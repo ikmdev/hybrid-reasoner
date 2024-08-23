@@ -11,7 +11,7 @@
 	<artifactId>hybrid-reasoner</artifactId>
 
 	<properties>
-		<owlapi.version>4.8.0-SNAPSHOT</owlapi.version>
+		<owlapi.version>4.7.1</owlapi.version>
 		<elk.version>0.28.0-SNAPSHOT</elk.version>
 		<skipITs>true</skipITs>
 		<snomed-test-data.groupid>dev.ikm.snomed</snomed-test-data.groupid>
