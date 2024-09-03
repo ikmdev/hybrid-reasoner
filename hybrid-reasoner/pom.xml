@@ -12,7 +12,7 @@
 
 	<properties>
 		<owlapi.version>4.7.1</owlapi.version>
-		<elk.version>0.28.0</elk.version>
+		<elk.version>0.29.0-SNAPSHOT</elk.version>
 		<skipITs>true</skipITs>
 		<snomed-test-data.groupid>dev.ikm.snomed</snomed-test-data.groupid>
 		<snomed-test-data.version>0.1.0</snomed-test-data.version>
@@ -140,6 +140,21 @@
 							<outputDirectory>
 								${project.build.directory}/data</outputDirectory>
 						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<configuration>
+					<skipITs>${skipITs}</skipITs>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
 					</execution>
 				</executions>
 			</plugin>
