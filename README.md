@@ -35,7 +35,7 @@ The integration tests require the SNOMED test data artifacts from the [reasoner-
 Data Team - Eric Mays (External) <emays@mays-systems.com>
 
 ## Issues and Contributions
-
-Technical and non-technical issues can be reported to the GitHub Issue Tracker.
+Technical and non-technical issues can be reported to the [Issue Tracker](https://github.com/ikmdev/hybrid-reasoner/issues).
 
 Contributions can be submitted via pull requests. Please check the [contribution guide](doc/how-to-contribute.md) for more details.
+
