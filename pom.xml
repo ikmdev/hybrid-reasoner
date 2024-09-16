@@ -32,15 +32,16 @@
 
 	<modules>
 		<module>hybrid-reasoner</module>
+		<module>hybrid-reasoner-snomed</module>
 		<module>hybrid-reasoner-temporal</module>
 	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>21</java.version>
-		<slf4j.version>2.0.15</slf4j.version>
-		<!--		<log4j.version>3.0.0-alpha1</log4j.version>-->
-		<log4j.version>2.23.1</log4j.version>
+		<slf4j.version>2.0.16</slf4j.version>
+		<log4j.version>3.0.0-alpha1</log4j.version>
+		<!--		<log4j.version>2.23.1</log4j.version>-->
 		<junit-jupiter-api.version>5.6.3</junit-jupiter-api.version>
 	</properties>
 
@@ -95,6 +96,11 @@
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-enforcer-plugin</artifactId>
+					<version>3.3.0</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-failsafe-plugin</artifactId>
 					<version>3.2.1</version>
 				</plugin>
@@ -146,6 +152,53 @@
 						</goals>
 						<configuration>
 							<ignoreUnusedRuntime>true</ignoreUnusedRuntime>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>enforce-maven</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireMavenVersion>
+									<version>3.8</version>
+								</requireMavenVersion>
+								<requireJavaVersion>
+									<version>${java.version}</version>
+								</requireJavaVersion>
+							</rules>
+							<fail>true</fail>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>analyze</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>display-dependency-updates</goal>
+							<goal>display-plugin-updates</goal>
+						</goals>
+						<configuration>
+							<ruleSet>
+								<ignoreVersions>
+									<ignoreVersion>
+										<type>regex</type>
+										<version>.+(alpha|beta).*</version>
+									</ignoreVersion>
+								</ignoreVersions>
+							</ruleSet>
 						</configuration>
 					</execution>
 				</executions>
