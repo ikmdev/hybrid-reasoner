@@ -28,14 +28,14 @@ To run the integration tests:
 ./mvnw clean install -DskipITs=false
 ```
 
-The integration tests require the SNOMED test data artifacts from the (reasoner-test-data project)[https://github.com/ikmdev/reasoner-test-data]
+The integration tests require the SNOMED test data artifacts from the [reasoner-test-data project](https://github.com/ikmdev/reasoner-test-data)
+
+### Team Ownership - Product Owner
+
+Data Team - Eric Mays (External) <emays@mays-systems.com>
 
 ## Issues and Contributions
 
 Technical and non-technical issues can be reported to the GitHub Issue Tracker.
 
 Contributions can be submitted via pull requests. Please check the [contribution guide](doc/how-to-contribute.md) for more details.
-
-### Team Ownership - Product Owner
-
-Data Team - Eric Mays (External) <emays@mays-systems.com>
