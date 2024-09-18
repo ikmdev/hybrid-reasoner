@@ -1,0 +1,370 @@
+Prefix(:=<http://www.hhs.fda.org/shield/SWEC-Ontology/>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+
+Ontology(<http://www.hhs.fda.org/shield/SWEC-Ontology>
+
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Abandoned>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Absent>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Accepted>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Action-Context-Value>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Allergic-Asthma>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Angina>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Asthma>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Attended>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Being-Organized>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Cardiovascular-Disease>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Change-Made>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Change-Recommended>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Current>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Discontinued>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Done>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Ended>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-angina-situation>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-cardiovascular-disease-situation>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-clinical-finding-situation>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-hypertension-situation>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-ischemic-heart-disease-situation>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-stroke-situation>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-venous-thrombosis-situation>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-with-explicit-context-situation>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Finding>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Finding-with-explicit-context-situation>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Hemorrhagic-Stroke>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Hypertension>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#In-Progress>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#In-the-Past>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Indicated>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Ischemic-Heart-Disease>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Kernel-Concept>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Lipid-Lowering-Therapy>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Natural-Brother>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#No-family-history-of-angina-situation>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#No-family-history-of-cardiovascular-disease-situation>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#No-family-history-of-hypertension-situation>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#No-family-history-of-ischemic-heart-disease-situation>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#No-family-history-of-stroke-situation>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#No-family-history-of-venous-thrombosis-situation>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Past-or-Current>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Performed>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Person>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Person-in-the-Family>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Planned>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Presence-Value>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Present>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Procedure>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Radiotherapy>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Recently>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Recommended>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Requested>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Respiratory-Disease>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Scheduled>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Situation-with-explicit-context>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Started>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Statement-Concept>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Stopped-Before-Completion>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Stroke>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Subject-of-Record>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Suspended>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Temporal-Context-Value>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Thrombosis>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#To-Be-Done>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#To-Be-Stopped>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Twin-Brother>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Under-Consideration>))
+Declaration(Class(<http://www.hhs.fda.org/shield/SWEC-Ontology#Venous-Thrombosis>))
+Declaration(ObjectProperty(<http://www.hhs.fda.org/shield/SWEC-Ontology#Action-Context>))
+Declaration(ObjectProperty(<http://www.hhs.fda.org/shield/SWEC-Ontology#Associated-Finding>))
+Declaration(ObjectProperty(<http://www.hhs.fda.org/shield/SWEC-Ontology#Associated-Procedure>))
+Declaration(ObjectProperty(<http://www.hhs.fda.org/shield/SWEC-Ontology#Role-Group>))
+Declaration(ObjectProperty(<http://www.hhs.fda.org/shield/SWEC-Ontology#Situation-Presence>))
+Declaration(ObjectProperty(<http://www.hhs.fda.org/shield/SWEC-Ontology#Situation-Value>))
+Declaration(ObjectProperty(<http://www.hhs.fda.org/shield/SWEC-Ontology#Subject-Relationship-Context>))
+Declaration(ObjectProperty(<http://www.hhs.fda.org/shield/SWEC-Ontology#Temporal-Context>))
+
+############################
+#   Classes
+############################
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Abandoned> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Abandoned>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Abandoned> <http://www.hhs.fda.org/shield/SWEC-Ontology#Stopped-Before-Completion>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Absent> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Absent>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Absent> <http://www.hhs.fda.org/shield/SWEC-Ontology#Presence-Value>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Accepted> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Accepted>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Accepted> <http://www.hhs.fda.org/shield/SWEC-Ontology#Being-Organized>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Action-Context-Value> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Action-Context-Value>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Action-Context-Value> <http://www.hhs.fda.org/shield/SWEC-Ontology#Kernel-Concept>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Allergic-Asthma> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Allergic-Asthma>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Allergic-Asthma> <http://www.hhs.fda.org/shield/SWEC-Ontology#Asthma>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Angina> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Angina>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Angina> <http://www.hhs.fda.org/shield/SWEC-Ontology#Ischemic-Heart-Disease>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Asthma> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Asthma>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Asthma> <http://www.hhs.fda.org/shield/SWEC-Ontology#Respiratory-Disease>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Attended> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Attended>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Attended> <http://www.hhs.fda.org/shield/SWEC-Ontology#Done>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Being-Organized> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Being-Organized>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Being-Organized> <http://www.hhs.fda.org/shield/SWEC-Ontology#Action-Context-Value>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Cardiovascular-Disease> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Cardiovascular-Disease>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Cardiovascular-Disease> <http://www.hhs.fda.org/shield/SWEC-Ontology#Finding>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Change-Made> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Change-Made>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Change-Made> <http://www.hhs.fda.org/shield/SWEC-Ontology#In-Progress>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Change-Recommended> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Change-Recommended>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Change-Recommended> <http://www.hhs.fda.org/shield/SWEC-Ontology#In-Progress>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Current> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Current>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Current> <http://www.hhs.fda.org/shield/SWEC-Ontology#Past-or-Current>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Discontinued> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Discontinued>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Discontinued> <http://www.hhs.fda.org/shield/SWEC-Ontology#Ended>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Done> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Done>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Done> <http://www.hhs.fda.org/shield/SWEC-Ontology#Ended>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Ended> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Ended>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Ended> <http://www.hhs.fda.org/shield/SWEC-Ontology#Action-Context-Value>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-angina-situation> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-angina-situation>)
+
+EquivalentClasses(<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-angina-situation> ObjectIntersectionOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-with-explicit-context-situation> ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Role-Group> ObjectIntersectionOf(ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Associated-Finding> <http://www.hhs.fda.org/shield/SWEC-Ontology#Angina>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Situation-Presence> <http://www.hhs.fda.org/shield/SWEC-Ontology#Present>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Subject-Relationship-Context> <http://www.hhs.fda.org/shield/SWEC-Ontology#Person-in-the-Family>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Temporal-Context> <http://www.hhs.fda.org/shield/SWEC-Ontology#Past-or-Current>)))))
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-cardiovascular-disease-situation> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-cardiovascular-disease-situation>)
+
+EquivalentClasses(<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-cardiovascular-disease-situation> ObjectIntersectionOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-with-explicit-context-situation> ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Role-Group> ObjectIntersectionOf(ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Associated-Finding> <http://www.hhs.fda.org/shield/SWEC-Ontology#Cardiovascular-Disease>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Situation-Presence> <http://www.hhs.fda.org/shield/SWEC-Ontology#Present>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Subject-Relationship-Context> <http://www.hhs.fda.org/shield/SWEC-Ontology#Person-in-the-Family>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Temporal-Context> <http://www.hhs.fda.org/shield/SWEC-Ontology#Past-or-Current>)))))
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-clinical-finding-situation> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-clinical-finding-situation>)
+
+EquivalentClasses(<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-clinical-finding-situation> ObjectIntersectionOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Situation-with-explicit-context> ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Role-Group> ObjectIntersectionOf(ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Associated-Finding> <http://www.hhs.fda.org/shield/SWEC-Ontology#Finding>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Subject-Relationship-Context> <http://www.hhs.fda.org/shield/SWEC-Ontology#Person-in-the-Family>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Temporal-Context> <http://www.hhs.fda.org/shield/SWEC-Ontology#Past-or-Current>)))))
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-hypertension-situation> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-hypertension-situation>)
+
+EquivalentClasses(<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-hypertension-situation> ObjectIntersectionOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-with-explicit-context-situation> ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Role-Group> ObjectIntersectionOf(ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Associated-Finding> <http://www.hhs.fda.org/shield/SWEC-Ontology#Hypertension>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Situation-Presence> <http://www.hhs.fda.org/shield/SWEC-Ontology#Present>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Subject-Relationship-Context> <http://www.hhs.fda.org/shield/SWEC-Ontology#Person-in-the-Family>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Temporal-Context> <http://www.hhs.fda.org/shield/SWEC-Ontology#Past-or-Current>)))))
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-ischemic-heart-disease-situation> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-ischemic-heart-disease-situation>)
+
+EquivalentClasses(<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-ischemic-heart-disease-situation> ObjectIntersectionOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-with-explicit-context-situation> ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Role-Group> ObjectIntersectionOf(ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Associated-Finding> <http://www.hhs.fda.org/shield/SWEC-Ontology#Ischemic-Heart-Disease>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Situation-Presence> <http://www.hhs.fda.org/shield/SWEC-Ontology#Present>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Subject-Relationship-Context> <http://www.hhs.fda.org/shield/SWEC-Ontology#Person-in-the-Family>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Temporal-Context> <http://www.hhs.fda.org/shield/SWEC-Ontology#Past-or-Current>)))))
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-stroke-situation> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-stroke-situation>)
+
+EquivalentClasses(<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-stroke-situation> ObjectIntersectionOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-with-explicit-context-situation> ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Role-Group> ObjectIntersectionOf(ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Associated-Finding> <http://www.hhs.fda.org/shield/SWEC-Ontology#Stroke>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Situation-Presence> <http://www.hhs.fda.org/shield/SWEC-Ontology#Present>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Subject-Relationship-Context> <http://www.hhs.fda.org/shield/SWEC-Ontology#Person-in-the-Family>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Temporal-Context> <http://www.hhs.fda.org/shield/SWEC-Ontology#Past-or-Current>)))))
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-venous-thrombosis-situation> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-venous-thrombosis-situation>)
+
+EquivalentClasses(<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-venous-thrombosis-situation> ObjectIntersectionOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-with-explicit-context-situation> ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Role-Group> ObjectIntersectionOf(ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Associated-Finding> <http://www.hhs.fda.org/shield/SWEC-Ontology#Venous-Thrombosis>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Situation-Presence> <http://www.hhs.fda.org/shield/SWEC-Ontology#Present>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Subject-Relationship-Context> <http://www.hhs.fda.org/shield/SWEC-Ontology#Person-in-the-Family>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Temporal-Context> <http://www.hhs.fda.org/shield/SWEC-Ontology#Past-or-Current>)))))
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-with-explicit-context-situation> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-with-explicit-context-situation>)
+
+EquivalentClasses(<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-with-explicit-context-situation> ObjectIntersectionOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Situation-with-explicit-context> ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Role-Group> ObjectIntersectionOf(ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Subject-Relationship-Context> <http://www.hhs.fda.org/shield/SWEC-Ontology#Person-in-the-Family>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Temporal-Context> <http://www.hhs.fda.org/shield/SWEC-Ontology#Past-or-Current>)))))
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Finding> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Finding>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Finding> <http://www.hhs.fda.org/shield/SWEC-Ontology#Kernel-Concept>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Finding-with-explicit-context-situation> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Finding-with-explicit-context-situation>)
+
+EquivalentClasses(<http://www.hhs.fda.org/shield/SWEC-Ontology#Finding-with-explicit-context-situation> ObjectIntersectionOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Situation-with-explicit-context> ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Role-Group> ObjectIntersectionOf(ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Associated-Finding> <http://www.hhs.fda.org/shield/SWEC-Ontology#Finding>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Temporal-Context> <http://www.hhs.fda.org/shield/SWEC-Ontology#Temporal-Context-Value>)))))
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Hemorrhagic-Stroke> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Hemorrhagic-Stroke>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Hemorrhagic-Stroke> <http://www.hhs.fda.org/shield/SWEC-Ontology#Stroke>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Hypertension> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Hypertension>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Hypertension> <http://www.hhs.fda.org/shield/SWEC-Ontology#Cardiovascular-Disease>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#In-Progress> (<http://www.hhs.fda.org/shield/SWEC-Ontology#In-Progress>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#In-Progress> <http://www.hhs.fda.org/shield/SWEC-Ontology#Action-Context-Value>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#In-the-Past> (<http://www.hhs.fda.org/shield/SWEC-Ontology#In-the-Past>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#In-the-Past> <http://www.hhs.fda.org/shield/SWEC-Ontology#Past-or-Current>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Indicated> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Indicated>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Indicated> <http://www.hhs.fda.org/shield/SWEC-Ontology#Action-Context-Value>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Ischemic-Heart-Disease> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Ischemic-Heart-Disease>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Ischemic-Heart-Disease> <http://www.hhs.fda.org/shield/SWEC-Ontology#Cardiovascular-Disease>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Kernel-Concept> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Kernel-Concept>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Kernel-Concept> owl:Thing)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Lipid-Lowering-Therapy> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Lipid-Lowering-Therapy>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Lipid-Lowering-Therapy> <http://www.hhs.fda.org/shield/SWEC-Ontology#Procedure>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Natural-Brother> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Natural-Brother>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Natural-Brother> <http://www.hhs.fda.org/shield/SWEC-Ontology#Person-in-the-Family>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#No-family-history-of-angina-situation> (<http://www.hhs.fda.org/shield/SWEC-Ontology#No-family-history-of-angina-situation>)
+
+EquivalentClasses(<http://www.hhs.fda.org/shield/SWEC-Ontology#No-family-history-of-angina-situation> ObjectIntersectionOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-clinical-finding-situation> ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Role-Group> ObjectIntersectionOf(ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Associated-Finding> <http://www.hhs.fda.org/shield/SWEC-Ontology#Angina>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Situation-Presence> <http://www.hhs.fda.org/shield/SWEC-Ontology#Absent>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Subject-Relationship-Context> <http://www.hhs.fda.org/shield/SWEC-Ontology#Person-in-the-Family>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Temporal-Context> <http://www.hhs.fda.org/shield/SWEC-Ontology#Past-or-Current>)))))
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#No-family-history-of-cardiovascular-disease-situation> (<http://www.hhs.fda.org/shield/SWEC-Ontology#No-family-history-of-cardiovascular-disease-situation>)
+
+EquivalentClasses(<http://www.hhs.fda.org/shield/SWEC-Ontology#No-family-history-of-cardiovascular-disease-situation> ObjectIntersectionOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-clinical-finding-situation> ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Role-Group> ObjectIntersectionOf(ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Associated-Finding> <http://www.hhs.fda.org/shield/SWEC-Ontology#Cardiovascular-Disease>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Situation-Presence> <http://www.hhs.fda.org/shield/SWEC-Ontology#Absent>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Subject-Relationship-Context> <http://www.hhs.fda.org/shield/SWEC-Ontology#Person-in-the-Family>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Temporal-Context> <http://www.hhs.fda.org/shield/SWEC-Ontology#Past-or-Current>)))))
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#No-family-history-of-hypertension-situation> (<http://www.hhs.fda.org/shield/SWEC-Ontology#No-family-history-of-hypertension-situation>)
+
+EquivalentClasses(<http://www.hhs.fda.org/shield/SWEC-Ontology#No-family-history-of-hypertension-situation> ObjectIntersectionOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-clinical-finding-situation> ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Role-Group> ObjectIntersectionOf(ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Associated-Finding> <http://www.hhs.fda.org/shield/SWEC-Ontology#Hypertension>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Situation-Presence> <http://www.hhs.fda.org/shield/SWEC-Ontology#Absent>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Subject-Relationship-Context> <http://www.hhs.fda.org/shield/SWEC-Ontology#Person-in-the-Family>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Temporal-Context> <http://www.hhs.fda.org/shield/SWEC-Ontology#Past-or-Current>)))))
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#No-family-history-of-ischemic-heart-disease-situation> (<http://www.hhs.fda.org/shield/SWEC-Ontology#No-family-history-of-ischemic-heart-disease-situation>)
+
+EquivalentClasses(<http://www.hhs.fda.org/shield/SWEC-Ontology#No-family-history-of-ischemic-heart-disease-situation> ObjectIntersectionOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-clinical-finding-situation> ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Role-Group> ObjectIntersectionOf(ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Associated-Finding> <http://www.hhs.fda.org/shield/SWEC-Ontology#Ischemic-Heart-Disease>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Situation-Presence> <http://www.hhs.fda.org/shield/SWEC-Ontology#Absent>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Subject-Relationship-Context> <http://www.hhs.fda.org/shield/SWEC-Ontology#Person-in-the-Family>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Temporal-Context> <http://www.hhs.fda.org/shield/SWEC-Ontology#Past-or-Current>)))))
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#No-family-history-of-stroke-situation> (<http://www.hhs.fda.org/shield/SWEC-Ontology#No-family-history-of-stroke-situation>)
+
+EquivalentClasses(<http://www.hhs.fda.org/shield/SWEC-Ontology#No-family-history-of-stroke-situation> ObjectIntersectionOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-clinical-finding-situation> ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Role-Group> ObjectIntersectionOf(ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Associated-Finding> <http://www.hhs.fda.org/shield/SWEC-Ontology#Stroke>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Situation-Presence> <http://www.hhs.fda.org/shield/SWEC-Ontology#Absent>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Subject-Relationship-Context> <http://www.hhs.fda.org/shield/SWEC-Ontology#Person-in-the-Family>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Temporal-Context> <http://www.hhs.fda.org/shield/SWEC-Ontology#Past-or-Current>)))))
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#No-family-history-of-venous-thrombosis-situation> (<http://www.hhs.fda.org/shield/SWEC-Ontology#No-family-history-of-venous-thrombosis-situation>)
+
+EquivalentClasses(<http://www.hhs.fda.org/shield/SWEC-Ontology#No-family-history-of-venous-thrombosis-situation> ObjectIntersectionOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Family-history-of-clinical-finding-situation> ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Role-Group> ObjectIntersectionOf(ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Associated-Finding> <http://www.hhs.fda.org/shield/SWEC-Ontology#Venous-Thrombosis>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Situation-Presence> <http://www.hhs.fda.org/shield/SWEC-Ontology#Absent>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Subject-Relationship-Context> <http://www.hhs.fda.org/shield/SWEC-Ontology#Person-in-the-Family>) ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Temporal-Context> <http://www.hhs.fda.org/shield/SWEC-Ontology#Past-or-Current>)))))
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Past-or-Current> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Past-or-Current>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Past-or-Current> <http://www.hhs.fda.org/shield/SWEC-Ontology#Temporal-Context-Value>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Performed> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Performed>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Performed> <http://www.hhs.fda.org/shield/SWEC-Ontology#Done>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Person> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Person>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Person> <http://www.hhs.fda.org/shield/SWEC-Ontology#Kernel-Concept>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Person-in-the-Family> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Person-in-the-Family>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Person-in-the-Family> <http://www.hhs.fda.org/shield/SWEC-Ontology#Person>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Planned> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Planned>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Planned> <http://www.hhs.fda.org/shield/SWEC-Ontology#Being-Organized>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Presence-Value> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Presence-Value>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Presence-Value> <http://www.hhs.fda.org/shield/SWEC-Ontology#Kernel-Concept>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Present> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Present>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Present> <http://www.hhs.fda.org/shield/SWEC-Ontology#Presence-Value>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Procedure> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Procedure>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Procedure> <http://www.hhs.fda.org/shield/SWEC-Ontology#Kernel-Concept>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Radiotherapy> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Radiotherapy>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Radiotherapy> <http://www.hhs.fda.org/shield/SWEC-Ontology#Procedure>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Recently> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Recently>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Recently> <http://www.hhs.fda.org/shield/SWEC-Ontology#In-the-Past>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Recommended> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Recommended>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Recommended> <http://www.hhs.fda.org/shield/SWEC-Ontology#Action-Context-Value>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Requested> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Requested>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Requested> <http://www.hhs.fda.org/shield/SWEC-Ontology#Being-Organized>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Respiratory-Disease> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Respiratory-Disease>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Respiratory-Disease> <http://www.hhs.fda.org/shield/SWEC-Ontology#Finding>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Scheduled> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Scheduled>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Scheduled> <http://www.hhs.fda.org/shield/SWEC-Ontology#Being-Organized>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Situation-with-explicit-context> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Situation-with-explicit-context>)
+
+EquivalentClasses(<http://www.hhs.fda.org/shield/SWEC-Ontology#Situation-with-explicit-context> ObjectIntersectionOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Statement-Concept> ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Role-Group> ObjectSomeValuesFrom(<http://www.hhs.fda.org/shield/SWEC-Ontology#Situation-Presence> <http://www.hhs.fda.org/shield/SWEC-Ontology#Presence-Value>))))
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Started> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Started>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Started> <http://www.hhs.fda.org/shield/SWEC-Ontology#Action-Context-Value>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Statement-Concept> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Statement-Concept>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Statement-Concept> owl:Thing)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Stopped-Before-Completion> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Stopped-Before-Completion>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Stopped-Before-Completion> <http://www.hhs.fda.org/shield/SWEC-Ontology#Ended>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Stroke> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Stroke>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Stroke> <http://www.hhs.fda.org/shield/SWEC-Ontology#Cardiovascular-Disease>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Subject-of-Record> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Subject-of-Record>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Subject-of-Record> <http://www.hhs.fda.org/shield/SWEC-Ontology#Person>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Suspended> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Suspended>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Suspended> <http://www.hhs.fda.org/shield/SWEC-Ontology#Stopped-Before-Completion>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Temporal-Context-Value> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Temporal-Context-Value>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Temporal-Context-Value> <http://www.hhs.fda.org/shield/SWEC-Ontology#Kernel-Concept>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Thrombosis> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Thrombosis>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Thrombosis> <http://www.hhs.fda.org/shield/SWEC-Ontology#Cardiovascular-Disease>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#To-Be-Done> (<http://www.hhs.fda.org/shield/SWEC-Ontology#To-Be-Done>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#To-Be-Done> <http://www.hhs.fda.org/shield/SWEC-Ontology#Action-Context-Value>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#To-Be-Stopped> (<http://www.hhs.fda.org/shield/SWEC-Ontology#To-Be-Stopped>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#To-Be-Stopped> <http://www.hhs.fda.org/shield/SWEC-Ontology#In-Progress>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Twin-Brother> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Twin-Brother>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Twin-Brother> <http://www.hhs.fda.org/shield/SWEC-Ontology#Natural-Brother>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Under-Consideration> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Under-Consideration>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Under-Consideration> <http://www.hhs.fda.org/shield/SWEC-Ontology#Action-Context-Value>)
+
+# Class: <http://www.hhs.fda.org/shield/SWEC-Ontology#Venous-Thrombosis> (<http://www.hhs.fda.org/shield/SWEC-Ontology#Venous-Thrombosis>)
+
+SubClassOf(<http://www.hhs.fda.org/shield/SWEC-Ontology#Venous-Thrombosis> <http://www.hhs.fda.org/shield/SWEC-Ontology#Thrombosis>)
+
+
+)

@@ -1,38 +1,38 @@
-# Title
+# Hybrid Reasoner
 
-|| Description about the Project ||
+A hybrid reasoner based on ELK, but using structural subsumption for the SNOMED situation with explicit context hierarchy. 
 
-### Team Ownership - Product Owner
+A prototype implementation including temporal reasoning is in the hybrid-reasoner module.
 
-Team Ownership - Product Owner
-
-## Getting Started
-
-Required for running this:
-
-1. Download and install Open JDK Java 19
+The hybrid-reasoner-snomed module scales to SNOMED and is based on the IKM reasoner elk-snomed implementation.
 
 ## Building and Running
 
-Follow the steps below to build and run Komet on your local machine:
-
-1. Clone the repository from GitHub to your local machine
-
-2. Change local directory to cloned repo location
-
-3. Enter the following command to build the application:
+Requires Java 21. Clone the repo, change to the cloned repo location.
 
 Unix/Linux/OSX:
 
-```bash
+```
 ./mvnw clean install
 ```
 
 Windows:
 
-```bash
+```
 ./mvnw.cmd clean install
 ```
+
+To run the integration tests:
+
+```
+./mvnw clean install -DskipITs=false
+```
+
+The integration tests require the SNOMED test data artifacts from the [reasoner-test-data project](https://github.com/ikmdev/reasoner-test-data)
+
+### Team Ownership - Product Owner
+
+Data Team - Eric Mays (External) <emays@mays-systems.com>
 
 ## Issues and Contributions
 Technical and non-technical issues can be reported to the [Issue Tracker](https://github.com/ikmdev/hybrid-reasoner/issues).

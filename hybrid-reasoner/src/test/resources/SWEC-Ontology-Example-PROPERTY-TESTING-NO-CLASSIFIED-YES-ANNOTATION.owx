@@ -1,0 +1,596 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.hhs.fda.org/shield/SWEC-Ontology"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.hhs.fda.org/shield/SWEC-Ontology">
+    <Prefix name="" IRI="http://www.hhs.fda.org/shield/SWEC-Ontology/"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Declaration>
+        <Class IRI="#Abandoned"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Absent"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Accepted"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Action-Context-Value"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Allergic-Asthma"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Angina"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Asthma"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Attended"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Being-Organized"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Cardiovascular-Disease"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Change-Made"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Change-Recommended"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Cranial-Radiotherapy"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Current"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Discontinued"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Done"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Ended"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Finding"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Hemorrhagic-Stroke"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Hemorrhagic-Stroke-Within-72-Hours-After-Cranial-Radiotherapy"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Hemorrhagic-Stroke-Within-One-Month-After-Cranial-Radiotherapy"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Hemorrhagic-Stroke-Within-One-Week-After-Radiotherapy"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Hypertension"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#In-Progress"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#In-the-Past"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Indicated"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Ischemic-Heart-Disease"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Kernel-Concept"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Lipid-Lowering-Therapy"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Natural-Brother"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Past-or-Current"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Performed"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Person"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Person-in-the-Family"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Planned"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Presence-Value"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Present"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Procedure"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Radiotherapy"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Recently"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Recommended"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Requested"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Respiratory-Disease"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Scheduled"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Started"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Statement-Concept"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Stopped-Before-Completion"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Stroke"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Stroke-After-Radiotherapy"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Stroke-During-or-Within-5-Days-After-Radiotherapy"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Subject-of-Record"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Suspended"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Temporal-Context-Value"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Temporally-Qualified-Concept"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Thrombosis"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#To-Be-Done"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#To-Be-Stopped"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Twin-Brother"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Under-Consideration"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Venous-Thrombosis"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#Action-Context"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#Associated-Finding"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#Associated-Procedure"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#BEFORE-DURING-OR-AFTER"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#BEFORE-OR-AFTER"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#Focus-Concept"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#Role-Group"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#STARTS-AFTER"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#STARTS-DURING"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#STARTS-DURING-OR-WITHIN-5-DAYS-AFTER"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#STARTS-WITHIN-72-HOURS-AFTER"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#STARTS-WITHIN-ONE-MONTH-AFTER"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#STARTS-WITHIN-ONE-WEEK-AFTER"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#Situation-Presence"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#Situation-Value"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#Subject-Relationship-Context"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#Temporal-Context"/>
+    </Declaration>
+    <EquivalentClasses>
+        <Class IRI="#Hemorrhagic-Stroke-Within-72-Hours-After-Cranial-Radiotherapy"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Statement-Concept"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#Focus-Concept"/>
+                <Class IRI="#Hemorrhagic-Stroke"/>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#STARTS-WITHIN-72-HOURS-AFTER"/>
+                <Class IRI="#Cranial-Radiotherapy"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Hemorrhagic-Stroke-Within-One-Month-After-Cranial-Radiotherapy"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Statement-Concept"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#Focus-Concept"/>
+                <Class IRI="#Hemorrhagic-Stroke"/>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#STARTS-WITHIN-ONE-MONTH-AFTER"/>
+                <Class IRI="#Cranial-Radiotherapy"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Hemorrhagic-Stroke-Within-One-Week-After-Radiotherapy"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Statement-Concept"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#Focus-Concept"/>
+                <Class IRI="#Hemorrhagic-Stroke"/>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#STARTS-WITHIN-ONE-WEEK-AFTER"/>
+                <Class IRI="#Radiotherapy"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Stroke-After-Radiotherapy"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Statement-Concept"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#Focus-Concept"/>
+                <Class IRI="#Stroke"/>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#STARTS-AFTER"/>
+                <Class IRI="#Radiotherapy"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Stroke-During-or-Within-5-Days-After-Radiotherapy"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Statement-Concept"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#Focus-Concept"/>
+                <Class IRI="#Stroke"/>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#STARTS-DURING-OR-WITHIN-5-DAYS-AFTER"/>
+                <Class IRI="#Radiotherapy"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Temporally-Qualified-Concept"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Statement-Concept"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#BEFORE-DURING-OR-AFTER"/>
+                <Class abbreviatedIRI="owl:Thing"/>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#Focus-Concept"/>
+                <Class abbreviatedIRI="owl:Thing"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <SubClassOf>
+        <Class IRI="#Abandoned"/>
+        <Class IRI="#Stopped-Before-Completion"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Absent"/>
+        <Class IRI="#Presence-Value"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Accepted"/>
+        <Class IRI="#Being-Organized"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Action-Context-Value"/>
+        <Class IRI="#Kernel-Concept"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Allergic-Asthma"/>
+        <Class IRI="#Asthma"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Angina"/>
+        <Class IRI="#Ischemic-Heart-Disease"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Asthma"/>
+        <Class IRI="#Respiratory-Disease"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Attended"/>
+        <Class IRI="#Done"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Being-Organized"/>
+        <Class IRI="#Action-Context-Value"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Cardiovascular-Disease"/>
+        <Class IRI="#Finding"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Change-Made"/>
+        <Class IRI="#In-Progress"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Change-Recommended"/>
+        <Class IRI="#In-Progress"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Cranial-Radiotherapy"/>
+        <Class IRI="#Radiotherapy"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Current"/>
+        <Class IRI="#Past-or-Current"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Discontinued"/>
+        <Class IRI="#Ended"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Done"/>
+        <Class IRI="#Ended"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Ended"/>
+        <Class IRI="#Action-Context-Value"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Finding"/>
+        <Class IRI="#Kernel-Concept"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Hemorrhagic-Stroke"/>
+        <Class IRI="#Stroke"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Hypertension"/>
+        <Class IRI="#Cardiovascular-Disease"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#In-Progress"/>
+        <Class IRI="#Action-Context-Value"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#In-the-Past"/>
+        <Class IRI="#Past-or-Current"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Indicated"/>
+        <Class IRI="#Action-Context-Value"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Ischemic-Heart-Disease"/>
+        <Class IRI="#Cardiovascular-Disease"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Kernel-Concept"/>
+        <Class abbreviatedIRI="owl:Thing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Lipid-Lowering-Therapy"/>
+        <Class IRI="#Procedure"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Natural-Brother"/>
+        <Class IRI="#Person-in-the-Family"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Past-or-Current"/>
+        <Class IRI="#Temporal-Context-Value"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Performed"/>
+        <Class IRI="#Done"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Person"/>
+        <Class IRI="#Kernel-Concept"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Person-in-the-Family"/>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Planned"/>
+        <Class IRI="#Being-Organized"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Presence-Value"/>
+        <Class IRI="#Kernel-Concept"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Present"/>
+        <Class IRI="#Presence-Value"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Procedure"/>
+        <Class IRI="#Kernel-Concept"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Radiotherapy"/>
+        <Class IRI="#Procedure"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Recently"/>
+        <Class IRI="#In-the-Past"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Recommended"/>
+        <Class IRI="#Action-Context-Value"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Requested"/>
+        <Class IRI="#Being-Organized"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Respiratory-Disease"/>
+        <Class IRI="#Finding"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Scheduled"/>
+        <Class IRI="#Being-Organized"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Started"/>
+        <Class IRI="#Action-Context-Value"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Statement-Concept"/>
+        <Class abbreviatedIRI="owl:Thing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Stopped-Before-Completion"/>
+        <Class IRI="#Ended"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Stroke"/>
+        <Class IRI="#Cardiovascular-Disease"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Subject-of-Record"/>
+        <Class IRI="#Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Suspended"/>
+        <Class IRI="#Stopped-Before-Completion"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Temporal-Context-Value"/>
+        <Class IRI="#Kernel-Concept"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Thrombosis"/>
+        <Class IRI="#Cardiovascular-Disease"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#To-Be-Done"/>
+        <Class IRI="#Action-Context-Value"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#To-Be-Stopped"/>
+        <Class IRI="#In-Progress"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Twin-Brother"/>
+        <Class IRI="#Natural-Brother"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Under-Consideration"/>
+        <Class IRI="#Action-Context-Value"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Venous-Thrombosis"/>
+        <Class IRI="#Thrombosis"/>
+    </SubClassOf>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#BEFORE-DURING-OR-AFTER</IRI>
+        <Literal>{ BB(-INF,+INF) &amp; BE(-INF,+INF) &amp; EB(-INF,+INF) &amp; EE(-INF,+INF)}</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#BEFORE-OR-AFTER</IRI>
+        <Literal>{ EB(-INF,-0sc) }  |  { BE(+0sc,+INF] }</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#STARTS-AFTER</IRI>
+        <Literal>{ BE(0sc,+INF) }</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#STARTS-DURING</IRI>
+        <Literal>{ BB[0sc,+INF) &amp; BE(-INF,0sc] }</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#STARTS-DURING-OR-WITHIN-5-DAYS-AFTER</IRI>
+        <Literal>{ BB[+0sc,+INF) &amp; BE(-INF, -0sc]  }  |  { BE(0sc,+5dy]  }</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#STARTS-WITHIN-72-HOURS-AFTER</IRI>
+        <Literal>{ BE(0sc,+72hr] }</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#STARTS-WITHIN-ONE-MONTH-AFTER</IRI>
+        <Literal>{ BE(0sc,+1mo] }</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#STARTS-WITHIN-ONE-WEEK-AFTER</IRI>
+        <Literal>{ BE(0sc,+1wk] }</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#Stroke-After-Radiotherapy</IRI>
+        <Literal>test annotation</Literal>
+    </AnnotationAssertion>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi -->
+
