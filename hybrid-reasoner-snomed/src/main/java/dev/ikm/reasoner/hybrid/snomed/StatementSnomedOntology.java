@@ -45,6 +45,12 @@ public class StatementSnomedOntology {
 
 	private DefiningSubsumption definingSubsumption;
 
+	private SnomedOntology nsoOntology;
+
+	private SnomedOntologyReasoner nsoReasoner;
+
+	private SnomedIsa isas;
+
 	public SnomedOntology getOntology() {
 		return ontology;
 	}
@@ -117,11 +123,11 @@ public class StatementSnomedOntology {
 	private void generateNNF() {
 		ArrayList<Concept> concepts = new ArrayList<>(ontology.getConcepts());
 		concepts.removeAll(statementConceptsDefiningDependentOrder);
-		SnomedOntology nso = new SnomedOntology(concepts, ontology.getRoleTypes(), ontology.getConcreteRoleTypes());
-		SnomedOntologyReasoner reasoner = SnomedOntologyReasoner.create(nso);
-		reasoner.flush();
-		nnfBuilder = NecessaryNormalFormBuilder.create(nso, reasoner.getSuperConcepts(),
-				reasoner.getSuperRoleTypes(false));
+		nsoOntology = new SnomedOntology(concepts, ontology.getRoleTypes(), ontology.getConcreteRoleTypes());
+		nsoReasoner = SnomedOntologyReasoner.create(nsoOntology);
+		nsoReasoner.flush();
+		nnfBuilder = NecessaryNormalFormBuilder.create(nsoOntology, nsoReasoner.getSuperConcepts(),
+				nsoReasoner.getSuperRoleTypes(false));
 		// TODO can we get rid of this??? role chains issue
 		nnfBuilder.generate();
 		for (Concept con : getStatementConceptsDefiningDependentOrder()) {
@@ -143,7 +149,7 @@ public class StatementSnomedOntology {
 	public SnomedIsa classify() {
 		HashMap<Long, Set<Long>> parents = new HashMap<>();
 		parents.put(swec_id, Set.of(SnomedIds.root));
-		SnomedIsa isas = SnomedIsa.init(parents);
+		isas = SnomedIsa.init(parents);
 		for (Concept con : statementConceptsDefiningDependentOrder) {
 //			log.info("Con: " + ontology.getFsn(con.getId()));
 			Set<Long> mss = new HashSet<>();
@@ -215,6 +221,29 @@ public class StatementSnomedOntology {
 					.forEach(id -> leaves.add(id));
 		}
 		return leaves;
+	}
+
+	public Set<Long> getEquivalentConcepts(int id) {
+		if (nsoOntology.getConcept(id) != null)
+			return nsoReasoner.getEquivalentConcepts(id);
+		return Set.of();
+	}
+
+	public Set<Long> getSuperConcepts(int id) {
+		if (nsoOntology.getConcept(id) != null)
+			return nsoReasoner.getSuperConcepts(id);
+		return isas.getParents(id);
+	}
+
+	public Set<Long> getSubConcepts(int id) {
+		if (id == SnomedIds.root) {
+			Set<Long> ret = new HashSet<>(nsoReasoner.getEquivalentConcepts(id));
+			ret.add(swec_id);
+			return ret;
+		}
+		if (nsoOntology.getConcept(id) != null)
+			return nsoReasoner.getSubConcepts(id);
+		return isas.getChildren(id);
 	}
 
 }
