@@ -82,8 +82,8 @@ public class SnomedTestIT {
 		snomedOntologyReasoner = SnomedOntologyReasoner.create(snomedOntology);
 		snomedOntologyReasoner.flush();
 		log.info("Classify complete");
-		nnfb = NecessaryNormalFormBuilder.create(snomedOntology,
-				snomedOntologyReasoner.getSuperConcepts(), snomedOntologyReasoner.getSuperRoleTypes(false));
+		nnfb = NecessaryNormalFormBuilder.create(snomedOntology, snomedOntologyReasoner.getSuperConcepts(),
+				snomedOntologyReasoner.getSuperRoleTypes(false));
 		log.info("Init complete");
 		SnomedRoles roles = SnomedRoles.init(rels_file);
 		SnomedConcreteRoles values = SnomedConcreteRoles.init(values_file);
@@ -92,15 +92,6 @@ public class SnomedTestIT {
 		ConceptComparer cc = new ConceptComparer(roles, values);
 		nnfb.generate(cc);
 		log.info("Generate in " + ((System.currentTimeMillis() - beg) / 1000));
-	}
-
-	public boolean hasUngroupedAbsent(Concept con) {
-		return con.getDefinitions().stream().anyMatch(def -> AbsentSubsumption.hasAbsent(def.getUngroupedRoles()));
-	}
-
-	public boolean hasGroupedAbsent(Concept con) {
-		return con.getDefinitions().stream().flatMap(def -> def.getRoleGroups().stream())
-				.anyMatch(rg -> AbsentSubsumption.hasAbsent(rg));
 	}
 
 	// Example with 2 role groups, one known present, one known absent
@@ -112,21 +103,21 @@ public class SnomedTestIT {
 		Set<RoleGroup> rgs = nnfb.getNecessaryNormalForm(433807000).getRoleGroups();
 		rgs.forEach(x -> log.info("RG: " + x));
 		assertEquals(2, rgs.size());
-		assertEquals(1, rgs.stream().filter(AbsentSubsumption::hasAbsent).count());
+		assertEquals(1, rgs.stream().filter(AbsentSubsumption::hasAbsentSnomed).count());
 	}
 
 	@Test
 	public void ungroupedAbsent() throws Exception {
 		// no absent concept in ungrouped roles
 		for (Concept con : snomedOntology.getConcepts()) {
-			assertFalse(hasUngroupedAbsent(con));
+			assertFalse(AbsentSubsumption.hasUngroupedAbsentSnomed(con));
 		}
 	}
 
 	@Test
 	public void ungroupedAbsentNNF() throws Exception {
 		for (Concept con : nnfb.getConcepts()) {
-			assertFalse(hasUngroupedAbsent(con));
+			assertFalse(AbsentSubsumption.hasUngroupedAbsentSnomed(con));
 		}
 	}
 
@@ -134,7 +125,7 @@ public class SnomedTestIT {
 	public void groupedAbsent() throws Exception {
 		int gr_cnt = 0;
 		for (Concept con : snomedOntology.getConcepts()) {
-			if (hasGroupedAbsent(con)) {
+			if (AbsentSubsumption.hasGroupedAbsentSnomed(con)) {
 				gr_cnt++;
 				assertEquals(1, con.getDefinitions().size());
 				assertEquals(1, con.getDefinitions().getFirst().getSuperConcepts().size());
@@ -147,7 +138,7 @@ public class SnomedTestIT {
 	public void groupedAbsentNNF() throws Exception {
 		int gr_cnt = 0;
 		for (Concept con : nnfb.getConcepts()) {
-			if (hasGroupedAbsent(con)) {
+			if (AbsentSubsumption.hasGroupedAbsentSnomed(con)) {
 				gr_cnt++;
 				assertEquals(1, con.getDefinitions().size());
 				assertEquals(1, con.getDefinitions().getFirst().getSuperConcepts().size());
@@ -160,7 +151,7 @@ public class SnomedTestIT {
 	public void sups() {
 		Set<Concept> sups = new HashSet<>();
 		for (Concept con : snomedOntology.getConcepts()) {
-			if (hasGroupedAbsent(con))
+			if (AbsentSubsumption.hasGroupedAbsentSnomed(con))
 				sups.addAll(con.getDefinitions().getFirst().getSuperConcepts());
 		}
 		sups.forEach(x -> log.info("Sup: " + x + " " + descrs.getFsn(x.getId())));
@@ -218,6 +209,32 @@ public class SnomedTestIT {
 		for (long id : subs) {
 			assertEquals(0, snomedOntology.getConcept(id).getGciDefinitions().size());
 		}
+	}
+
+	@Test
+	public void roots() {
+		Set<Long> roots = Set.of(//
+				373572006l // 373572006 |Clinical finding absent (situation)|)
+				, 160266009l // 160266009 |No family history of clinical finding (situation)|
+		);
+		int root_cnt = 0;
+		Set<Long> subs = snomedOntologyReasoner.getSubConcepts(StatementSnomedOntology.swec_id, false);
+		for (long id : subs) {
+			Concept con = snomedOntology.getConcept(id);
+			if (!AbsentSubsumption.hasGroupedAbsentSnomed(con))
+				continue;
+			if (!roots.contains(id)
+					&& !snomedOntologyReasoner.getSuperConcepts(id, false).stream().anyMatch(x -> roots.contains(x))) {
+				root_cnt++;
+				// 413350009 |Finding with explicit context (situation)|
+				if (!snomedOntologyReasoner.getSuperConcepts(id).contains(413350009l)) {
+					log.info("No root: " + id + " " + descrs.getFsn(id));
+					snomedOntologyReasoner.getSuperConcepts(id)
+							.forEach(x -> log.info("\tSup: " + x + " " + descrs.getFsn(x)));
+				}
+			}
+		}
+		assertEquals(24, root_cnt);
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,11 +32,20 @@ public class StatementSnomedOntology {
 	public static final long known_absent_id = 410516002;
 
 	// 246090004 |Associated finding (attribute)|
-	public static final long associated_finding_id = 246090004;
+	// public static final long associated_finding_id = 246090004;
+
+	public record SwecIds(long swec, long swec_parent, long findingContext, long knownAbsent) {
+	}
+
+	public static final SwecIds swec_sctids = new SwecIds(swec_id, SnomedIds.root, finding_context_id, known_absent_id);
 
 	private SnomedOntology ontology;
 
+	private long root;
+
 	private SnomedIsa definingIsa;
+
+	private SwecIds swecIds;
 
 	private ArrayList<Concept> conceptsDefiningDependentOrder = new ArrayList<>();
 
@@ -63,17 +73,24 @@ public class StatementSnomedOntology {
 		return statementConceptsDefiningDependentOrder;
 	}
 
-	private StatementSnomedOntology(SnomedOntology ontology) {
+	private StatementSnomedOntology(SnomedOntology ontology, long root, SwecIds swecIds) {
 		super();
 		this.ontology = ontology;
-	}
-
-	public static StatementSnomedOntology create(SnomedOntology ontology) {
-		return create(ontology, true);
+		this.root = root;
+		this.swecIds = swecIds;
 	}
 
 	public static StatementSnomedOntology create(SnomedOntology ontology, boolean useAbsent) {
-		StatementSnomedOntology ret = new StatementSnomedOntology(ontology);
+		return create(ontology, useAbsent, SnomedIds.root, swec_sctids);
+	}
+
+	public static StatementSnomedOntology create(SnomedOntology ontology, long root, SwecIds swecIds) {
+		return create(ontology, true, root, swecIds);
+	}
+
+	public static StatementSnomedOntology create(SnomedOntology ontology, boolean useAbsent, long root,
+			SwecIds swecIds) {
+		StatementSnomedOntology ret = new StatementSnomedOntology(ontology, root, swecIds);
 		ret.init(useAbsent);
 		return ret;
 	}
@@ -83,7 +100,7 @@ public class StatementSnomedOntology {
 		generateNNF();
 		if (useAbsent) {
 			definingSubsumption = new AbsentSubsumption(ontology, definingIsa, nnfBuilder.getIsa(),
-					nnfBuilder.getSuperRolesTypes(), nnfBuilder.getNecessaryNormalForm());
+					nnfBuilder.getSuperRolesTypes(), nnfBuilder.getNecessaryNormalForm(), swecIds);
 		} else {
 			definingSubsumption = new DefiningSubsumption(ontology, definingIsa, nnfBuilder.getIsa(),
 					nnfBuilder.getSuperRolesTypes(), nnfBuilder.getNecessaryNormalForm());
@@ -95,29 +112,41 @@ public class StatementSnomedOntology {
 		HashMap<Long, Set<Long>> dependentOnConcepts = new HashMap<>();
 		for (Concept concept : ontology.getConcepts()) {
 			long id = concept.getId();
+			if (id == root)
+				continue;
 			definingSuperConcepts.put(id, new HashSet<>());
 			for (Definition def : concept.getDefinitions()) {
 				for (Concept sup : def.getSuperConcepts()) {
+					if (id == sup.getId())
+						log.error("Self cycle: " + id);
 					definingSuperConcepts.get(id).add(sup.getId());
 				}
 			}
 			dependentOnConcepts.put(id, ontology.getDependentOnConcepts(concept.getId()));
 		}
-		definingIsa = SnomedIsa.init(definingSuperConcepts);
+		definingIsa = SnomedIsa.init(definingSuperConcepts, root);
 		{
-			SnomedIsa deps = SnomedIsa.init(dependentOnConcepts);
+			SnomedIsa deps = SnomedIsa.init(dependentOnConcepts, root);
 			deps.getOrderedConcepts().stream().map(id -> ontology.getConcept(id))
 					.forEach(con -> conceptsDefiningDependentOrder.add(con));
 		}
 		log.info("Concepts: " + conceptsDefiningDependentOrder.size());
-		if (conceptsDefiningDependentOrder.size() != ontology.getConcepts().size())
-			throw new RuntimeException("Size");
-		{
-			for (Concept con : conceptsDefiningDependentOrder) {
-				if (definingIsa.hasAncestor(con.getId(), swec_id))
-					statementConceptsDefiningDependentOrder.add(con);
-			}
+		if (conceptsDefiningDependentOrder.size() != ontology.getConcepts().size()) {
+			String msg = "Size: " + conceptsDefiningDependentOrder.size() + " != " + ontology.getConcepts().size();
+			log.error(msg);
+			// TODO Figure out what do about this in Solor
+			HashSet<Long> ontology_ids = ontology.getConcepts().stream().map(Concept::getId)
+					.collect(Collectors.toCollection(HashSet::new));
+			ontology_ids.removeAll(conceptsDefiningDependentOrder.stream().map(Concept::getId).toList());
+			ontology_ids.forEach(x -> log.error("Missing: " + x + " " + ontology.getConcept(x).getDefinitions()));
+			if (root == SnomedIds.root)
+				throw new RuntimeException(msg);
 		}
+		for (Concept con : conceptsDefiningDependentOrder) {
+			if (definingIsa.hasAncestor(con.getId(), swecIds.swec))
+				statementConceptsDefiningDependentOrder.add(con);
+		}
+		log.info("Statement concepts: " + statementConceptsDefiningDependentOrder.size());
 	}
 
 	private void generateNNF() {
@@ -127,7 +156,7 @@ public class StatementSnomedOntology {
 		nsoReasoner = SnomedOntologyReasoner.create(nsoOntology);
 		nsoReasoner.flush();
 		nnfBuilder = NecessaryNormalFormBuilder.create(nsoOntology, nsoReasoner.getSuperConcepts(),
-				nsoReasoner.getSuperRoleTypes(false));
+				nsoReasoner.getSuperRoleTypes(false), root);
 		// TODO can we get rid of this??? role chains issue
 		nnfBuilder.generate();
 		for (Concept con : getStatementConceptsDefiningDependentOrder()) {
@@ -139,7 +168,7 @@ public class StatementSnomedOntology {
 	 * Return true if con1 is subsumed by con2
 	 */
 	public boolean isSubsumedBy(Concept con1, Concept con2) {
-		if (con2.getId() == swec_id)
+		if (con2.getId() == swecIds.swec)
 			return true;
 		return definingSubsumption.isSubsumedByStructural(con1, con2);
 	}
@@ -148,12 +177,12 @@ public class StatementSnomedOntology {
 
 	public SnomedIsa classify() {
 		HashMap<Long, Set<Long>> parents = new HashMap<>();
-		parents.put(swec_id, Set.of(SnomedIds.root));
+		parents.put(swecIds.swec, Set.of(swecIds.swec_parent));
 		isas = SnomedIsa.init(parents);
 		for (Concept con : statementConceptsDefiningDependentOrder) {
 //			log.info("Con: " + ontology.getFsn(con.getId()));
 			Set<Long> mss = new HashSet<>();
-			findMss(con, SnomedIds.root, isas, new HashSet<>(), new HashSet<>(), mss);
+			findMss(con, swecIds.swec_parent, isas, new HashSet<>(), new HashSet<>(), mss);
 //			mss.forEach(id -> log.info("\tMSS: " + ontology.getFsn(id)));
 			Set<Long> mgs = new HashSet<>();
 			findMgs(con, bottom_id, isas, new HashSet<>(), new HashSet<>(), getLeaves(mss, isas), mgs);
@@ -223,24 +252,26 @@ public class StatementSnomedOntology {
 		return leaves;
 	}
 
-	public Set<Long> getEquivalentConcepts(int id) {
+	public Set<Long> getEquivalentConcepts(long id) {
 		if (nsoOntology.getConcept(id) != null)
 			return nsoReasoner.getEquivalentConcepts(id);
 		return Set.of();
 	}
 
-	public Set<Long> getSuperConcepts(int id) {
+	public Set<Long> getSuperConcepts(long id) {
 		if (nsoOntology.getConcept(id) != null)
 			return nsoReasoner.getSuperConcepts(id);
 		return isas.getParents(id);
 	}
 
-	public Set<Long> getSubConcepts(int id) {
-		if (id == SnomedIds.root) {
-			Set<Long> ret = new HashSet<>(nsoReasoner.getEquivalentConcepts(id));
-			ret.add(swec_id);
-			return ret;
-		}
+	public Set<Long> getSubConcepts(long id) {
+//		if (id == swecIds.swec_parent) {
+//			Set<Long> ret = new HashSet<>(nsoReasoner.getSubConcepts(id));
+//			ret.add(swecIds.swec);
+//			return ret;
+//		}
+		if (id == swecIds.swec)
+			return isas.getChildren(id);
 		if (nsoOntology.getConcept(id) != null)
 			return nsoReasoner.getSubConcepts(id);
 		return isas.getChildren(id);

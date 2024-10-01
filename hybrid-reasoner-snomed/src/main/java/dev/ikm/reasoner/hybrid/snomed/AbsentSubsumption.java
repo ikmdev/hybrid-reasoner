@@ -31,23 +31,57 @@ import dev.ikm.elk.snomed.model.Definition;
 import dev.ikm.elk.snomed.model.Role;
 import dev.ikm.elk.snomed.model.RoleGroup;
 import dev.ikm.elk.snomed.model.RoleType;
+import dev.ikm.reasoner.hybrid.snomed.StatementSnomedOntology.SwecIds;
 
 public class AbsentSubsumption extends DefiningSubsumption {
-	
-	public static boolean hasAbsent(Set<Role> roles) {
-		return roles.stream().anyMatch(x -> x.getRoleType().getId() == StatementSnomedOntology.finding_context_id
-				&& x.getConcept().getId() == StatementSnomedOntology.known_absent_id);
+
+	private SwecIds swecIds;
+
+	public static boolean hasAbsentSnomed(Set<Role> roles) {
+		return new AbsentSubsumption().hasAbsent(roles);
 	}
-	
-	public static boolean hasAbsent(RoleGroup rg) {
+
+	public boolean hasAbsent(Set<Role> roles) {
+		return roles.stream().anyMatch(x -> x.getRoleType().getId() == swecIds.findingContext()
+				&& x.getConcept().getId() == swecIds.knownAbsent());
+	}
+
+	public static boolean hasAbsentSnomed(RoleGroup rg) {
+		return new AbsentSubsumption().hasAbsent(rg);
+	}
+
+	public boolean hasAbsent(RoleGroup rg) {
 		return hasAbsent(rg.getRoles());
+	}
+
+	public static boolean hasUngroupedAbsentSnomed(Concept con) {
+		return con.getDefinitions().stream()
+				.anyMatch(def -> AbsentSubsumption.hasAbsentSnomed(def.getUngroupedRoles()));
+	}
+
+	public static boolean hasGroupedAbsentSnomed(Concept con) {
+		return con.getDefinitions().stream().flatMap(def -> def.getRoleGroups().stream())
+				.anyMatch(rg -> AbsentSubsumption.hasAbsentSnomed(rg));
+	}
+
+	private AbsentSubsumption() {
+		super(null, null, null, null, null);
+		this.swecIds = StatementSnomedOntology.swec_sctids;
+	}
+
+	public AbsentSubsumption(SnomedOntology ontology, SnomedIsa definingIsa, SnomedIsa isa,
+			HashMap<RoleType, Set<RoleType>> superRoles, HashMap<Concept, Definition> necessaryNormalForm,
+			SwecIds swecIds) {
+		super(ontology, definingIsa, isa, superRoles, necessaryNormalForm);
+		this.swecIds = swecIds;
 	}
 
 	public AbsentSubsumption(SnomedOntology ontology, SnomedIsa definingIsa, SnomedIsa isa,
 			HashMap<RoleType, Set<RoleType>> superRoles, HashMap<Concept, Definition> necessaryNormalForm) {
 		super(ontology, definingIsa, isa, superRoles, necessaryNormalForm);
+		this.swecIds = StatementSnomedOntology.swec_sctids;
 	}
-	
+
 	@Override
 	protected boolean isSubsumedBy(RoleGroup rg1, RoleGroup rg2) {
 		if (hasAbsent(rg1) && hasAbsent(rg2))
