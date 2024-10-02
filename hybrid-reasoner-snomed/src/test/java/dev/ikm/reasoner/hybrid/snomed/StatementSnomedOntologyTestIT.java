@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
@@ -22,6 +23,15 @@ import dev.ikm.elk.snomed.model.Concept;
 public class StatementSnomedOntologyTestIT extends StatementSnomedOntologyTestBase {
 
 	private static final Logger log = LoggerFactory.getLogger(StatementSnomedOntologyTestIT.class);
+
+	@BeforeAll
+	public void init() throws Exception {
+		long beg = System.currentTimeMillis();
+		super.init();
+		sso = StatementSnomedOntology.create(snomedOntology, false);
+		long end = System.currentTimeMillis();
+		log.info("Init in: " + ((end - beg) / 1000 + " secs"));
+	}
 
 	@Test
 	public void getConcepts() {

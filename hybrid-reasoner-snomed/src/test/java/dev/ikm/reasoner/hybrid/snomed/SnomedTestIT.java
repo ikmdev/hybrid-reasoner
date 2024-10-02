@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,52 +18,23 @@ import dev.ikm.elk.snomed.ConceptComparer;
 import dev.ikm.elk.snomed.NecessaryNormalFormBuilder;
 import dev.ikm.elk.snomed.SnomedConcreteRoles;
 import dev.ikm.elk.snomed.SnomedDescriptions;
-import dev.ikm.elk.snomed.SnomedOntology;
 import dev.ikm.elk.snomed.SnomedOntologyReasoner;
 import dev.ikm.elk.snomed.SnomedRoles;
 import dev.ikm.elk.snomed.model.Concept;
 import dev.ikm.elk.snomed.model.Definition;
 import dev.ikm.elk.snomed.model.Role;
 import dev.ikm.elk.snomed.model.RoleGroup;
-import dev.ikm.elk.snomed.owl.OwlTransformer;
-import dev.ikm.elk.snomed.owl.SnomedOwlOntology;
 
 @TestInstance(Lifecycle.PER_CLASS)
-public class SnomedTestIT {
+public class SnomedTestIT extends StatementSnomedOntologyTestBase {
 
 	private static final Logger log = LoggerFactory.getLogger(SnomedTestIT.class);
-
-	protected String getDir() {
-		return "target/data/snomed-test-data-" + getEditionDir() + "-" + getVersion();
-	}
-
-	protected String getEdition() {
-		return "US1000124";
-	}
-
-	protected String getEditionDir() {
-		return "us";
-	}
 
 	protected String getVersion() {
 		return "20240301";
 	}
 
-	protected Path axioms_file = Paths.get(getDir(),
-			"sct2_sRefset_OWLExpressionSnapshot_" + getEdition() + "_" + getVersion() + ".txt");
-
-	protected Path rels_file = Paths.get(getDir(),
-			"sct2_Relationship_Snapshot_" + getEdition() + "_" + getVersion() + ".txt");
-
-	protected Path values_file = Paths.get(getDir(),
-			"sct2_RelationshipConcreteValues_Snapshot_" + getEdition() + "_" + getVersion() + ".txt");
-
-	protected Path descriptions_file = Paths.get(getDir(),
-			"sct2_Description_Snapshot-en_" + getEdition() + "_" + getVersion() + ".txt");
-
 	private SnomedDescriptions descrs;
-
-	private SnomedOntology snomedOntology;
 
 	private SnomedOntologyReasoner snomedOntologyReasoner;
 
@@ -73,12 +42,8 @@ public class SnomedTestIT {
 
 	@BeforeAll
 	public void init() throws Exception {
-		log.info("Test case: " + axioms_file);
-		SnomedOwlOntology snomedOwlOntology = SnomedOwlOntology.createOntology();
-		snomedOwlOntology.loadOntology(axioms_file);
+		super.init();
 		descrs = SnomedDescriptions.init(descriptions_file);
-		log.info("Load complete");
-		snomedOntology = new OwlTransformer().transform(snomedOwlOntology);
 		snomedOntologyReasoner = SnomedOntologyReasoner.create(snomedOntology);
 		snomedOntologyReasoner.flush();
 		log.info("Classify complete");

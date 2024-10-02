@@ -53,7 +53,7 @@ public class StatementSnomedOntology {
 
 	private NecessaryNormalFormBuilder nnfBuilder;
 
-	private DefiningSubsumption definingSubsumption;
+	private DefiningSubsumption subsumption;
 
 	private SnomedOntology nsoOntology;
 
@@ -99,10 +99,10 @@ public class StatementSnomedOntology {
 		initConcepts();
 		generateNNF();
 		if (useAbsent) {
-			definingSubsumption = new AbsentSubsumption(ontology, definingIsa, nnfBuilder.getIsa(),
+			subsumption = new AbsentSubsumption(ontology, definingIsa, nnfBuilder.getIsa(),
 					nnfBuilder.getSuperRolesTypes(), nnfBuilder.getNecessaryNormalForm(), swecIds);
 		} else {
-			definingSubsumption = new DefiningSubsumption(ontology, definingIsa, nnfBuilder.getIsa(),
+			subsumption = new DefiningSubsumption(ontology, definingIsa, nnfBuilder.getIsa(),
 					nnfBuilder.getSuperRolesTypes(), nnfBuilder.getNecessaryNormalForm());
 		}
 	}
@@ -170,7 +170,7 @@ public class StatementSnomedOntology {
 	public boolean isSubsumedBy(Concept con1, Concept con2) {
 		if (con2.getId() == swecIds.swec)
 			return true;
-		return definingSubsumption.isSubsumedByStructural(con1, con2);
+		return subsumption.isSubsumedByStructural(con1, con2);
 	}
 
 	private static final long bottom_id = Long.MIN_VALUE;

@@ -3,7 +3,6 @@ package dev.ikm.reasoner.hybrid.snomed;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.slf4j.Logger;
@@ -51,18 +50,20 @@ public class StatementSnomedOntologyTestBase {
 
 	protected StatementSnomedOntology sso;
 
-	@BeforeAll
 	public void init() throws Exception {
 		log.info("Test case: " + axioms_file);
-		long beg = System.currentTimeMillis();
 		SnomedOwlOntology snomedOwlOntology = SnomedOwlOntology.createOntology();
 		snomedOwlOntology.loadOntology(axioms_file);
 		log.info("Load complete");
 		snomedOntology = new OwlTransformer().transform(snomedOwlOntology);
 		snomedOntology.setDescriptions(SnomedDescriptions.init(descriptions_file));
-		sso = StatementSnomedOntology.create(snomedOntology, false);
-		long end = System.currentTimeMillis();
-		log.info("Init in: " + ((end - beg) / 1000 + " secs"));
+	}
+
+	protected void list(long con, int depth) {
+		log.info("\t".repeat(depth) + con + " " + snomedOntology.getFsn(con));
+		for (long sub : sso.getSubConcepts(con)) {
+			list(sub, depth + 1);
+		}
 	}
 
 }
