@@ -394,6 +394,7 @@
 			</plugin>
 		</plugins>
 	</reporting>
+
 	<profiles>
 
 		<!-- OSSRH Related Profiles (Start) -->
