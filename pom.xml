@@ -4,9 +4,11 @@
 
 	<groupId>dev.ikm.hybrid-reasoner</groupId>
 	<artifactId>hybrid-reasoner-parent</artifactId>
-	<version>1.0.3-SNAPSHOT</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
+	<name>Hybrid-Reasoner</name>
+	<description>Hybrid-Reasoner Parent</description>
 	<url>https://www.ikm.dev</url>
 	<inceptionYear>2024</inceptionYear>
 	<organization>
