@@ -7,8 +7,9 @@
 	<version>1.0.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>Hybrid-Reasoner</name>
-	<description>Hybrid-Reasoner Parent</description>
+	<name>Hybrid Reasoner</name>
+	<description>A hybrid reasoner using structural subsumption for "absent"
+		semantics</description>
 	<url>https://www.ikm.dev</url>
 	<inceptionYear>2024</inceptionYear>
 	<organization>
@@ -44,11 +45,15 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>21</java.version>
-		<!-- logging dependencies-->
+		<!-- logging dependencies -->
 		<slf4j.version>2.0.16</slf4j.version>
 		<log4j.version>3.0.0-alpha1</log4j.version>
-		<!-- test dependencies-->
+		<!-- test dependencies -->
 		<junit-jupiter-api.version>5.6.3</junit-jupiter-api.version>
+		<!-- dev.ikm.elk dependencies -->
+		<ikm-reasoner.version>0.31.0</ikm-reasoner.version>
+		<!-- dev.ikm.owlapi dependencies -->
+		<owlapi.version>4.7.3</owlapi.version>
 		<!-- maven plugins -->
 		<maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
 		<maven-changes-plugin.version>2.12.1</maven-changes-plugin.version>
@@ -93,6 +98,43 @@
 				<artifactId>junit-jupiter-api</artifactId>
 				<version>${junit-jupiter-api.version}</version>
 				<scope>test</scope>
+			</dependency>
+			<!-- dev.ikm.elk dependencies -->
+			<dependency>
+				<groupId>dev.ikm.elk</groupId>
+				<artifactId>elk-owlapi</artifactId>
+				<version>${ikm-reasoner.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>dev.ikm.elk</groupId>
+				<artifactId>elk-reasoner</artifactId>
+				<version>${ikm-reasoner.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>dev.ikm.elk</groupId>
+				<artifactId>elk-snomed</artifactId>
+				<version>${ikm-reasoner.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>dev.ikm.elk</groupId>
+				<artifactId>elk-snomed-owl</artifactId>
+				<version>${ikm-reasoner.version}</version>
+			</dependency>
+			<!-- dev.ikm.owlapi dependencies -->
+			<dependency>
+				<groupId>dev.ikm.owlapi</groupId>
+				<artifactId>owlapi-api</artifactId>
+				<version>${owlapi.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>dev.ikm.owlapi</groupId>
+				<artifactId>owlapi-impl</artifactId>
+				<version>${owlapi.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>dev.ikm.owlapi</groupId>
+				<artifactId>owlapi-apibinding</artifactId>
+				<version>${owlapi.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
