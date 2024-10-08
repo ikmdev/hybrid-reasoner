@@ -11,8 +11,6 @@
 	<artifactId>hybrid-reasoner-snomed</artifactId>
 
 	<properties>
-		<ikm-reasoner.version>0.30.0</ikm-reasoner.version>
-		<owlapi.version>4.7.1</owlapi.version>
 		<skipITs>true</skipITs>
 		<snomed-test-data.groupid>dev.ikm.snomed</snomed-test-data.groupid>
 		<snomed-test-data.version>0.1.0</snomed-test-data.version>
@@ -22,12 +20,10 @@
 		<dependency>
 			<groupId>dev.ikm.elk</groupId>
 			<artifactId>elk-snomed</artifactId>
-			<version>${ikm-reasoner.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>dev.ikm.elk</groupId>
 			<artifactId>elk-snomed-owl</artifactId>
-			<version>${ikm-reasoner.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
