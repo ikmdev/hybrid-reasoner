@@ -124,6 +124,11 @@
 				<artifactId>elk-snomed-owl</artifactId>
 				<version>${ikm-reasoner.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>dev.ikm.elk</groupId>
+				<artifactId>elk-snomed-owl-el</artifactId>
+				<version>${ikm-reasoner.version}</version>
+			</dependency>
 			<!-- dev.ikm.owlapi dependencies -->
 			<dependency>
 				<groupId>dev.ikm.owlapi</groupId>

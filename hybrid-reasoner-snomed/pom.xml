@@ -23,8 +23,7 @@
 		</dependency>
 		<dependency>
 			<groupId>dev.ikm.elk</groupId>
-			<artifactId>elk-snomed-owl</artifactId>
-			<scope>test</scope>
+			<artifactId>elk-snomed-owl-el</artifactId>
 		</dependency>
 	</dependencies>
 
