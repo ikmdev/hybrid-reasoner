@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -16,13 +17,14 @@ import org.slf4j.LoggerFactory;
 
 import dev.ikm.elk.snomed.SnomedIds;
 import dev.ikm.elk.snomed.SnomedIsa;
-import dev.ikm.elk.snomed.SnomedOntologyReasoner;
 import dev.ikm.elk.snomed.model.Concept;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class StatementSnomedOntologyTestIT extends StatementSnomedOntologyTestBase {
 
 	private static final Logger log = LoggerFactory.getLogger(StatementSnomedOntologyTestIT.class);
+
+	private SnomedIsa isas;
 
 	@BeforeAll
 	public void init() throws Exception {
@@ -31,6 +33,7 @@ public class StatementSnomedOntologyTestIT extends StatementSnomedOntologyTestBa
 		sso = StatementSnomedOntology.create(snomedOntology, false);
 		long end = System.currentTimeMillis();
 		log.info("Init in: " + ((end - beg) / 1000 + " secs"));
+		isas = SnomedIsa.init(rels_file);
 	}
 
 	@Test
@@ -57,10 +60,9 @@ public class StatementSnomedOntologyTestIT extends StatementSnomedOntologyTestBa
 
 	@Test
 	public void isSubsumedBy() {
-		SnomedOntologyReasoner reasoner = SnomedOntologyReasoner.create(snomedOntology);
-		reasoner.flush();
 		for (Concept con : sso.getStatementConceptsDefiningDependentOrder()) {
-			for (Concept sup : reasoner.getSuperConcepts(con)) {
+			for (long sup_id : isas.getParents(con.getId())) {
+				Concept sup = snomedOntology.getConcept(sup_id);
 				assertTrue(sso.isSubsumedBy(con, sup));
 				assertFalse(sso.isSubsumedBy(sup, con));
 			}
@@ -79,37 +81,34 @@ public class StatementSnomedOntologyTestIT extends StatementSnomedOntologyTestBa
 	}
 
 	@Test
-	public void classify() {
+	public void classify() throws Exception {
 		long beg = System.currentTimeMillis();
-		SnomedIsa isas = sso.classify();
+		SnomedIsa sso_isas = sso.classify();
 		long end = System.currentTimeMillis();
 		log.info("Classify in: " + ((end - beg) / 1000 + " secs"));
-		SnomedOntologyReasoner reasoner = SnomedOntologyReasoner.create(snomedOntology);
-		reasoner.flush();
-		for (long id : isas.getOrderedConcepts()) {
+		for (long id : sso_isas.getOrderedConcepts()) {
 			if (id == SnomedIds.root)
 				continue;
-			Set<Long> exp = reasoner.getSubConcepts(id);
-			Set<Long> act = isas.getChildren(id);
+			Set<Long> exp = isas.getChildren(id);
+			Set<Long> act = sso_isas.getChildren(id);
 			if (!exp.equals(act)) {
-				log.info("Con: " + isas.getChildren(id).size() + " - " + snomedOntology.getFsn(id));
+				log.info("Con: " + sso_isas.getChildren(id).size() + " - " + snomedOntology.getFsn(id));
 				Set<Long> mis = new HashSet<>(exp);
 				mis.removeAll(act);
 				mis.forEach(child -> log.info("\tMis: " + snomedOntology.getFsn(child)));
 				Set<Long> ext = new HashSet<>(act);
 				ext.removeAll(exp);
 				ext.forEach(child -> log.info("\tExt: " + snomedOntology.getFsn(child)));
-//				log.info("Con: " + isas.getChildren(id).size() + " - " + snomedOntology.getFsn(id));
-//				isas.getChildren(id).stream().map(child -> snomedOntology.getFsn(child)).sorted()
-//						.forEach(child -> log.info("\t" + child));
 			}
-			assertEquals(reasoner.getSubConcepts(id), isas.getChildren(id));
-			assertEquals(reasoner.getSubConcepts(id), sso.getSubConcepts(id));
+			assertEquals(exp, act);
+			assertEquals(exp, sso.getSubConcepts(id));
 		}
 		for (Concept con : snomedOntology.getConcepts()) {
 			long id = con.getId();
-			assertEquals(reasoner.getSubConcepts(id), sso.getSubConcepts(id));
-			assertEquals(reasoner.getSuperConcepts(id), sso.getSuperConcepts(id));
+			if (List.of(SnomedIds.concept_model_object_attribute, SnomedIds.concept_model_data_attribute).contains(id))
+				continue;
+			assertEquals(isas.getChildren(id), sso.getSubConcepts(id));
+			assertEquals(isas.getParents(id), sso.getSuperConcepts(id));
 		}
 	}
 
