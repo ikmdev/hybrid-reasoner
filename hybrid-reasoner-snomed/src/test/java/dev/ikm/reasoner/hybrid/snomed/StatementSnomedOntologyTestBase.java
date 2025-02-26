@@ -48,8 +48,6 @@ public class StatementSnomedOntologyTestBase {
 
 	protected SnomedOntology snomedOntology;
 
-	protected StatementSnomedOntology sso;
-
 	public void init() throws Exception {
 		log.info("Test case: " + axioms_file);
 		OwlElOntology ontology = new OwlElOntology();
@@ -57,12 +55,13 @@ public class StatementSnomedOntologyTestBase {
 		log.info("Load complete");
 		snomedOntology = new OwlElTransformer().transform(ontology);
 		snomedOntology.setDescriptions(SnomedDescriptions.init(descriptions_file));
+		snomedOntology.setNames();
 	}
 
-	protected void list(long con, int depth) {
+	protected void list(StatementSnomedOntology sso, long con, int depth) {
 		log.info("\t".repeat(depth) + con + " " + snomedOntology.getFsn(con));
 		for (long sub : sso.getSubConcepts(con)) {
-			list(sub, depth + 1);
+			list(sso, sub, depth + 1);
 		}
 	}
 

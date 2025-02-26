@@ -24,6 +24,8 @@ public class StatementSnomedOntologyTestIT extends StatementSnomedOntologyTestBa
 
 	private static final Logger log = LoggerFactory.getLogger(StatementSnomedOntologyTestIT.class);
 
+	private StatementSnomedOntology sso;
+
 	private SnomedIsa isas;
 
 	@BeforeAll
