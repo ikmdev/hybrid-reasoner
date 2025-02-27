@@ -30,6 +30,8 @@ To run the integration tests:
 
 The integration tests require the SNOMED test data artifacts from the [reasoner-test-data project](https://github.com/ikmdev/reasoner-test-data)
 
+Available at [Maven Central](http://central.sonatype.com/namespace/dev.ikm.hybrid-reasoner)
+
 ### Team Ownership - Product Owner
 
 Data Team - Eric Mays (External) <emays@mays-systems.com>
