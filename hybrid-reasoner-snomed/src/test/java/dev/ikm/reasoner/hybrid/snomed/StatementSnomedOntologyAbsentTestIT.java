@@ -21,6 +21,8 @@ public class StatementSnomedOntologyAbsentTestIT extends StatementSnomedOntology
 
 	private static final Logger log = LoggerFactory.getLogger(StatementSnomedOntologyAbsentTestIT.class);
 
+	private StatementSnomedOntology sso;
+
 	@BeforeAll
 	public void init() throws Exception {
 		long beg = System.currentTimeMillis();
@@ -80,7 +82,7 @@ public class StatementSnomedOntologyAbsentTestIT extends StatementSnomedOntology
 		sso.classify();
 		long end = System.currentTimeMillis();
 		log.info("Classify in: " + ((end - beg) / 1000 + " secs"));
-		list(FamilyHistoryIds.family_history_swec, 0);
+		list(sso, FamilyHistoryIds.family_history_swec, 0);
 	}
 
 }

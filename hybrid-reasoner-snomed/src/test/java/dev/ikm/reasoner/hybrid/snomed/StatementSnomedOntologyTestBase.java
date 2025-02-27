@@ -8,10 +8,10 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import dev.ikm.elk.snomed.OwlElTransformer;
 import dev.ikm.elk.snomed.SnomedDescriptions;
 import dev.ikm.elk.snomed.SnomedOntology;
-import dev.ikm.elk.snomed.owl.OwlTransformer;
-import dev.ikm.elk.snomed.owl.SnomedOwlOntology;
+import dev.ikm.elk.snomed.owlel.OwlElOntology;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class StatementSnomedOntologyTestBase {
@@ -48,21 +48,20 @@ public class StatementSnomedOntologyTestBase {
 
 	protected SnomedOntology snomedOntology;
 
-	protected StatementSnomedOntology sso;
-
 	public void init() throws Exception {
 		log.info("Test case: " + axioms_file);
-		SnomedOwlOntology snomedOwlOntology = SnomedOwlOntology.createOntology();
-		snomedOwlOntology.loadOntology(axioms_file);
+		OwlElOntology ontology = new OwlElOntology();
+		ontology.load(axioms_file);
 		log.info("Load complete");
-		snomedOntology = new OwlTransformer().transform(snomedOwlOntology);
+		snomedOntology = new OwlElTransformer().transform(ontology);
 		snomedOntology.setDescriptions(SnomedDescriptions.init(descriptions_file));
+		snomedOntology.setNames();
 	}
 
-	protected void list(long con, int depth) {
+	protected void list(StatementSnomedOntology sso, long con, int depth) {
 		log.info("\t".repeat(depth) + con + " " + snomedOntology.getFsn(con));
 		for (long sub : sso.getSubConcepts(con)) {
-			list(sub, depth + 1);
+			list(sso, sub, depth + 1);
 		}
 	}
 

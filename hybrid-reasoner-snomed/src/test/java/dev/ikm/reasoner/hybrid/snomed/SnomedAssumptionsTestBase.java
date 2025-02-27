@@ -17,7 +17,6 @@ import org.slf4j.LoggerFactory;
 import dev.ikm.elk.snomed.ConceptComparer;
 import dev.ikm.elk.snomed.NecessaryNormalFormBuilder;
 import dev.ikm.elk.snomed.SnomedConcreteRoles;
-import dev.ikm.elk.snomed.SnomedDescriptions;
 import dev.ikm.elk.snomed.SnomedOntologyReasoner;
 import dev.ikm.elk.snomed.SnomedRoles;
 import dev.ikm.elk.snomed.model.Concept;
@@ -26,24 +25,23 @@ import dev.ikm.elk.snomed.model.Role;
 import dev.ikm.elk.snomed.model.RoleGroup;
 
 @TestInstance(Lifecycle.PER_CLASS)
-public class SnomedTestIT extends StatementSnomedOntologyTestBase {
+public abstract class SnomedAssumptionsTestBase extends StatementSnomedOntologyTestBase {
 
-	private static final Logger log = LoggerFactory.getLogger(SnomedTestIT.class);
-
-	protected String getVersion() {
-		return "20240301";
-	}
-
-	private SnomedDescriptions descrs;
+	private static final Logger log = LoggerFactory.getLogger(SnomedAssumptionsTestBase.class);
 
 	private SnomedOntologyReasoner snomedOntologyReasoner;
 
 	private NecessaryNormalFormBuilder nnfb;
 
+	protected int swec_concepts_cnt = -1;
+
+	protected int grouped_absent_cnt = -1;
+	
+	protected int grouped_absent_nnf_cnt = -1;
+
 	@BeforeAll
 	public void init() throws Exception {
 		super.init();
-		descrs = SnomedDescriptions.init(descriptions_file);
 		snomedOntologyReasoner = SnomedOntologyReasoner.create(snomedOntology);
 		snomedOntologyReasoner.flush();
 		log.info("Classify complete");
@@ -96,7 +94,7 @@ public class SnomedTestIT extends StatementSnomedOntologyTestBase {
 				assertEquals(1, con.getDefinitions().getFirst().getSuperConcepts().size());
 			}
 		}
-		assertEquals(458, gr_cnt);
+		assertEquals(grouped_absent_cnt, gr_cnt);
 	}
 
 	@Test
@@ -109,7 +107,7 @@ public class SnomedTestIT extends StatementSnomedOntologyTestBase {
 				assertEquals(1, con.getDefinitions().getFirst().getSuperConcepts().size());
 			}
 		}
-		assertEquals(458, gr_cnt);
+		assertEquals(grouped_absent_nnf_cnt, gr_cnt);
 	}
 
 	@Test
@@ -119,7 +117,7 @@ public class SnomedTestIT extends StatementSnomedOntologyTestBase {
 			if (AbsentSubsumption.hasGroupedAbsentSnomed(con))
 				sups.addAll(con.getDefinitions().getFirst().getSuperConcepts());
 		}
-		sups.forEach(x -> log.info("Sup: " + x + " " + descrs.getFsn(x.getId())));
+		sups.forEach(x -> log.info("Sup: " + x));
 		assertEquals(19, sups.size());
 	}
 
@@ -127,7 +125,7 @@ public class SnomedTestIT extends StatementSnomedOntologyTestBase {
 	public void disjoint() {
 		// check that the statement concepts are disjoint from other hierarchies
 		Set<Long> subs = snomedOntologyReasoner.getSubConcepts(StatementSnomedOntology.swec_id, false);
-		assertEquals(5428, subs.size());
+		assertEquals(swec_concepts_cnt, subs.size());
 		subs.add(StatementSnomedOntology.swec_id);
 		for (long id : subs) {
 			if (id == StatementSnomedOntology.swec_id)
@@ -193,9 +191,8 @@ public class SnomedTestIT extends StatementSnomedOntologyTestBase {
 				root_cnt++;
 				// 413350009 |Finding with explicit context (situation)|
 				if (!snomedOntologyReasoner.getSuperConcepts(id).contains(413350009l)) {
-					log.info("No root: " + id + " " + descrs.getFsn(id));
-					snomedOntologyReasoner.getSuperConcepts(id)
-							.forEach(x -> log.info("\tSup: " + x + " " + descrs.getFsn(x)));
+					log.info("No root: " + con);
+					snomedOntologyReasoner.getSuperConcepts(con).forEach(x -> log.info("\tSup: " + x));
 				}
 			}
 		}

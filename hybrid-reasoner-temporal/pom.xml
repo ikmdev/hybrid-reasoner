@@ -13,11 +13,15 @@
 	<description>Parses strings representing General Relative Temporal
 		Relationships, and tests subsumption between two such expressions</description>
 
+	<properties>
+		<antlr4.version>4.13.2</antlr4.version>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.antlr</groupId>
 			<artifactId>antlr4-runtime</artifactId>
-			<version>4.13.0</version>
+			<version>${antlr4.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -26,7 +30,7 @@
 			<plugin>
 				<groupId>org.antlr</groupId>
 				<artifactId>antlr4-maven-plugin</artifactId>
-				<version>4.13.0</version>
+				<version>${antlr4.version}</version>
 				<configuration>
 					<listener>true</listener>
 					<visitor>true</visitor>

@@ -47,38 +47,38 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>21</java.version>
 		<!-- logging dependencies -->
-		<slf4j.version>2.0.16</slf4j.version>
+		<slf4j.version>2.0.17</slf4j.version>
 		<log4j.version>3.0.0-alpha1</log4j.version>
 		<!-- test dependencies -->
-		<junit.version>5.11.4</junit.version>
+		<junit.version>5.12.0</junit.version>
 		<!-- dev.ikm.elk dependencies -->
-		<ikm-reasoner.version>0.37.3</ikm-reasoner.version>
+		<ikm-reasoner.version>0.37.5</ikm-reasoner.version>
 		<!-- dev.ikm.owlapi dependencies -->
-		<owlapi.version>4.8.0</owlapi.version>
+		<owlapi.version>4.8.2</owlapi.version>
 		<!-- other dependencies -->
 		<!-- org.apache.maven.plugins -->
 		<maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
 		<maven-changes-plugin.version>2.12.1</maven-changes-plugin.version>
-		<maven-clean-plugin.version>3.3.2</maven-clean-plugin.version>
-		<maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
-		<maven-dependency-plugin.version>3.6.1</maven-dependency-plugin.version>
-		<maven-deploy-plugin.version>3.1.0</maven-deploy-plugin.version>
-		<maven-enforcer-plugin.version>3.3.0</maven-enforcer-plugin.version>
-		<maven-failsafe-plugin.version>3.2.1 </maven-failsafe-plugin.version>
-		<maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
-		<maven-install-plugin.version>3.1.1</maven-install-plugin.version>
-		<maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
-		<maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
-		<maven-project-info-reports-plugin.version>3.4.5</maven-project-info-reports-plugin.version>
+		<maven-clean-plugin.version>3.4.1</maven-clean-plugin.version>
+		<maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
+		<maven-dependency-plugin.version>3.8.1</maven-dependency-plugin.version>
+		<maven-deploy-plugin.version>3.1.3</maven-deploy-plugin.version>
+		<maven-enforcer-plugin.version>3.5.0</maven-enforcer-plugin.version>
+		<maven-failsafe-plugin.version>3.5.2 </maven-failsafe-plugin.version>
+		<maven-gpg-plugin.version>3.2.7</maven-gpg-plugin.version>
+		<maven-install-plugin.version>3.1.3</maven-install-plugin.version>
+		<maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
+		<maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
+		<maven-project-info-reports-plugin.version>3.8.0</maven-project-info-reports-plugin.version>
 		<maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
-		<maven-site-plugin.version>3.12.1</maven-site-plugin.version>
-		<maven-source-plugin.version>3.3.0</maven-source-plugin.version>
-		<maven-surefire-plugin.version>3.2.2</maven-surefire-plugin.version>
+		<maven-site-plugin.version>3.21.0</maven-site-plugin.version>
+		<maven-source-plugin.version>3.3.1</maven-source-plugin.version>
+		<maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
 		<!-- other plugins -->
-		<license-maven-plugin.version>2.4.0</license-maven-plugin.version>
-		<nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
+		<license-maven-plugin.version>2.5.0</license-maven-plugin.version>
+		<nexus-staging-maven-plugin.version>1.7.0</nexus-staging-maven-plugin.version>
 		<tidy-maven-plugin.version>1.3.0</tidy-maven-plugin.version>
-		<versions-maven-plugin.version>2.15.0</versions-maven-plugin.version>
+		<versions-maven-plugin.version>2.18.0</versions-maven-plugin.version>
 		<maven.github-flow.version>1.21.1-r4</maven.github-flow.version>
 	</properties>
 
@@ -124,10 +124,20 @@
 				<artifactId>elk-snomed-owl</artifactId>
 				<version>${ikm-reasoner.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>dev.ikm.elk</groupId>
+				<artifactId>elk-snomed-owl-el</artifactId>
+				<version>${ikm-reasoner.version}</version>
+			</dependency>
 			<!-- dev.ikm.owlapi dependencies -->
 			<dependency>
 				<groupId>dev.ikm.owlapi</groupId>
 				<artifactId>owlapi-api</artifactId>
+				<version>${owlapi.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>dev.ikm.owlapi</groupId>
+				<artifactId>owlapi-apibinding</artifactId>
 				<version>${owlapi.version}</version>
 			</dependency>
 			<dependency>
@@ -137,10 +147,10 @@
 			</dependency>
 			<dependency>
 				<groupId>dev.ikm.owlapi</groupId>
-				<artifactId>owlapi-apibinding</artifactId>
+				<artifactId>owlapi-parsers</artifactId>
 				<version>${owlapi.version}</version>
-			</dependency>
-			<!-- other dependencies -->
+			</dependency>	<!--
+			other dependencies -->
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
@@ -158,6 +168,7 @@
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -266,13 +277,15 @@
 					<artifactId>versions-maven-plugin</artifactId>
 					<version>${versions-maven-plugin.version}</version>
 				</plugin>
-				<!-- This plugin is provided to help with feature development and releasing -->
+				<!-- This plugin is provided to help with feature development
+				and releasing -->
 				<plugin>
 					<groupId>dev.ikm</groupId>
 					<artifactId>gitflow-maven-plugin</artifactId>
 					<version>${maven.github-flow.version}</version>
 					<configuration>
-						<featureNamePattern>^(?!(((feature|hotfix|bugfix))\/(IKM|AR|IAT|IC|IKMC|IKDT|IKMD|IIA|IKMW|IKMM|TE)-\d+(-[0-9A-Za-z\-]*)*)|main|prod|master|dev).*$</featureNamePattern>
+						<featureNamePattern>
+							^(?!(((feature|hotfix|bugfix))\/(IKM|AR|IAT|IC|IKMC|IKDT|IKMD|IIA|IKMW|IKMM|TE)-\d+(-[0-9A-Za-z\-]*)*)|main|prod|master|dev).*$</featureNamePattern>
 						<separateFinishBranches>true</separateFinishBranches>
 						<gitFlowConfig>
 							<developmentBranch>main</developmentBranch>
@@ -284,11 +297,15 @@
 							<releaseBranchPrefix>release/</releaseBranchPrefix>
 						</gitFlowConfig>
 						<commitMessages>
-							<featureStartMessage>Update version to start feature: @{featureName}</featureStartMessage>
-							<featureFinishMessage>Update version to finish feature: @{featureName}</featureFinishMessage>
-							<releaseStartMessage>Update release version: @{version}</releaseStartMessage>
+							<featureStartMessage>Update version to start
+								feature: @{featureName}</featureStartMessage>
+							<featureFinishMessage>Update version to finish
+								feature: @{featureName}</featureFinishMessage>
+							<releaseStartMessage>Update release version:
+								@{version}</releaseStartMessage>
 							<tagReleaseMessage>Tag release: @{version}</tagReleaseMessage>
-							<releaseFinishMessage>Update development version: @{version}</releaseFinishMessage>
+							<releaseFinishMessage>Update development version:
+								@{version}</releaseFinishMessage>
 						</commitMessages>
 					</configuration>
 				</plugin>
@@ -307,7 +324,7 @@
 						<configuration>
 							<rules>
 								<requireMavenVersion>
-									<version>3.8</version>
+									<version>3.9</version>
 								</requireMavenVersion>
 								<requireJavaVersion>
 									<version>${java.version}</version>
@@ -334,7 +351,19 @@
 								<ignoreVersions>
 									<ignoreVersion>
 										<type>regex</type>
-										<version>.+(alpha|beta).*</version>
+										<version>.+-(alpha|beta).+</version>
+									</ignoreVersion>
+									<ignoreVersion>
+										<type>regex</type>
+										<version>.+-(M|m).+</version>
+									</ignoreVersion>
+									<ignoreVersion>
+										<type>regex</type>
+										<version>.+-(RC|rc).+</version>
+									</ignoreVersion>
+									<ignoreVersion>
+										<type>regex</type>
+										<version>(.+-SNAPSHOT|.+-M\d)</version>
 									</ignoreVersion>
 								</ignoreVersions>
 							</ruleSet>
@@ -361,6 +390,7 @@
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
+					<release>${java.version}</release>
 					<fork>true</fork>
 				</configuration>
 			</plugin>
@@ -410,7 +440,19 @@
 							<goal>analyze-only</goal>
 						</goals>
 						<configuration>
+							<ignoredNonTestScopedDependencies>
+								<ignoredNonTestScopedDependency>
+									org.apache.logging.log4j:*</ignoredNonTestScopedDependency>
+								<ignoredNonTestScopedDependency>org.slf4j:*</ignoredNonTestScopedDependency>
+							</ignoredNonTestScopedDependencies>
+							<ignoredUnusedDeclaredDependencies>
+								<ignoredUnusedDeclaredDependency>
+									org.apache.logging.log4j:*</ignoredUnusedDeclaredDependency>
+								<ignoredUnusedDeclaredDependency>org.slf4j:*</ignoredUnusedDeclaredDependency>
+							</ignoredUnusedDeclaredDependencies>
 							<ignoreUnusedRuntime>true</ignoreUnusedRuntime>
+							<ignoredUsedUndeclaredDependencies>
+								dev.ikm.jpms:eclipse-collections-api</ignoredUsedUndeclaredDependencies>
 						</configuration>
 					</execution>
 				</executions>
