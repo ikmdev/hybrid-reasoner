@@ -33,11 +33,15 @@
 		</dependency>
 		<dependency>
 			<groupId>dev.ikm.owlapi</groupId>
+			<artifactId>owlapi-apibinding</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>dev.ikm.owlapi</groupId>
 			<artifactId>owlapi-impl</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>dev.ikm.owlapi</groupId>
-			<artifactId>owlapi-apibinding</artifactId>
+			<artifactId>owlapi-parsers</artifactId>
 		</dependency>
 		<!-- project dependencies -->
 		<dependency>
