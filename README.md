@@ -6,7 +6,7 @@ A prototype implementation including temporal reasoning is in the hybrid-reasone
 
 The hybrid-reasoner-snomed module scales to SNOMED and is based on the IKM reasoner elk-snomed implementation.
 
-Requires Java 21.
+Requires Java 23.
 
 To build on Unix/Linux/OSX: `./mvnw clean install`
 
