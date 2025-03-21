@@ -264,6 +264,15 @@ public class StatementSnomedOntology {
 		return isas.getParents(id);
 	}
 
+	public HashMap<Long, Set<Long>> getSuperConcepts() {
+		HashMap<Long, Set<Long>> superConcepts = new HashMap<>();
+		for (Concept concept : ontology.getConcepts()) {
+			long id = concept.getId();
+			superConcepts.put(id, getSuperConcepts(id));
+		}
+		return superConcepts;
+	}
+
 	public Set<Long> getSubConcepts(long id) {
 //		if (id == swecIds.swec_parent) {
 //			Set<Long> ret = new HashSet<>(nsoReasoner.getSubConcepts(id));
@@ -275,6 +284,10 @@ public class StatementSnomedOntology {
 		if (nsoOntology.getConcept(id) != null)
 			return nsoReasoner.getSubConcepts(id);
 		return isas.getChildren(id);
+	}
+
+	public HashMap<Long, Set<Long>> getSuperRoleTypes(boolean direct) {
+		return nsoReasoner.getSuperRoleTypes(direct);
 	}
 
 }
