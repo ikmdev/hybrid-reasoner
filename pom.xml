@@ -50,11 +50,11 @@
 		<slf4j.version>2.0.17</slf4j.version>
 		<log4j.version>3.0.0-alpha1</log4j.version>
 		<!-- test dependencies -->
-		<junit.version>5.12.1</junit.version>
+		<junit.version>5.12.2</junit.version>
 		<!-- dev.ikm.elk dependencies -->
 		<ikm-reasoner.version>0.37.6</ikm-reasoner.version>
 		<!-- dev.ikm.owlapi dependencies -->
-		<owlapi.version>4.8.2</owlapi.version>
+		<owlapi.version>4.8.3</owlapi.version>
 		<!-- other dependencies -->
 		<!-- org.apache.maven.plugins -->
 		<maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
