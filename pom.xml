@@ -4,7 +4,7 @@
 
 	<groupId>dev.ikm.hybrid-reasoner</groupId>
 	<artifactId>hybrid-reasoner-parent</artifactId>
-	<version>1.0.13</version>
+	<version>1.0.14-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Hybrid Reasoner</name>
