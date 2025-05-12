@@ -16,9 +16,9 @@ import org.slf4j.LoggerFactory;
 
 import dev.ikm.elk.snomed.ConceptComparer;
 import dev.ikm.elk.snomed.NecessaryNormalFormBuilder;
-import dev.ikm.elk.snomed.SnomedConcreteRoles;
+import dev.ikm.elk.snomed.SnomedLoader;
+import dev.ikm.elk.snomed.SnomedOntology;
 import dev.ikm.elk.snomed.SnomedOntologyReasoner;
-import dev.ikm.elk.snomed.SnomedRoles;
 import dev.ikm.elk.snomed.model.Concept;
 import dev.ikm.elk.snomed.model.Definition;
 import dev.ikm.elk.snomed.model.Role;
@@ -36,7 +36,7 @@ public abstract class SnomedAssumptionsTestBase extends StatementSnomedOntologyT
 	protected int swec_concepts_cnt = -1;
 
 	protected int grouped_absent_cnt = -1;
-	
+
 	protected int grouped_absent_nnf_cnt = -1;
 
 	@BeforeAll
@@ -48,13 +48,14 @@ public abstract class SnomedAssumptionsTestBase extends StatementSnomedOntologyT
 		nnfb = NecessaryNormalFormBuilder.create(snomedOntology, snomedOntologyReasoner.getSuperConcepts(),
 				snomedOntologyReasoner.getSuperRoleTypes(false));
 		log.info("Init complete");
-		SnomedRoles roles = SnomedRoles.init(rels_file);
-		SnomedConcreteRoles values = SnomedConcreteRoles.init(values_file);
+		SnomedOntology inferredOntology = new SnomedLoader().load(concepts_file, descriptions_file, rels_file,
+				values_file);
 		log.info("Generate");
 		long beg = System.currentTimeMillis();
-		ConceptComparer cc = new ConceptComparer(roles, values);
+		ConceptComparer cc = new ConceptComparer(inferredOntology);
 		nnfb.generate(cc);
 		log.info("Generate in " + ((System.currentTimeMillis() - beg) / 1000));
+		assertEquals(0, cc.getMisMatchCount());
 	}
 
 	// Example with 2 role groups, one known present, one known absent

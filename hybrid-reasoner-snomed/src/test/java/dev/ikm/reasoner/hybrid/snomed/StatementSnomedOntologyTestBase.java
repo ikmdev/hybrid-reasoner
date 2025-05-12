@@ -37,6 +37,9 @@ public class StatementSnomedOntologyTestBase {
 	protected Path axioms_file = Paths.get(getDir(),
 			"sct2_sRefset_OWLExpressionSnapshot_" + getEdition() + "_" + getVersion() + ".txt");
 
+	protected Path concepts_file = Paths.get(getDir(),
+			"sct2_Concept_Snapshot_" + getEdition() + "_" + getVersion() + ".txt");
+
 	protected Path rels_file = Paths.get(getDir(),
 			"sct2_Relationship_Snapshot_" + getEdition() + "_" + getVersion() + ".txt");
 
