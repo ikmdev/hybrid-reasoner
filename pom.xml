@@ -52,7 +52,7 @@
 		<!-- test dependencies -->
 		<junit.version>5.12.2</junit.version>
 		<!-- dev.ikm.elk dependencies -->
-		<ikm-reasoner.version>0.37.6</ikm-reasoner.version>
+		<ikm-reasoner.version>0.37.9</ikm-reasoner.version>
 		<!-- dev.ikm.owlapi dependencies -->
 		<owlapi.version>4.8.3</owlapi.version>
 		<!-- other dependencies -->
@@ -64,7 +64,7 @@
 		<maven-dependency-plugin.version>3.8.1</maven-dependency-plugin.version>
 		<maven-deploy-plugin.version>3.1.4</maven-deploy-plugin.version>
 		<maven-enforcer-plugin.version>3.5.0</maven-enforcer-plugin.version>
-		<maven-failsafe-plugin.version>3.5.2 </maven-failsafe-plugin.version>
+		<maven-failsafe-plugin.version>3.5.3</maven-failsafe-plugin.version>
 		<maven-gpg-plugin.version>3.2.7</maven-gpg-plugin.version>
 		<maven-install-plugin.version>3.1.4</maven-install-plugin.version>
 		<maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
@@ -73,7 +73,7 @@
 		<maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
 		<maven-site-plugin.version>3.21.0</maven-site-plugin.version>
 		<maven-source-plugin.version>3.3.1</maven-source-plugin.version>
-		<maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
+		<maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
 		<!-- other plugins -->
 		<license-maven-plugin.version>2.5.0</license-maven-plugin.version>
 		<nexus-staging-maven-plugin.version>1.7.0</nexus-staging-maven-plugin.version>
@@ -348,6 +348,7 @@
 						</goals>
 						<configuration>
 							<ruleSet>
+								<ignoreVersions>
 								<ignoreVersion>
 									<type>regex</type>
 									<version>.+-(alpha|beta).+</version>
@@ -364,6 +365,7 @@
 									<type>regex</type>
 									<version>(.+-SNAPSHOT|.+-M\d)</version>
 								</ignoreVersion>
+								</ignoreVersions>
 							</ruleSet>
 						</configuration>
 					</execution>
