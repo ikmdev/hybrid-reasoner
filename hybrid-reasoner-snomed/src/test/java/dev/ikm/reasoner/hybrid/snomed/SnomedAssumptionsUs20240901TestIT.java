@@ -5,14 +5,22 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import dev.ikm.elk.snomed.test.SnomedVersionUs;
+
 @TestInstance(Lifecycle.PER_CLASS)
-public class SnomedAssumptionsUs20240901TestIT extends SnomedAssumptionsTestBase {
+public class SnomedAssumptionsUs20240901TestIT extends SnomedAssumptionsTestBase implements SnomedVersionUs {
 
 	@SuppressWarnings("unused")
 	private static final Logger log = LoggerFactory.getLogger(SnomedAssumptionsUs20240901TestIT.class);
 
-	protected String getVersion() {
+	@Override
+	public String getVersion() {
 		return "20240901";
+	}
+
+	@Override
+	public String getInternationalVersion() {
+		return "20240701";
 	}
 
 	{

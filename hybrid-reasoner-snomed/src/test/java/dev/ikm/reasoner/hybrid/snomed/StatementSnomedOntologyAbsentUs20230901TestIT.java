@@ -15,11 +15,23 @@ import org.slf4j.LoggerFactory;
 import dev.ikm.elk.snomed.SnomedOntologyReasoner;
 import dev.ikm.elk.snomed.model.Concept;
 import dev.ikm.elk.snomed.model.DefinitionType;
+import dev.ikm.elk.snomed.test.SnomedVersionUs;
 
 @TestInstance(Lifecycle.PER_CLASS)
-public class StatementSnomedOntologyAbsentTestIT extends StatementSnomedOntologyTestBase {
+public class StatementSnomedOntologyAbsentUs20230901TestIT extends StatementSnomedOntologyTestBase
+		implements SnomedVersionUs {
 
-	private static final Logger log = LoggerFactory.getLogger(StatementSnomedOntologyAbsentTestIT.class);
+	private static final Logger log = LoggerFactory.getLogger(StatementSnomedOntologyAbsentUs20230901TestIT.class);
+
+	@Override
+	public String getVersion() {
+		return "20230901";
+	}
+
+	@Override
+	public String getInternationalVersion() {
+		return "20230630";
+	}
 
 	private StatementSnomedOntology sso;
 

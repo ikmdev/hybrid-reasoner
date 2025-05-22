@@ -18,11 +18,23 @@ import org.slf4j.LoggerFactory;
 import dev.ikm.elk.snomed.SnomedIds;
 import dev.ikm.elk.snomed.SnomedIsa;
 import dev.ikm.elk.snomed.model.Concept;
+import dev.ikm.elk.snomed.test.SnomedVersionUs;
 
 @TestInstance(Lifecycle.PER_CLASS)
-public class StatementSnomedOntologyTestIT extends StatementSnomedOntologyTestBase {
+public class StatementSnomedOntologyUs20230901TestIT extends StatementSnomedOntologyTestBase
+		implements SnomedVersionUs {
 
-	private static final Logger log = LoggerFactory.getLogger(StatementSnomedOntologyTestIT.class);
+	private static final Logger log = LoggerFactory.getLogger(StatementSnomedOntologyUs20230901TestIT.class);
+
+	@Override
+	public String getVersion() {
+		return "20230901";
+	}
+
+	@Override
+	public String getInternationalVersion() {
+		return "20230630";
+	}
 
 	private StatementSnomedOntology sso;
 
