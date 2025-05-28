@@ -52,7 +52,7 @@
 		<!-- test dependencies -->
 		<junit.version>5.12.2</junit.version>
 		<!-- dev.ikm.elk dependencies -->
-		<ikm-reasoner.version>0.37.9</ikm-reasoner.version>
+		<ikm-reasoner.version>0.38.1</ikm-reasoner.version>
 		<!-- dev.ikm.owlapi dependencies -->
 		<owlapi.version>4.8.3</owlapi.version>
 		<!-- other dependencies -->
@@ -127,6 +127,11 @@
 			<dependency>
 				<groupId>dev.ikm.elk</groupId>
 				<artifactId>elk-snomed-owl-el</artifactId>
+				<version>${ikm-reasoner.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>dev.ikm.elk</groupId>
+				<artifactId>elk-snomed-test</artifactId>
 				<version>${ikm-reasoner.version}</version>
 			</dependency>
 			<!-- dev.ikm.owlapi dependencies -->
@@ -349,22 +354,22 @@
 						<configuration>
 							<ruleSet>
 								<ignoreVersions>
-								<ignoreVersion>
-									<type>regex</type>
-									<version>.+-(alpha|beta).+</version>
-								</ignoreVersion>
-								<ignoreVersion>
-									<type>regex</type>
-									<version>.+-(M|m).+</version>
-								</ignoreVersion>
-								<ignoreVersion>
-									<type>regex</type>
-									<version>.+-(RC|rc).+</version>
-								</ignoreVersion>
-								<ignoreVersion>
-									<type>regex</type>
-									<version>(.+-SNAPSHOT|.+-M\d)</version>
-								</ignoreVersion>
+									<ignoreVersion>
+										<type>regex</type>
+										<version>.+-(alpha|beta).+</version>
+									</ignoreVersion>
+									<ignoreVersion>
+										<type>regex</type>
+										<version>.+-(M|m).+</version>
+									</ignoreVersion>
+									<ignoreVersion>
+										<type>regex</type>
+										<version>.+-(RC|rc).+</version>
+									</ignoreVersion>
+									<ignoreVersion>
+										<type>regex</type>
+										<version>(.+-SNAPSHOT|.+-M\d)</version>
+									</ignoreVersion>
 								</ignoreVersions>
 							</ruleSet>
 						</configuration>

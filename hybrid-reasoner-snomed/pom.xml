@@ -25,6 +25,10 @@
 			<groupId>dev.ikm.elk</groupId>
 			<artifactId>elk-snomed-owl-el</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>dev.ikm.elk</groupId>
+			<artifactId>elk-snomed-test</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -42,6 +46,20 @@
 						<configuration>
 							<skip>${skipITs}</skip>
 							<artifactItems>
+								<artifactItem>
+									<groupId>${snomed-test-data.groupid}</groupId>
+									<artifactId>
+										snomed-test-data-intl-20240701</artifactId>
+									<version>${snomed-test-data.version}</version>
+									<type>zip</type>
+								</artifactItem>
+								<artifactItem>
+									<groupId>${snomed-test-data.groupid}</groupId>
+									<artifactId>
+										snomed-test-data-intl-20250101</artifactId>
+									<version>${snomed-test-data.version}</version>
+									<type>zip</type>
+								</artifactItem>
 								<artifactItem>
 									<groupId>${snomed-test-data.groupid}</groupId>
 									<artifactId>
@@ -82,6 +100,9 @@
 				<artifactId>maven-failsafe-plugin</artifactId>
 				<configuration>
 					<skipITs>${skipITs}</skipITs>
+					<forkCount>1</forkCount>
+					<reuseForks>false</reuseForks>
+					<argLine>-Xmx12G</argLine>
 				</configuration>
 				<executions>
 					<execution>
