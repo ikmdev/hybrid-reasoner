@@ -529,27 +529,15 @@
 		<!-- OSSRH Related Profiles (Start) -->
 
 		<profile>
-			<id>emptySourceJavadocOSSRH</id>
+			<id>emptySourceJavadocMavenCentralRepository</id>
 
 			<activation>
 				<property>
-					<name>repositoryIdOSSRH</name>
+					<name>repositoryIdMavenCentralRepository</name>
 					<value>true</value>
 				</property>
 			</activation>
 
-			<distributionManagement>
-				<snapshotRepository>
-					<id>ossrh</id>
-					<url>
-						https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-				</snapshotRepository>
-				<repository>
-					<id>maven-releases</id>
-					<url>
-						https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-				</repository>
-			</distributionManagement>
 
 			<build>
 				<plugins>
@@ -576,27 +564,16 @@
 		</profile>
 
 		<profile>
-			<id>sourceJavadocOSSRH</id>
+			<id>sourceJavadocMavenCentralRepository</id>
 
 			<activation>
 				<property>
-					<name>repositoryIdOSSRH</name>
+					<name>repositoryIdMavenCentralRepository</name>
 					<value>true</value>
 				</property>
 			</activation>
 
-			<distributionManagement>
-				<snapshotRepository>
-					<id>ossrh</id>
-					<url>
-						https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-				</snapshotRepository>
-				<repository>
-					<id>maven-releases</id>
-					<url>
-						https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-				</repository>
-			</distributionManagement>
+
 
 			<build>
 				<plugins>
@@ -637,27 +614,14 @@
 		</profile>
 
 		<profile>
-			<id>stageOSSRH</id>
+			<id>stageMavenCentralRepository</id>
 
 			<activation>
 				<property>
-					<name>repositoryIdOSSRH</name>
+					<name>repositoryIdMavenCentralRepository</name>
 					<value>true</value>
 				</property>
 			</activation>
-
-			<distributionManagement>
-				<snapshotRepository>
-					<id>ossrh</id>
-					<url>
-						https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-				</snapshotRepository>
-				<repository>
-					<id>maven-releases</id>
-					<url>
-						https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-				</repository>
-			</distributionManagement>
 
 			<build>
 				<plugins>
