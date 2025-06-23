@@ -9,12 +9,23 @@
 	</parent>
 
 	<artifactId>hybrid-reasoner</artifactId>
+    <name>Hybrid Reasoner Submodule</name>
 
 	<properties>
 		<skipITs>true</skipITs>
 		<snomed-test-data.groupid>dev.ikm.snomed</snomed-test-data.groupid>
 		<snomed-test-data.version>0.1.0</snomed-test-data.version>
 	</properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+    			<groupId>${project.groupId}</groupId>
+    			<artifactId>hybrid-reasoner-temporal</artifactId>
+    			<version>${project.version}</version>
+		    </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 	<dependencies>
 		<!-- dev.ikm.elk dependencies -->
@@ -47,7 +58,6 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>hybrid-reasoner-temporal</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 
