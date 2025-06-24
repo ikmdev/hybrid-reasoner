@@ -52,7 +52,7 @@
 		<!-- test dependencies -->
 		<junit.version>5.12.2</junit.version>
 		<!-- dev.ikm.elk dependencies -->
-		<ikm-reasoner.version>0.38.1</ikm-reasoner.version>
+		<ikm-reasoner.version>0.39.2</ikm-reasoner.version>
 		<!-- dev.ikm.owlapi dependencies -->
 		<owlapi.version>4.8.3</owlapi.version>
 		<!-- other dependencies -->
@@ -104,6 +104,11 @@
 				<scope>import</scope>
 			</dependency>
 			<!-- dev.ikm.elk dependencies -->
+			<dependency>
+				<groupId>dev.ikm.elk</groupId>
+				<artifactId>elk-owl-model</artifactId>
+				<version>${ikm-reasoner.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>dev.ikm.elk</groupId>
 				<artifactId>elk-owlapi</artifactId>
