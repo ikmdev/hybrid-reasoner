@@ -9,7 +9,7 @@
 	</parent>
 
 	<artifactId>hybrid-reasoner</artifactId>
-    <name>Hybrid Reasoner Submodule</name>
+    <name>Hybrid Reasoner</name>
 
 	<properties>
 		<skipITs>true</skipITs>

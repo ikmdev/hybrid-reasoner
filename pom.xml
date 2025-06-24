@@ -14,7 +14,7 @@
 	<version>1.0.16-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>Hybrid Reasoner</name>
+	<name>Hybrid Reasoner Parent</name>
 	<description>A hybrid reasoner using structural subsumption for "absent" semantics</description>
 	<url>https://www.ikm.dev</url>
 	<inceptionYear>2024</inceptionYear>
@@ -81,12 +81,6 @@
 				<groupId>org.apache.logging.log4j</groupId>
 				<artifactId>log4j-slf4j2-impl</artifactId>
 				<version>${log4j.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-api</artifactId>
-				<version>${slf4j.version}</version>
 			</dependency>
 
 			<!-- test dependencies-->
