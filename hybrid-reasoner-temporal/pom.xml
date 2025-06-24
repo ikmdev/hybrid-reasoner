@@ -9,8 +9,8 @@
 	</parent>
 
 	<artifactId>hybrid-reasoner-temporal</artifactId>
-    <name>Hybrid Reasoner Temporal</name>
 
+	<name>Hybrid Reasoner Temporal</name>
 	<description>Parses strings representing General Relative Temporal
 		Relationships, and tests subsumption between two such expressions</description>
 
@@ -18,17 +18,15 @@
 		<antlr4.version>4.13.2</antlr4.version>
 	</properties>
 
-    <dependencyManagement>
+	<dependencyManagement>
         <dependencies>
             <dependency>
-    			<groupId>org.antlr</groupId>
-    			<artifactId>antlr4-runtime</artifactId>
-    			<version>${antlr4.version}</version>
+  <groupId>org.antlr</groupId>
+  <artifactId>antlr4-runtime</artifactId>
+  <version>${antlr4.version}</version>
     		</dependency>
         </dependencies>
     </dependencyManagement>
-    
-
 	<dependencies>
 		<dependency>
 			<groupId>org.antlr</groupId>
@@ -37,16 +35,15 @@
 	</dependencies>
 
 	<build>
-        <pluginManagement>
+		<pluginManagement>
             <plugins>
                 <plugin>
-    				<groupId>org.antlr</groupId>
-    				<artifactId>antlr4-maven-plugin</artifactId>
-    				<version>${antlr4.version}</version>
+  <groupId>org.antlr</groupId>
+  <artifactId>antlr4-maven-plugin</artifactId>
+  <version>${antlr4.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
-        
 		<plugins>
 			<plugin>
 				<groupId>org.antlr</groupId>

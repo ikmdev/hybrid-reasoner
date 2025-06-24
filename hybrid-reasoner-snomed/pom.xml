@@ -9,7 +9,8 @@
 	</parent>
 
 	<artifactId>hybrid-reasoner-snomed</artifactId>
-    <name>Hybrid Reasoner Snomed</name>
+
+	<name>Hybrid Reasoner Snomed</name>
 
 	<properties>
 		<skipITs>true</skipITs>
