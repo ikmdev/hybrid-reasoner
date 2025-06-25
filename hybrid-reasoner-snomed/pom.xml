@@ -10,6 +10,8 @@
 
 	<artifactId>hybrid-reasoner-snomed</artifactId>
 
+	<name>Hybrid Reasoner Snomed</name>
+
 	<properties>
 		<skipITs>true</skipITs>
 		<snomed-test-data.groupid>dev.ikm.snomed</snomed-test-data.groupid>
