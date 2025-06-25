@@ -21,6 +21,10 @@
 	<dependencies>
 		<dependency>
 			<groupId>dev.ikm.elk</groupId>
+			<artifactId>elk-owl-model</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>dev.ikm.elk</groupId>
 			<artifactId>elk-snomed</artifactId>
 		</dependency>
 		<dependency>

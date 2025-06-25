@@ -2,6 +2,8 @@ package dev.ikm.reasoner.hybrid.snomed;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -11,6 +13,8 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import dev.ikm.elk.snomed.SnomedIds;
+import dev.ikm.elk.snomed.SnomedIsa;
 import dev.ikm.elk.snomed.SnomedOntologyReasoner;
 import dev.ikm.elk.snomed.model.Concept;
 import dev.ikm.elk.snomed.model.Definition;
@@ -51,7 +55,8 @@ public class StatementSnomedOntologyAbsentNfhUs20230901TestIT extends StatementS
 			con.getDefinitions().getFirst().getSuperConcepts().clear();
 			con.getDefinitions().getFirst().addSuperConcept(nfh_cf);
 		}
-		sso = StatementSnomedOntology.create(snomedOntology, true);
+		sso = StatementSnomedOntology.create(snomedOntology, true, SnomedIds.root,
+				StatementSnomedOntology.swec_nfh_sctids);
 		long end = System.currentTimeMillis();
 		log.info("Init in: " + ((end - beg) / 1000 + " secs"));
 	}
@@ -110,7 +115,8 @@ public class StatementSnomedOntologyAbsentNfhUs20230901TestIT extends StatementS
 	}
 
 	@Test
-	public void classify() {
+	public void classify() throws Exception {
+		SnomedIsa isas = SnomedIsa.init(rels_file);
 		long beg = System.currentTimeMillis();
 		sso.classify();
 		long end = System.currentTimeMillis();
@@ -120,6 +126,26 @@ public class StatementSnomedOntologyAbsentNfhUs20230901TestIT extends StatementS
 		checkParents(160270001, Set.of(160273004l, 266882009l, 297250002l, 313342001l));
 		checkParents(160250007l, Set.of(313376005l));
 		assertEquals(11, sso.getSubConcepts(FamilyHistoryIds.no_family_history_swec).size());
+		for (Concept con : snomedOntology.getConcepts()) {
+			long id = con.getId();
+			if (List.of(SnomedIds.concept_model_object_attribute, SnomedIds.concept_model_data_attribute).contains(id))
+				continue;
+			if (id == FamilyHistoryIds.no_family_history_swec)
+				continue;
+			if (isas.hasAncestor(id, FamilyHistoryIds.no_family_history_swec))
+				continue;
+			if (!isas.getChildren(id).equals(sso.getSubConcepts(id))) {
+				log.error("" + con);
+				ArrayList<Long> missing = new ArrayList<>(isas.getChildren(id));
+				missing.removeAll(sso.getSubConcepts(id));
+				log.error("Missing: " + missing);
+				ArrayList<Long> extra = new ArrayList<>(sso.getSubConcepts(id));
+				extra.removeAll(isas.getChildren(id));
+				log.error("Extra: " + extra);
+			}
+//			assertEquals(isas.getChildren(id), sso.getSubConcepts(id), "Children of " + con);
+//			assertEquals(isas.getParents(id), sso.getSuperConcepts(id));
+		}
 	}
 
 }
