@@ -177,10 +177,8 @@ public abstract class SnomedAssumptionsTestBase extends StatementSnomedOntologyT
 
 	@Test
 	public void roots() {
-		Set<Long> roots = Set.of(//
-				373572006l // 373572006 |Clinical finding absent (situation)|)
-				, 160266009l // 160266009 |No family history of clinical finding (situation)|
-		);
+		Set<Long> roots = Set.of(FamilyHistoryIds.clinical_finding_absent_swec,
+				FamilyHistoryIds.no_family_history_swec);
 		int root_cnt = 0;
 		Set<Long> subs = snomedOntologyReasoner.getSubConcepts(StatementSnomedOntology.swec_id, false);
 		for (long id : subs) {
@@ -191,8 +189,7 @@ public abstract class SnomedAssumptionsTestBase extends StatementSnomedOntologyT
 					&& !snomedOntologyReasoner.getSuperConcepts(id, false).stream().anyMatch(x -> roots.contains(x))) {
 				root_cnt++;
 				log.info("Not under CFA or NFH: " + con);
-				// 413350009 |Finding with explicit context (situation)|
-				if (!snomedOntologyReasoner.getSuperConcepts(id).contains(413350009l)) {
+				if (!snomedOntologyReasoner.getSuperConcepts(id).contains(FamilyHistoryIds.finding_swec)) {
 					log.info("Not under FWEC: " + con);
 					snomedOntologyReasoner.getSuperConcepts(con).forEach(x -> log.info("\tSup: " + x));
 				}

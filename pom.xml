@@ -57,7 +57,7 @@
 		<slf4j.version>2.0.17</slf4j.version>
 		<log4j.version>3.0.0-alpha1</log4j.version>
 		<!-- test dependencies -->
-		<junit.version>5.13.2</junit.version><!-- defined in parent -->
+		<junit.version>5.13.3</junit.version><!-- defined in parent -->
 		<!-- dev.ikm.elk dependencies -->
 		<ikm-reasoner.version>0.39.2</ikm-reasoner.version>
 		<!-- dev.ikm.owlapi dependencies -->
