@@ -64,7 +64,7 @@ public class StatementSnomedOntologyAbsentUs20230901TestIT extends StatementSnom
 					cnt++;
 				} else {
 					cnt_n++;
-					log.info("Con: " + snomedOntology.getFsn(con.getId()));
+					log.info("Con: " + con.getId() + " " + snomedOntology.getFsn(con.getId()));
 					log.info("\tSup: " + snomedOntology.getFsn(sup.getId()));
 					log.error("\t" + sso.isSubsumedBy(con, sup) + " " + sso.isSubsumedBy(sup, con));
 				}
