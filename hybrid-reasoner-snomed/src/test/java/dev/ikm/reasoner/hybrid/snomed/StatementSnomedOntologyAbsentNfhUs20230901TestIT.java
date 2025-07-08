@@ -15,7 +15,6 @@ import org.slf4j.LoggerFactory;
 
 import dev.ikm.elk.snomed.SnomedIds;
 import dev.ikm.elk.snomed.SnomedIsa;
-import dev.ikm.elk.snomed.SnomedOntologyReasoner;
 import dev.ikm.elk.snomed.model.Concept;
 import dev.ikm.elk.snomed.model.Definition;
 import dev.ikm.elk.snomed.model.DefinitionType;
@@ -49,6 +48,7 @@ public class StatementSnomedOntologyAbsentNfhUs20230901TestIT extends StatementS
 			def.setDefinitionType(DefinitionType.SubConcept);
 			def.getSuperConcepts().clear();
 			def.addSuperConcept(snomedOntology.getConcept(FamilyHistoryIds.family_history_swec));
+			def.addSuperConcept(snomedOntology.getConcept(FamilyHistoryIds.finding_swec));
 			def.getRoleGroups().clear();
 			// 704008007 |No family history of asthma (situation)|
 			Concept con = snomedOntology.getConcept(704008007);
@@ -59,28 +59,6 @@ public class StatementSnomedOntologyAbsentNfhUs20230901TestIT extends StatementS
 				StatementSnomedOntology.swec_nfh_sctids);
 		long end = System.currentTimeMillis();
 		log.info("Init in: " + ((end - beg) / 1000 + " secs"));
-	}
-
-	private void list(SnomedOntologyReasoner reasoner, long con, int depth) {
-		log.info("\t".repeat(depth) + con + " " + snomedOntology.getFsn(con));
-		for (long sub : reasoner.getSubConcepts(con)) {
-			list(reasoner, sub, depth + 1);
-		}
-	}
-
-//	@Test
-	public void noFH() {
-		SnomedOntologyReasoner reasoner = SnomedOntologyReasoner.create(snomedOntology);
-		reasoner.flush();
-		Set<Long> cons = reasoner.getSubConcepts(FamilyHistoryIds.no_family_history_swec, false);
-		cons.add(FamilyHistoryIds.no_family_history_swec);
-		for (long con : cons) {
-			log.info(con + " " + snomedOntology.getFsn(con));
-			for (Concept par : snomedOntology.getConcept(con).getDefinitions().getFirst().getSuperConcepts()) {
-				log.info("\t" + par + " " + snomedOntology.getFsn(par.getId()));
-			}
-		}
-		list(reasoner, FamilyHistoryIds.no_family_history_swec, 0);
 	}
 
 //	160266009 No family history of clinical finding (situation)
@@ -126,6 +104,9 @@ public class StatementSnomedOntologyAbsentNfhUs20230901TestIT extends StatementS
 		checkParents(160270001, Set.of(160273004l, 266882009l, 297250002l, 313342001l));
 		checkParents(160250007l, Set.of(313376005l));
 		assertEquals(11, sso.getSubConcepts(FamilyHistoryIds.no_family_history_swec).size());
+		for (long parent : sso.getSuperConcepts(FamilyHistoryIds.no_family_history_swec)) {
+			log.info("Par: " + sso.getOntology().getConcept(parent));
+		}
 		for (Concept con : snomedOntology.getConcepts()) {
 			long id = con.getId();
 			if (List.of(SnomedIds.concept_model_object_attribute, SnomedIds.concept_model_data_attribute).contains(id))
@@ -143,8 +124,8 @@ public class StatementSnomedOntologyAbsentNfhUs20230901TestIT extends StatementS
 				extra.removeAll(isas.getChildren(id));
 				log.error("Extra: " + extra);
 			}
-//			assertEquals(isas.getChildren(id), sso.getSubConcepts(id), "Children of " + con);
-//			assertEquals(isas.getParents(id), sso.getSuperConcepts(id));
+			assertEquals(isas.getChildren(id), sso.getSubConcepts(id), "Children of " + con);
+			assertEquals(isas.getParents(id), sso.getSuperConcepts(id), "Parents of " + con);
 		}
 	}
 

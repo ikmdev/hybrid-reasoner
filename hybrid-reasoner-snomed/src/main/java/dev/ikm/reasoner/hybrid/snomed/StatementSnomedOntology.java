@@ -39,8 +39,8 @@ public class StatementSnomedOntology {
 
 	public static final SwecIds swec_sctids = new SwecIds(swec_id, SnomedIds.root, finding_context_id, known_absent_id);
 
-	public static final SwecIds swec_nfh_sctids = new SwecIds(FamilyHistoryIds.no_family_history_swec, SnomedIds.root,
-			finding_context_id, known_absent_id);
+	public static final SwecIds swec_nfh_sctids = new SwecIds(FamilyHistoryIds.no_family_history_swec,
+			FamilyHistoryIds.finding_swec, finding_context_id, known_absent_id);
 
 	private SnomedOntology ontology;
 
