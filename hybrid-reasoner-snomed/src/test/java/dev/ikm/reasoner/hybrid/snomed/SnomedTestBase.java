@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.IOException;
 import java.nio.file.Files;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +37,7 @@ public abstract class SnomedTestBase extends SnomedVersionBase {
 
 	private static final Logger LOG = LoggerFactory.getLogger(SnomedTestBase.class);
 
-	@BeforeEach
+	@BeforeAll
 	protected void filesExist() {
 		assertTrue(Files.exists(axioms_file), "No file: " + axioms_file);
 		assertTrue(Files.exists(concepts_file), "No file: " + concepts_file);

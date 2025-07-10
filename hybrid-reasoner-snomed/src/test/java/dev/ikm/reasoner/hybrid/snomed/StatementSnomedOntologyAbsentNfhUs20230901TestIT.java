@@ -43,8 +43,8 @@ public class StatementSnomedOntologyAbsentNfhUs20230901TestIT extends StatementS
 		long beg = System.currentTimeMillis();
 		super.init();
 		{
-			Concept nfh_cf = snomedOntology.getConcept(FamilyHistoryIds.no_family_history_swec);
-			Definition def = nfh_cf.getDefinitions().getFirst();
+			Concept nfh_con = snomedOntology.getConcept(FamilyHistoryIds.no_family_history_swec);
+			Definition def = nfh_con.getDefinitions().getFirst();
 			def.setDefinitionType(DefinitionType.SubConcept);
 			def.getSuperConcepts().clear();
 			def.addSuperConcept(snomedOntology.getConcept(FamilyHistoryIds.family_history_swec));
@@ -53,7 +53,7 @@ public class StatementSnomedOntologyAbsentNfhUs20230901TestIT extends StatementS
 			// 704008007 |No family history of asthma (situation)|
 			Concept con = snomedOntology.getConcept(704008007);
 			con.getDefinitions().getFirst().getSuperConcepts().clear();
-			con.getDefinitions().getFirst().addSuperConcept(nfh_cf);
+			con.getDefinitions().getFirst().addSuperConcept(nfh_con);
 		}
 		sso = StatementSnomedOntology.create(snomedOntology, true, SnomedIds.root,
 				StatementSnomedOntology.swec_nfh_sctids);

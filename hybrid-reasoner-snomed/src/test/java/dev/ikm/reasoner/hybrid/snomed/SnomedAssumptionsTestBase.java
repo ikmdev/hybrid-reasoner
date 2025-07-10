@@ -33,8 +33,6 @@ public abstract class SnomedAssumptionsTestBase extends StatementSnomedOntologyT
 
 	private NecessaryNormalFormBuilder nnfb;
 
-	protected int swec_concepts_cnt = -1;
-
 	protected int grouped_absent_cnt = -1;
 
 	protected int grouped_absent_nnf_cnt = -1;
