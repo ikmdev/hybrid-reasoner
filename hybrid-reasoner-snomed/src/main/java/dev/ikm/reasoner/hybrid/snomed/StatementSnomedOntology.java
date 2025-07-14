@@ -180,7 +180,7 @@ public class StatementSnomedOntology {
 
 	public SnomedIsa classify() {
 		HashMap<Long, Set<Long>> parents = new HashMap<>();
-		parents.put(swecIds.swec, Set.of(swecIds.swec_parent));
+		parents.put(swecIds.swec, new HashSet<>(Set.of(swecIds.swec_parent)));
 		isas = SnomedIsa.init(parents);
 		for (Concept con : statementConceptsDefiningDependentOrder) {
 //			log.info("Con: " + ontology.getFsn(con.getId()));
