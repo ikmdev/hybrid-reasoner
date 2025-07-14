@@ -8,11 +8,12 @@ import org.slf4j.LoggerFactory;
 import dev.ikm.elk.snomed.test.SnomedVersionInternational;
 
 @TestInstance(Lifecycle.PER_CLASS)
-public class SnomedAssumptionsInternational20250101TestIT extends SnomedAssumptionsTestBase
-		implements SnomedVersionInternational {
+public class StatementSnomedOntologyAbsentNfhInternational20250101TestIT
+		extends StatementSnomedOntologyAbsentNfhTestIBase implements SnomedVersionInternational {
 
 	@SuppressWarnings("unused")
-	private static final Logger log = LoggerFactory.getLogger(SnomedAssumptionsInternational20250101TestIT.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(StatementSnomedOntologyAbsentNfhInternational20250101TestIT.class);
 
 	@Override
 	public String getVersion() {
@@ -20,10 +21,7 @@ public class SnomedAssumptionsInternational20250101TestIT extends SnomedAssumpti
 	}
 
 	{
-		concepts_cnt = 370795;
-		swec_concepts_cnt = 5007;
-		grouped_absent_cnt = 435;
-		grouped_absent_nnf_cnt = 435;
+		nfh_sub_concept_cnt = 12;
 	}
 
 }

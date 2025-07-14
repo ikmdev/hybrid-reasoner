@@ -24,6 +24,7 @@ public class SnomedAssumptionsUs20240901TestIT extends SnomedAssumptionsTestBase
 	}
 
 	{
+		concepts_cnt = 375519;
 		swec_concepts_cnt = 5509;
 		grouped_absent_cnt = 463;
 		grouped_absent_nnf_cnt = 463;

@@ -16,6 +16,10 @@ public abstract class StatementSnomedOntologyTestBase extends SnomedTestBase {
 	private static final Logger log = LoggerFactory.getLogger(StatementSnomedOntologyTestBase.class);
 
 	protected SnomedOntology snomedOntology;
+	
+	protected int concepts_cnt = -1;
+	
+	protected int swec_concepts_cnt = -1;
 
 	public void init() throws Exception {
 		log.info("Test case: " + axioms_file);

@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import dev.ikm.elk.snomed.test.SnomedVersionUs;
 
+@Deprecated
 @TestInstance(Lifecycle.PER_CLASS)
 public class SnomedAssumptionsUs20240301TestIT extends SnomedAssumptionsTestBase implements SnomedVersionUs {
 
