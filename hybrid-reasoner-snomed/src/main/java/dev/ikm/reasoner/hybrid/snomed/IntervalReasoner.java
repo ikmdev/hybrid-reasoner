@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.semanticweb.elk.owl.interfaces.ElkClassExpression;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import dev.ikm.elk.snomed.SnomedOntology;
 import dev.ikm.elk.snomed.SnomedOntologyReasoner;
@@ -16,6 +18,9 @@ import dev.ikm.elk.snomed.model.Role;
 import dev.ikm.elk.snomed.model.RoleType;
 
 public class IntervalReasoner extends SnomedOntologyReasoner {
+
+	@SuppressWarnings("unused")
+	private static final Logger LOG = LoggerFactory.getLogger(IntervalReasoner.class);
 
 	private List<ConcreteRoleType> intervalRoles;
 
