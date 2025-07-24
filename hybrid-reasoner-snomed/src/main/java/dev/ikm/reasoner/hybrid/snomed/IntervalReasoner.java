@@ -51,7 +51,7 @@ public class IntervalReasoner extends SnomedOntologyReasoner {
 					continue;
 				Interval interval2 = Interval.fromString(interval_str2);
 				Concept interval_con2 = interval_concepts.get(interval_str2);
-				if (interval1.contains(interval2))
+				if (interval1.contains(interval2) && interval1.getUnitOfMeasure() == interval2.getUnitOfMeasure())
 					interval_con2.getDefinitions().getFirst().addSuperConcept(interval_con1);
 			}
 		}

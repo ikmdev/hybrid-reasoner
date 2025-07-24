@@ -76,7 +76,8 @@ public class IntervalReasonerInternational20250101TestIT extends SnomedTestBase 
 				Matcher mat = pat.matcher(name);
 				if (mat.find()) {
 //					log.info("\t" + mat.group(1) + " " + mat.group(2));
-					Interval i = Interval.fromString("[" + mat.group(1) + "," + mat.group(2) + "]");
+					Interval i = Interval
+							.fromString("[" + mat.group(1) + "," + mat.group(2) + "]" + TemporalUnits.Weeks.sctid);
 					log.info("\t" + i);
 					updateDefinition(con, i);
 					continue;
@@ -88,7 +89,7 @@ public class IntervalReasonerInternational20250101TestIT extends SnomedTestBase 
 				Matcher mat = pat.matcher(name);
 				if (mat.find()) {
 //					log.info("\t" + mat.group(1));
-					Interval i = Interval.fromString("[0," + mat.group(1) + ")");
+					Interval i = Interval.fromString("[0," + mat.group(1) + ")" + TemporalUnits.Weeks.sctid);
 					log.info("\t" + i);
 					updateDefinition(con, i);
 					continue;
@@ -100,7 +101,8 @@ public class IntervalReasonerInternational20250101TestIT extends SnomedTestBase 
 				Matcher mat = pat.matcher(name);
 				if (mat.find()) {
 //					log.info("\t" + mat.group(1));
-					Interval i = Interval.fromString("[" + mat.group(1) + "," + mat.group(1) + "]");
+					Interval i = Interval
+							.fromString("[" + mat.group(1) + "," + mat.group(1) + "]" + TemporalUnits.Weeks.sctid);
 					log.info("\t" + i);
 					updateDefinition(con, i);
 					continue;
