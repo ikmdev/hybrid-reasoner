@@ -514,6 +514,7 @@
 			</plugin>
 		</plugins>
 	</reporting>
+
 	<profiles>
 		<!-- codeQuality profile to override pmd configuration from build-parent
 		 Need to ovverride aggregate parameter as it is deprecated. -->
