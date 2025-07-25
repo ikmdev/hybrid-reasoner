@@ -58,7 +58,7 @@ public class IntervalTest {
 	}
 
 	private boolean contains(String i1, String i2) {
-		return Interval.fromString(i1 + 1).contains(Interval.fromString(i2 + 1));
+		return Interval.fromString(i1 + "1").contains(Interval.fromString(i2 + "1"));
 	}
 
 	@Test

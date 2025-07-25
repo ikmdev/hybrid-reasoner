@@ -98,7 +98,8 @@ public class Interval {
 
 	public boolean contains(Interval that) {
 		return this.getLowerContainsValue() <= that.getLowerContainsValue()
-				&& this.getUpperContainsValue() >= that.getUpperContainsValue();
+				&& this.getUpperContainsValue() >= that.getUpperContainsValue()
+				&& this.unitOfMeasure == that.unitOfMeasure;
 	}
 
 	// This would work for float

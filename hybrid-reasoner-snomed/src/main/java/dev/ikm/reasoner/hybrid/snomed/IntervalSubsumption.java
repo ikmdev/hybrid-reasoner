@@ -50,7 +50,7 @@ public class IntervalSubsumption extends DefiningSubsumption {
 				&& intervalRoles.contains(role1.getConcreteRoleType())) {
 			Interval i1 = Interval.fromString(role1.getValue());
 			Interval i2 = Interval.fromString(role2.getValue());
-			return i2.contains(i1) && i1.getUnitOfMeasure() == i2.getUnitOfMeasure();
+			return i2.contains(i1);
 		}
 		return super.isSubsumedBy(role1, role2);
 	}
