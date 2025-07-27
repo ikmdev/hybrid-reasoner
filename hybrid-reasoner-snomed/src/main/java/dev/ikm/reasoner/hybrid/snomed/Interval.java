@@ -81,7 +81,12 @@ public class Interval {
 
 	@Override
 	public String toString() {
-		return (lowerOpen ? "(" : "[") + lowerBound + "," + upperBound + (upperOpen ? ")" : "]") + unitOfMeasure;
+		return toString(true);
+	}
+
+	public String toString(boolean includeUnitOfMeasure) {
+		return (lowerOpen ? "(" : "[") + lowerBound + "," + upperBound + (upperOpen ? ")" : "]")
+				+ (includeUnitOfMeasure ? unitOfMeasure : "");
 	}
 
 	private int getLowerContainsValue() {
@@ -101,13 +106,5 @@ public class Interval {
 				&& this.getUpperContainsValue() >= that.getUpperContainsValue()
 				&& this.unitOfMeasure == that.unitOfMeasure;
 	}
-
-	// This would work for float
-//	public boolean contains(Interval that) {
-//		return Integer.compare(this.getLowerBound(),
-//				that.getLowerBound()) <= (this.isLowerOpen() && !that.isLowerOpen() ? -1 : 0)
-//				&& Integer.compare(this.getUpperBound(),
-//						that.getUpperBound()) >= (this.isUpperOpen() && !that.isUpperOpen() ? 1 : 0);
-//	}
 
 }
