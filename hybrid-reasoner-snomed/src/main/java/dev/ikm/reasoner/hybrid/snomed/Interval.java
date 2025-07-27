@@ -9,28 +9,55 @@ public class Interval {
 
 	private boolean lowerOpen, upperOpen;
 
+	private long unitOfMeasure;
+
 	public int getLowerBound() {
 		return lowerBound;
+	}
+
+	public void setLowerBound(int lowerBound) {
+		this.lowerBound = lowerBound;
 	}
 
 	public int getUpperBound() {
 		return upperBound;
 	}
 
+	public void setUpperBound(int upperBound) {
+		this.upperBound = upperBound;
+	}
+
 	public boolean isLowerOpen() {
 		return lowerOpen;
+	}
+
+	public void setLowerOpen(boolean lowerOpen) {
+		this.lowerOpen = lowerOpen;
 	}
 
 	public boolean isUpperOpen() {
 		return upperOpen;
 	}
 
-	public Interval(int lowerBound, boolean lowerOpen, int upperBound, boolean upperOpen) {
+	public void setUpperOpen(boolean upperOpen) {
+		this.upperOpen = upperOpen;
+	}
+
+	public long getUnitOfMeasure() {
+		return unitOfMeasure;
+	}
+
+	public void setUnitOfMeasure(long unitOfMeasure) {
+		this.unitOfMeasure = unitOfMeasure;
+	}
+
+	public Interval(int lowerBound, boolean lowerOpen, int upperBound, boolean upperOpen, long unitOfMeasure) {
 		super();
 		this.lowerBound = lowerBound;
 		this.lowerOpen = lowerOpen;
 		this.upperBound = upperBound;
 		this.upperOpen = upperOpen;
+		this.unitOfMeasure = unitOfMeasure;
 	}
 
 	private Interval() {
@@ -38,7 +65,7 @@ public class Interval {
 
 	public static Interval fromString(String str) {
 		str = str.replace(" ", "");
-		String regex = "^(\\[|\\()(\\-?\\d+),(\\-?\\d+)(\\]|\\))$";
+		String regex = "^(\\[|\\()(\\-?\\d+),(\\-?\\d+)(\\]|\\))(\\-?\\d+)$";
 		Pattern pat = Pattern.compile(regex);
 		Matcher mat = pat.matcher(str);
 		if (!mat.matches())
@@ -48,12 +75,18 @@ public class Interval {
 		ret.lowerBound = Integer.parseInt(mat.group(2));
 		ret.upperBound = Integer.parseInt(mat.group(3));
 		ret.upperOpen = mat.group(4).equals(")");
+		ret.unitOfMeasure = Long.parseLong(mat.group(5));
 		return ret;
 	}
 
 	@Override
 	public String toString() {
-		return (lowerOpen ? "(" : "[") + lowerBound + "," + upperBound + (upperOpen ? ")" : "]");
+		return toString(true);
+	}
+
+	public String toString(boolean includeUnitOfMeasure) {
+		return (lowerOpen ? "(" : "[") + lowerBound + "," + upperBound + (upperOpen ? ")" : "]")
+				+ (includeUnitOfMeasure ? unitOfMeasure : "");
 	}
 
 	private int getLowerContainsValue() {
@@ -70,15 +103,8 @@ public class Interval {
 
 	public boolean contains(Interval that) {
 		return this.getLowerContainsValue() <= that.getLowerContainsValue()
-				&& this.getUpperContainsValue() >= that.getUpperContainsValue();
+				&& this.getUpperContainsValue() >= that.getUpperContainsValue()
+				&& this.unitOfMeasure == that.unitOfMeasure;
 	}
-
-	// This would work for float
-//	public boolean contains(Interval that) {
-//		return Integer.compare(this.getLowerBound(),
-//				that.getLowerBound()) <= (this.isLowerOpen() && !that.isLowerOpen() ? -1 : 0)
-//				&& Integer.compare(this.getUpperBound(),
-//						that.getUpperBound()) >= (this.isUpperOpen() && !that.isUpperOpen() ? 1 : 0);
-//	}
 
 }
