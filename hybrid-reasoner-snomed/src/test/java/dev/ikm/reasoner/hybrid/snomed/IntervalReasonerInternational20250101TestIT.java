@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import dev.ikm.elk.snomed.OwlElTransformer;
 import dev.ikm.elk.snomed.SnomedDescriptions;
 import dev.ikm.elk.snomed.SnomedOntology;
+import dev.ikm.elk.snomed.interval.Interval;
 import dev.ikm.elk.snomed.model.Concept;
 import dev.ikm.elk.snomed.model.ConcreteRole;
 import dev.ikm.elk.snomed.model.ConcreteRoleType;
