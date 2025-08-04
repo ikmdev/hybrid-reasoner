@@ -9,7 +9,7 @@ import dev.ikm.elk.snomed.test.SnomedVersionInternational;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class StatementSnomedOntologyWithoutAbsentInternational20250101TestIT
-		extends StatementSnomedOntologyWihoutAbsentTestBase implements SnomedVersionInternational {
+		extends StatementSnomedOntologyWithoutAbsentTestBase implements SnomedVersionInternational {
 
 	@SuppressWarnings("unused")
 	private static final Logger log = LoggerFactory

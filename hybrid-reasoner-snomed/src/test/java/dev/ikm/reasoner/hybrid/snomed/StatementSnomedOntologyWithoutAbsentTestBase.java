@@ -19,9 +19,9 @@ import dev.ikm.elk.snomed.SnomedIsa;
 import dev.ikm.elk.snomed.model.Concept;
 
 @TestInstance(Lifecycle.PER_CLASS)
-public abstract class StatementSnomedOntologyWihoutAbsentTestBase extends StatementSnomedOntologyTestBase {
+public abstract class StatementSnomedOntologyWithoutAbsentTestBase extends StatementSnomedOntologyTestBase {
 
-	private static final Logger log = LoggerFactory.getLogger(StatementSnomedOntologyWihoutAbsentTestBase.class);
+	private static final Logger log = LoggerFactory.getLogger(StatementSnomedOntologyWithoutAbsentTestBase.class);
 
 	private StatementSnomedOntology sso;
 

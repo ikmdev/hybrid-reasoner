@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import dev.ikm.elk.snomed.SnomedOntology;
 import dev.ikm.elk.snomed.SnomedOntologyReasoner;
+import dev.ikm.elk.snomed.interval.Interval;
 import dev.ikm.elk.snomed.model.Concept;
 import dev.ikm.elk.snomed.model.ConcreteRole;
 import dev.ikm.elk.snomed.model.ConcreteRoleType;
@@ -36,10 +37,10 @@ public class IntervalReasoner extends SnomedOntologyReasoner {
 	}
 
 	public static IntervalReasoner create(SnomedOntology snomedOntology, List<ConcreteRoleType> intervalRoles) {
-		IntervalReasoner sor = new IntervalReasoner(intervalRoles);
-		sor.init(snomedOntology);
-		sor.computeInferences();
-		return sor;
+		IntervalReasoner ir = new IntervalReasoner(intervalRoles);
+		ir.init(snomedOntology);
+		ir.computeInferences();
+		return ir;
 	}
 
 	private void processIntervalConcepts() {
@@ -94,7 +95,6 @@ public class IntervalReasoner extends SnomedOntologyReasoner {
 			Concept interval_concept = interval_concepts.get(interval_value_str);
 			Role interval_role = new Role(new RoleType(concreteRole.getConcreteRoleType().getId()), interval_concept);
 			return process(interval_role);
-
 		} else {
 			return super.process(concreteRole);
 		}
