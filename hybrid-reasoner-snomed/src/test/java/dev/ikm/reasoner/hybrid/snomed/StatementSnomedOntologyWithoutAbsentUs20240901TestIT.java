@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import dev.ikm.elk.snomed.test.SnomedVersionUs;
 
 @TestInstance(Lifecycle.PER_CLASS)
-public class StatementSnomedOntologyWithoutAbsentUs20240901TestIT extends StatementSnomedOntologyWihoutAbsentTestBase
+public class StatementSnomedOntologyWithoutAbsentUs20240901TestIT extends StatementSnomedOntologyWithoutAbsentTestBase
 		implements SnomedVersionUs {
 
 	@SuppressWarnings("unused")
