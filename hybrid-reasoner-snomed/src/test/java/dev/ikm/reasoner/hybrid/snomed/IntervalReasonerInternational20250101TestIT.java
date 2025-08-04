@@ -117,12 +117,26 @@ public class IntervalReasonerInternational20250101TestIT extends SnomedTestBase 
 		ir.getSubConcepts(snomedOntology.getConcept(pi_sctid), false).stream()
 				.sorted(Comparator.comparing(Concept::getId)).forEach(con -> log
 						.info("\n" + con + "\n" + con.getDefinitions().getFirst() + "\n" + ir.getSuperConcepts(con)));
-		List<String> lines = ir.getSubConcepts(snomedOntology.getConcept(pi_sctid), false).stream()
-				.sorted(Comparator.comparing(Concept::getId))
-				.map(con -> con.getId() + "\t"
-						+ con.getDefinitions().getFirst().getUngroupedConcreteRoles().iterator().next().getValue())
-				.toList();
-		Files.write(Paths.get("target", "intervals-" + getEditionDir() + "-" + getVersion() + ".txt"), lines);
+		{
+			List<String> lines = ir.getSubConcepts(snomedOntology.getConcept(pi_sctid), false).stream()
+					.sorted(Comparator.comparing(Concept::getId))
+					.map(con -> con.getId() + "\t"
+							+ con.getDefinitions().getFirst().getUngroupedConcreteRoles().iterator().next().getValue())
+					.toList();
+			Files.write(Paths.get("target", "intervals-" + getEditionDir() + "-" + getVersion() + ".txt"), lines);
+		}
+		{
+			String file_name = "intervals-sups-" + getEditionDir() + "-" + getVersion() + ".txt";
+			List<String> lines = ir.getSubConcepts(snomedOntology.getConcept(pi_sctid), false).stream()
+					.sorted(Comparator.comparing(Concept::getId)) //
+					.flatMap(con -> ir.getSuperConcepts(con).stream() //
+							.sorted(Comparator.comparing(Concept::getId)) //
+							.map(sup -> List.of(con, sup)))
+					.map(con_sup -> con_sup.get(0) + " " + con_sup.get(1)).toList();
+			Files.write(Paths.get("target", file_name), lines);
+			List<String> expect_lines = Files.lines(Paths.get("src/test/resources", file_name)).toList();
+			assertEquals(expect_lines, lines);
+		}
 		log.info("-".repeat(20));
 		print(ir, snomedOntology.getConcept(pi_sctid), 0);
 	}
