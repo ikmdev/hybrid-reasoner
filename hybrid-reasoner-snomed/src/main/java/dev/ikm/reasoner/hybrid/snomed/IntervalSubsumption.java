@@ -24,23 +24,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-import dev.ikm.elk.snomed.DefiningSubsumption;
+import dev.ikm.elk.snomed.NNFSubsumption;
 import dev.ikm.elk.snomed.SnomedIsa;
-import dev.ikm.elk.snomed.SnomedOntology;
+import dev.ikm.elk.snomed.interval.Interval;
 import dev.ikm.elk.snomed.model.Concept;
 import dev.ikm.elk.snomed.model.ConcreteRole;
 import dev.ikm.elk.snomed.model.ConcreteRoleType;
 import dev.ikm.elk.snomed.model.Definition;
 import dev.ikm.elk.snomed.model.RoleType;
 
-public class IntervalSubsumption extends DefiningSubsumption {
+public class IntervalSubsumption extends NNFSubsumption {
 
 	private List<ConcreteRoleType> intervalRoles;
 
-	public IntervalSubsumption(SnomedOntology ontology, SnomedIsa definingIsa, SnomedIsa isa,
-			HashMap<RoleType, Set<RoleType>> superRoles, HashMap<Concept, Definition> necessaryNormalForm,
-			List<ConcreteRoleType> intervalRoles) {
-		super(ontology, definingIsa, isa, superRoles, necessaryNormalForm);
+	public IntervalSubsumption(SnomedIsa isa, HashMap<RoleType, Set<RoleType>> superRoles,
+			HashMap<Concept, Definition> necessaryNormalForm, List<ConcreteRoleType> intervalRoles) {
+		super(isa, superRoles, necessaryNormalForm);
 		this.intervalRoles = intervalRoles;
 	}
 
