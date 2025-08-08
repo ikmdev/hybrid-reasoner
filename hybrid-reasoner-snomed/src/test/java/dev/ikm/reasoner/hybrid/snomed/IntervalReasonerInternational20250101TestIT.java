@@ -2,6 +2,8 @@ package dev.ikm.reasoner.hybrid.snomed;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -17,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import dev.ikm.elk.snomed.OwlElTransformer;
 import dev.ikm.elk.snomed.SnomedDescriptions;
 import dev.ikm.elk.snomed.SnomedOntology;
+import dev.ikm.elk.snomed.interval.Interval;
 import dev.ikm.elk.snomed.model.Concept;
 import dev.ikm.elk.snomed.model.ConcreteRole;
 import dev.ikm.elk.snomed.model.ConcreteRoleType;
@@ -49,14 +52,16 @@ public class IntervalReasonerInternational20250101TestIT extends SnomedTestBase 
 		snomedOntology.setNames();
 	}
 
+	// 395507008 |Premature infant (finding)|
+	private static final long pi_sctid = 395507008;
+
 	@Test
-	public void premature() {
+	public void premature() throws Exception {
 		snomedOntology.addConcreteRoleType(new ConcreteRoleType(-1));
-		// 395507008 |Premature infant (finding)|
-//		{
-//			SnomedOntologyReasoner sor = SnomedOntologyReasoner.create(snomedOntology);
-//			log.info("subConcepts: " + sor.getSubConcepts(395507008, false).size());
-//		}
+		// {
+		// SnomedOntologyReasoner sor = SnomedOntologyReasoner.create(snomedOntology);
+		// log.info("subConcepts: " + sor.getSubConcepts(pi_sctid, false).size());
+		// }
 		int cnt = 0;
 		for (Concept con : snomedOntology.getConcepts()) {
 			String name = con.getName();
@@ -72,7 +77,8 @@ public class IntervalReasonerInternational20250101TestIT extends SnomedTestBase 
 				Matcher mat = pat.matcher(name);
 				if (mat.find()) {
 //					log.info("\t" + mat.group(1) + " " + mat.group(2));
-					Interval i = Interval.fromString("[" + mat.group(1) + "," + mat.group(2) + "]");
+					Interval i = Interval
+							.fromString("[" + mat.group(1) + "," + mat.group(2) + "]" + TemporalUnits.Weeks.sctid);
 					log.info("\t" + i);
 					updateDefinition(con, i);
 					continue;
@@ -84,7 +90,7 @@ public class IntervalReasonerInternational20250101TestIT extends SnomedTestBase 
 				Matcher mat = pat.matcher(name);
 				if (mat.find()) {
 //					log.info("\t" + mat.group(1));
-					Interval i = Interval.fromString("[0," + mat.group(1) + ")");
+					Interval i = Interval.fromString("[0," + mat.group(1) + ")" + TemporalUnits.Weeks.sctid);
 					log.info("\t" + i);
 					updateDefinition(con, i);
 					continue;
@@ -96,7 +102,8 @@ public class IntervalReasonerInternational20250101TestIT extends SnomedTestBase 
 				Matcher mat = pat.matcher(name);
 				if (mat.find()) {
 //					log.info("\t" + mat.group(1));
-					Interval i = Interval.fromString("[" + mat.group(1) + "," + mat.group(1) + "]");
+					Interval i = Interval
+							.fromString("[" + mat.group(1) + "," + mat.group(1) + "]" + TemporalUnits.Weeks.sctid);
 					log.info("\t" + i);
 					updateDefinition(con, i);
 					continue;
@@ -107,11 +114,31 @@ public class IntervalReasonerInternational20250101TestIT extends SnomedTestBase 
 		assertEquals(22, cnt);
 		List<ConcreteRoleType> intervalRoles = List.of(snomedOntology.getConcreteRoleType(-1));
 		IntervalReasoner ir = IntervalReasoner.create(snomedOntology, intervalRoles);
-		ir.getSubConcepts(snomedOntology.getConcept(395507008), false).stream()
+		ir.getSubConcepts(snomedOntology.getConcept(pi_sctid), false).stream()
 				.sorted(Comparator.comparing(Concept::getId)).forEach(con -> log
 						.info("\n" + con + "\n" + con.getDefinitions().getFirst() + "\n" + ir.getSuperConcepts(con)));
+		{
+			List<String> lines = ir.getSubConcepts(snomedOntology.getConcept(pi_sctid), false).stream()
+					.sorted(Comparator.comparing(Concept::getId))
+					.map(con -> con.getId() + "\t"
+							+ con.getDefinitions().getFirst().getUngroupedConcreteRoles().iterator().next().getValue())
+					.toList();
+			Files.write(Paths.get("target", "intervals-" + getEditionDir() + "-" + getVersion() + ".txt"), lines);
+		}
+		{
+			String file_name = "intervals-sups-" + getEditionDir() + "-" + getVersion() + ".txt";
+			List<String> lines = ir.getSubConcepts(snomedOntology.getConcept(pi_sctid), false).stream()
+					.sorted(Comparator.comparing(Concept::getId)) //
+					.flatMap(con -> ir.getSuperConcepts(con).stream() //
+							.sorted(Comparator.comparing(Concept::getId)) //
+							.map(sup -> List.of(con, sup)))
+					.map(con_sup -> con_sup.get(0) + " " + con_sup.get(1)).toList();
+			Files.write(Paths.get("target", file_name), lines);
+			List<String> expect_lines = Files.lines(Paths.get("src/test/resources", file_name)).toList();
+			assertEquals(expect_lines, lines);
+		}
 		log.info("-".repeat(20));
-		print(ir, snomedOntology.getConcept(395507008), 0);
+		print(ir, snomedOntology.getConcept(pi_sctid), 0);
 	}
 
 	private void print(IntervalReasoner ir, Concept concept, int i) {
@@ -123,7 +150,7 @@ public class IntervalReasonerInternational20250101TestIT extends SnomedTestBase 
 		Definition def = con.getDefinitions().getFirst();
 		def.setDefinitionType(DefinitionType.EquivalentConcept);
 		def.getSuperConcepts().clear();
-		def.addSuperConcept(snomedOntology.getConcept(395507008));
+		def.addSuperConcept(snomedOntology.getConcept(pi_sctid));
 		def.getRoleGroups().clear();
 		def.getUngroupedRoles().clear();
 		def.getUngroupedConcreteRoles().clear();

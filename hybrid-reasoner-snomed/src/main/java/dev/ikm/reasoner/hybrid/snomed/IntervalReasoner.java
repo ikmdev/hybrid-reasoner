@@ -4,9 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.semanticweb.elk.owl.interfaces.ElkClassExpression;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import dev.ikm.elk.snomed.SnomedOntology;
 import dev.ikm.elk.snomed.SnomedOntologyReasoner;
+import dev.ikm.elk.snomed.interval.Interval;
 import dev.ikm.elk.snomed.model.Concept;
 import dev.ikm.elk.snomed.model.ConcreteRole;
 import dev.ikm.elk.snomed.model.ConcreteRoleType;
@@ -16,6 +19,9 @@ import dev.ikm.elk.snomed.model.Role;
 import dev.ikm.elk.snomed.model.RoleType;
 
 public class IntervalReasoner extends SnomedOntologyReasoner {
+
+	@SuppressWarnings("unused")
+	private static final Logger LOG = LoggerFactory.getLogger(IntervalReasoner.class);
 
 	private List<ConcreteRoleType> intervalRoles;
 
@@ -31,10 +37,10 @@ public class IntervalReasoner extends SnomedOntologyReasoner {
 	}
 
 	public static IntervalReasoner create(SnomedOntology snomedOntology, List<ConcreteRoleType> intervalRoles) {
-		IntervalReasoner sor = new IntervalReasoner(intervalRoles);
-		sor.init(snomedOntology);
-		sor.computeInferences();
-		return sor;
+		IntervalReasoner ir = new IntervalReasoner(intervalRoles);
+		ir.init(snomedOntology);
+		ir.computeInferences();
+		return ir;
 	}
 
 	private void processIntervalConcepts() {
@@ -89,7 +95,6 @@ public class IntervalReasoner extends SnomedOntologyReasoner {
 			Concept interval_concept = interval_concepts.get(interval_value_str);
 			Role interval_role = new Role(new RoleType(concreteRole.getConcreteRoleType().getId()), interval_concept);
 			return process(interval_role);
-
 		} else {
 			return super.process(concreteRole);
 		}

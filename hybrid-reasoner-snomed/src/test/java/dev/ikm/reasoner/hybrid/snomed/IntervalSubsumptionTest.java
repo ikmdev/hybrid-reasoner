@@ -20,10 +20,20 @@ public class IntervalSubsumptionTest {
 	@Test
 	public void interval() {
 		ConcreteRoleType rt = new ConcreteRoleType(1);
-		ConcreteRole r1 = new ConcreteRole(rt, "[0,10]", ConcreteRole.ValueType.String);
-		ConcreteRole r2 = new ConcreteRole(rt, "[1,9]", ConcreteRole.ValueType.String);
-		IntervalSubsumption is = new IntervalSubsumption(null, null, null, null, null, List.of(rt));
+		ConcreteRole r1 = new ConcreteRole(rt, "[0,10]20", ConcreteRole.ValueType.String);
+		ConcreteRole r2 = new ConcreteRole(rt, "[1,9]20", ConcreteRole.ValueType.String);
+		IntervalSubsumption is = new IntervalSubsumption(null, null, null, List.of(rt));
 		assertTrue(is.isSubsumedBy(r2, r1));
+		assertFalse(is.isSubsumedBy(r1, r2));
+	}
+
+	@Test
+	public void intervalUnits() {
+		ConcreteRoleType rt = new ConcreteRoleType(1);
+		ConcreteRole r1 = new ConcreteRole(rt, "[0,10]20", ConcreteRole.ValueType.String);
+		ConcreteRole r2 = new ConcreteRole(rt, "[1,9]30", ConcreteRole.ValueType.String);
+		IntervalSubsumption is = new IntervalSubsumption(null, null, null, List.of(rt));
+		assertFalse(is.isSubsumedBy(r2, r1));
 		assertFalse(is.isSubsumedBy(r1, r2));
 	}
 
