@@ -415,7 +415,7 @@
 							</ignoredUnusedDeclaredDependencies>
 							<ignoreUnusedRuntime>true</ignoreUnusedRuntime>
 							<ignoredUsedUndeclaredDependencies>
-								dev.ikm.jpms:eclipse-collections-api</ignoredUsedUndeclaredDependencies>
+                                org.eclipse.collections:eclipse-collections-api</ignoredUsedUndeclaredDependencies>
 						</configuration>
 					</execution>
 				</executions>
