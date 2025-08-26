@@ -23,7 +23,7 @@ public class IntervalTest {
 		assertEquals(10, i.getLowerBound());
 		assertEquals(20, i.getUpperBound());
 		assertTrue(i.isUpperOpen());
-		assertEquals(30, i.getUnitOfMeasure());
+		assertEquals(30, i.getUnitOfMeasure().getId());
 	}
 
 	@Test
@@ -34,7 +34,7 @@ public class IntervalTest {
 		assertEquals(10, i.getLowerBound());
 		assertEquals(20, i.getUpperBound());
 		assertFalse(i.isUpperOpen());
-		assertEquals(30, i.getUnitOfMeasure());
+		assertEquals(30, i.getUnitOfMeasure().getId());
 	}
 
 	@Test
@@ -45,7 +45,7 @@ public class IntervalTest {
 		assertEquals(10, i.getLowerBound());
 		assertEquals(20, i.getUpperBound());
 		assertFalse(i.isUpperOpen());
-		assertEquals(30, i.getUnitOfMeasure());
+		assertEquals(30, i.getUnitOfMeasure().getId());
 	}
 
 	@Test
@@ -56,7 +56,7 @@ public class IntervalTest {
 		assertEquals(10, i.getLowerBound());
 		assertEquals(20, i.getUpperBound());
 		assertTrue(i.isUpperOpen());
-		assertEquals(30, i.getUnitOfMeasure());
+		assertEquals(30, i.getUnitOfMeasure().getId());
 	}
 
 	private boolean contains(String i1, String i2) {
@@ -92,7 +92,7 @@ public class IntervalTest {
 		assertEquals(-10, i.getLowerBound());
 		assertEquals(-20, i.getUpperBound());
 		assertTrue(i.isUpperOpen());
-		assertEquals(-30, i.getUnitOfMeasure());
+		assertEquals(-30, i.getUnitOfMeasure().getId());
 	}
 
 	@Test
@@ -103,7 +103,7 @@ public class IntervalTest {
 		assertEquals(-10, i.getLowerBound());
 		assertEquals(-20, i.getUpperBound());
 		assertTrue(i.isUpperOpen());
-		assertEquals(Long.MAX_VALUE, i.getUnitOfMeasure());
+		assertEquals(Long.MAX_VALUE, i.getUnitOfMeasure().getId());
 	}
 
 	@Test
@@ -114,7 +114,7 @@ public class IntervalTest {
 		assertEquals(-10, i.getLowerBound());
 		assertEquals(-20, i.getUpperBound());
 		assertTrue(i.isUpperOpen());
-		assertEquals(Long.MIN_VALUE, i.getUnitOfMeasure());
+		assertEquals(Long.MIN_VALUE, i.getUnitOfMeasure().getId());
 	}
 
 }

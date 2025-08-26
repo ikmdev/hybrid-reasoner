@@ -59,7 +59,7 @@
 		<!-- test dependencies -->
 		<junit.version>5.13.4</junit.version><!-- defined in parent -->
 		<!-- dev.ikm.elk dependencies -->
-		<ikm-reasoner.version>0.39.4</ikm-reasoner.version>
+		<ikm-reasoner.version>0.39.5</ikm-reasoner.version>
 		<!-- dev.ikm.owlapi dependencies -->
 		<owlapi.version>4.8.5</owlapi.version>
 		<!-- other dependencies -->
