@@ -8,16 +8,16 @@ import org.slf4j.LoggerFactory;
 import dev.ikm.elk.snomed.SnomedOntology;
 
 @TestInstance(Lifecycle.PER_CLASS)
-public class IntervalReasonerInternational20250101TestIT extends IntervalReasonerInternationalTestBase {
+public class IntervalReasonerInternational20250801TestIT extends IntervalReasonerInternationalTestBase {
 
 	protected SnomedOntology snomedOntology;
 
 	@SuppressWarnings("unused")
-	private static final Logger log = LoggerFactory.getLogger(IntervalReasonerInternational20250101TestIT.class);
+	private static final Logger log = LoggerFactory.getLogger(IntervalReasonerInternational20250801TestIT.class);
 
 	@Override
 	public String getVersion() {
-		return "20250101";
+		return "20250801";
 	}
 
 }
