@@ -159,7 +159,7 @@ public class StatementSnomedOntology {
 		nsoReasoner = SnomedOntologyReasoner.create(nsoOntology);
 		nsoReasoner.flush();
 		nnfBuilder = NecessaryNormalFormBuilder.create(nsoOntology, nsoReasoner.getSuperConcepts(),
-				nsoReasoner.getSuperRoleTypes(false), root);
+				nsoReasoner.getSuperRoleTypes(false), root, (workDone, max) -> {});
 		// TODO can we get rid of this??? role chains issue
 		nnfBuilder.generate();
 		for (Concept con : getStatementConceptsDefiningDependentOrder()) {

@@ -13,16 +13,16 @@ public class IntervalNecessaryNormalFormBuilder extends NecessaryNormalFormBuild
 	private List<ConcreteRoleType> intervalRoles;
 
 	protected IntervalNecessaryNormalFormBuilder(SnomedOntology snomedOntology, long root,
-			List<ConcreteRoleType> intervalRoles) {
-		super(snomedOntology, root);
+			List<ConcreteRoleType> intervalRoles, ProgressUpdater progressUpdater) {
+		super(snomedOntology, root, progressUpdater);
 		this.intervalRoles = intervalRoles;
 	}
 
 	public static NecessaryNormalFormBuilder create(SnomedOntology snomedOntology,
 			HashMap<Long, Set<Long>> superConcepts, HashMap<Long, Set<Long>> superRoleTypes, long root,
-			List<ConcreteRoleType> intervalRoles) {
+			List<ConcreteRoleType> intervalRoles, ProgressUpdater progressUpdater) {
 		IntervalNecessaryNormalFormBuilder nnfb = new IntervalNecessaryNormalFormBuilder(snomedOntology, root,
-				intervalRoles);
+				intervalRoles, progressUpdater);
 		nnfb.initConcepts(superConcepts);
 		nnfb.initRoles(superRoleTypes);
 		nnfb.initSubsumption();

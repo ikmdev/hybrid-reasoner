@@ -44,7 +44,7 @@ public abstract class SnomedAssumptionsTestBase extends StatementSnomedOntologyT
 		snomedOntologyReasoner.flush();
 		log.info("Classify complete");
 		nnfb = NecessaryNormalFormBuilder.create(snomedOntology, snomedOntologyReasoner.getSuperConcepts(),
-				snomedOntologyReasoner.getSuperRoleTypes(false));
+				snomedOntologyReasoner.getSuperRoleTypes(false), (workDone, max) -> {});
 		log.info("Init complete");
 		SnomedOntology inferredOntology = new SnomedLoader().load(concepts_file, descriptions_file, rels_file,
 				values_file);
