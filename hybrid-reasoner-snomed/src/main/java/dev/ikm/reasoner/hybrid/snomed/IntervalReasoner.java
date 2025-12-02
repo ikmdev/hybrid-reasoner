@@ -3,6 +3,8 @@ package dev.ikm.reasoner.hybrid.snomed;
 import java.util.HashMap;
 import java.util.List;
 
+import org.eclipse.collections.api.factory.Maps;
+import org.eclipse.collections.api.map.MutableMap;
 import org.semanticweb.elk.owl.interfaces.ElkClassExpression;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +27,7 @@ public class IntervalReasoner extends SnomedOntologyReasoner {
 
 	private List<ConcreteRoleType> intervalRoles;
 
-	private HashMap<String, Concept> interval_concepts = new HashMap<>();
+	private MutableMap<String, Concept> interval_concepts = Maps.mutable.empty();
 
 	private long next_interval_concept_id = Long.MIN_VALUE;
 

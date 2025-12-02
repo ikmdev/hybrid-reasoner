@@ -32,6 +32,8 @@ import dev.ikm.elk.snomed.model.Role;
 import dev.ikm.elk.snomed.model.RoleGroup;
 import dev.ikm.elk.snomed.model.RoleType;
 import dev.ikm.reasoner.hybrid.snomed.StatementSnomedOntology.SwecIds;
+import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.set.MutableSet;
 
 public class AbsentSubsumption extends DefiningSubsumption {
 
@@ -70,14 +72,14 @@ public class AbsentSubsumption extends DefiningSubsumption {
 	}
 
 	public AbsentSubsumption(SnomedOntology ontology, SnomedIsa definingIsa, SnomedIsa isa,
-			HashMap<RoleType, Set<RoleType>> superRoles, HashMap<Concept, Definition> necessaryNormalForm,
-			SwecIds swecIds) {
+							 MutableMap<RoleType, MutableSet<RoleType>> superRoles, MutableMap<Concept, Definition> necessaryNormalForm,
+							 SwecIds swecIds) {
 		super(ontology, definingIsa, isa, superRoles, necessaryNormalForm);
 		this.swecIds = swecIds;
 	}
 
 	public AbsentSubsumption(SnomedOntology ontology, SnomedIsa definingIsa, SnomedIsa isa,
-			HashMap<RoleType, Set<RoleType>> superRoles, HashMap<Concept, Definition> necessaryNormalForm) {
+							 MutableMap<RoleType, MutableSet<RoleType>> superRoles, MutableMap<Concept, Definition> necessaryNormalForm) {
 		super(ontology, definingIsa, isa, superRoles, necessaryNormalForm);
 		this.swecIds = StatementSnomedOntology.swec_sctids;
 	}

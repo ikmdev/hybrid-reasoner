@@ -3,6 +3,7 @@ package dev.ikm.reasoner.hybrid.snomed;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -123,13 +124,23 @@ public abstract class StatementSnomedOntologyAbsentNfhTestIBase extends Statemen
 				continue;
 			if (isas.hasAncestor(id, FamilyHistoryIds.no_family_history_swec))
 				continue;
-			if (!isas.getChildren(id).equals(sso.getSubConcepts(id))) {
+
+			// Convert both ImmutableLongSet to Set<Long> for comparison
+			Set<Long> expectedChildren = new HashSet<>();
+			isas.getChildren(id).forEach(expectedChildren::add);
+			Set<Long> actualChildren = sso.getSubConcepts(id);
+
+			if (!expectedChildren.equals(actualChildren)) {
 				log.error("" + con);
-				ArrayList<Long> missing = new ArrayList<>(isas.getChildren(id));
-				missing.removeAll(sso.getSubConcepts(id));
+
+				// Create missing list
+				ArrayList<Long> missing = new ArrayList<>(expectedChildren);
+				missing.removeAll(actualChildren);
 				log.error("Missing: " + missing);
-				ArrayList<Long> extra = new ArrayList<>(sso.getSubConcepts(id));
-				extra.removeAll(isas.getChildren(id));
+
+				// Create extra list
+				ArrayList<Long> extra = new ArrayList<>(actualChildren);
+				extra.removeAll(expectedChildren);
 				log.error("Extra: " + extra);
 			}
 			assertEquals(isas.getChildren(id), sso.getSubConcepts(id), "Children of " + con);

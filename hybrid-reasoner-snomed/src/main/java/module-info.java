@@ -7,6 +7,7 @@ open module dev.ikm.reasoner.hybrid.snomed {
 	requires dev.ikm.elk.snomed.reasoner;
 	requires dev.ikm.elk.snomed.test;
 	requires org.semanticweb.elk.owl.model;
+    requires org.eclipse.collections.api;
 
-	exports dev.ikm.reasoner.hybrid.snomed;
+    exports dev.ikm.reasoner.hybrid.snomed;
 }

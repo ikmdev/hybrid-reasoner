@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -93,10 +94,12 @@ public class IntervalReasonerTest {
 		snomedOntology.getConcepts().stream().filter(con -> con.getId() != 0)
 				.sorted(Comparator.comparing(Concept::getId)).forEach(con -> log
 						.info("\n" + con + "\n" + con.getDefinitions().getFirst() + "\n" + sor.getSuperConcepts(con)));
-		assertEquals(Set.of(0l), sor.getSuperConcepts(1));
-		assertEquals(Set.of(1l), sor.getSuperConcepts(2));
-		assertEquals(Set.of(1l), sor.getSuperConcepts(3));
-		assertEquals(Set.of(2l, 3l), sor.getSuperConcepts(4));
+		
+		// Convert MutableLongSet to Set<Long> for assertions
+		assertEquals(Set.of(0L), toSet(sor.getSuperConcepts(1)));
+		assertEquals(Set.of(1L), toSet(sor.getSuperConcepts(2)));
+		assertEquals(Set.of(1L), toSet(sor.getSuperConcepts(3)));
+		assertEquals(Set.of(2L, 3L), toSet(sor.getSuperConcepts(4)));
 	}
 
 	@Test
@@ -110,10 +113,18 @@ public class IntervalReasonerTest {
 		snomedOntology.getConcepts().stream().filter(con -> con.getId() != 0)
 				.sorted(Comparator.comparing(Concept::getId)).forEach(con -> log
 						.info("\n" + con + "\n" + con.getDefinitions().getFirst() + "\n" + ir.getSuperConcepts(con)));
-		assertEquals(Set.of(0l), ir.getSuperConcepts(1));
-		assertEquals(Set.of(1l), ir.getSuperConcepts(2));
-		assertEquals(Set.of(1l), ir.getSuperConcepts(3));
-		assertEquals(Set.of(2l, 3l), ir.getSuperConcepts(4));
+		
+		// Convert MutableLongSet to Set<Long> for assertions
+		assertEquals(Set.of(0L), toSet(ir.getSuperConcepts(1)));
+		assertEquals(Set.of(1L), toSet(ir.getSuperConcepts(2)));
+		assertEquals(Set.of(1L), toSet(ir.getSuperConcepts(3)));
+		assertEquals(Set.of(2L, 3L), toSet(ir.getSuperConcepts(4)));
 	}
 
+	// Helper method to convert MutableLongSet to Set<Long>
+	private Set<Long> toSet(org.eclipse.collections.api.set.primitive.MutableLongSet primitiveSet) {
+		Set<Long> boxedSet = new HashSet<>();
+		primitiveSet.forEach(boxedSet::add);
+		return boxedSet;
+	}
 }

@@ -52,7 +52,9 @@ public abstract class StatementSnomedOntologyWithoutAbsentTestBase extends State
 	public void getConceptsDefiningDependentOrder() {
 		HashSet<Long> priors = new HashSet<>();
 		for (Concept con : sso.getConceptsDefiningDependentOrder()) {
-			for (long dep : snomedOntology.getDependentOnConcepts(con.getId())) {
+			// Convert ImmutableLongSet to array for iteration
+			long[] deps = snomedOntology.getDependentOnConcepts(con.getId()).toArray();
+			for (long dep : deps) {
 				assertTrue(priors.contains(dep));
 			}
 			priors.add(con.getId());
@@ -62,7 +64,9 @@ public abstract class StatementSnomedOntologyWithoutAbsentTestBase extends State
 	@Test
 	public void isSubsumedBy() {
 		for (Concept con : sso.getStatementConceptsDefiningDependentOrder()) {
-			for (long sup_id : isas.getParents(con.getId())) {
+			// Convert ImmutableLongSet to array for iteration
+			long[] supIds = isas.getParents(con.getId()).toArray();
+			for (long sup_id : supIds) {
 				Concept sup = snomedOntology.getConcept(sup_id);
 				assertTrue(sso.isSubsumedBy(con, sup));
 				assertFalse(sso.isSubsumedBy(sup, con));
@@ -87,11 +91,16 @@ public abstract class StatementSnomedOntologyWithoutAbsentTestBase extends State
 		SnomedIsa sso_isas = sso.classify();
 		long end = System.currentTimeMillis();
 		log.info("Classify in: " + ((end - beg) / 1000 + " secs"));
-		for (long id : sso_isas.getOrderedConcepts()) {
+		long[] orderedConcepts = sso_isas.getOrderedConcepts().toArray();
+		for (long id : orderedConcepts) {
 			if (id == SnomedIds.root)
 				continue;
-			Set<Long> exp = isas.getChildren(id);
-			Set<Long> act = sso_isas.getChildren(id);
+			// Convert ImmutableLongSet to Set<Long> for comparison
+			Set<Long> exp = new HashSet<>();
+			isas.getChildren(id).forEach(exp::add);
+			Set<Long> act = new HashSet<>();
+			sso_isas.getChildren(id).forEach(act::add);
+
 			if (!exp.equals(act)) {
 				log.info("Con: " + sso_isas.getChildren(id).size() + " - " + snomedOntology.getFsn(id));
 				Set<Long> mis = new HashSet<>(exp);

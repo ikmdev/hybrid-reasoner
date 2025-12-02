@@ -32,13 +32,15 @@ import dev.ikm.elk.snomed.model.ConcreteRole;
 import dev.ikm.elk.snomed.model.ConcreteRoleType;
 import dev.ikm.elk.snomed.model.Definition;
 import dev.ikm.elk.snomed.model.RoleType;
+import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.set.MutableSet;
 
 public class IntervalSubsumption extends NNFSubsumption {
 
 	private List<ConcreteRoleType> intervalRoles;
 
-	public IntervalSubsumption(SnomedIsa isa, HashMap<RoleType, Set<RoleType>> superRoles,
-			HashMap<Concept, Definition> necessaryNormalForm, List<ConcreteRoleType> intervalRoles) {
+	public IntervalSubsumption(SnomedIsa isa, MutableMap<RoleType, MutableSet<RoleType>> superRoles,
+			MutableMap<Concept, Definition> necessaryNormalForm, List<ConcreteRoleType> intervalRoles) {
 		super(isa, superRoles, necessaryNormalForm);
 		this.intervalRoles = intervalRoles;
 	}

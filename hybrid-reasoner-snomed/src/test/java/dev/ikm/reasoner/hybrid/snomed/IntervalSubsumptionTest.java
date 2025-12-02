@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
+import org.eclipse.collections.api.factory.Maps;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +23,8 @@ public class IntervalSubsumptionTest {
 		ConcreteRoleType rt = new ConcreteRoleType(1);
 		ConcreteRole r1 = new ConcreteRole(rt, "[0,10]20", ConcreteRole.ValueType.String);
 		ConcreteRole r2 = new ConcreteRole(rt, "[1,9]20", ConcreteRole.ValueType.String);
-		IntervalSubsumption is = new IntervalSubsumption(null, null, null, List.of(rt));
+		// Pass empty map instead of null
+		IntervalSubsumption is = new IntervalSubsumption(null, Maps.mutable.empty(), Maps.mutable.empty(), List.of(rt));
 		assertTrue(is.isSubsumedBy(r2, r1));
 		assertFalse(is.isSubsumedBy(r1, r2));
 	}
@@ -32,7 +34,8 @@ public class IntervalSubsumptionTest {
 		ConcreteRoleType rt = new ConcreteRoleType(1);
 		ConcreteRole r1 = new ConcreteRole(rt, "[0,10]20", ConcreteRole.ValueType.String);
 		ConcreteRole r2 = new ConcreteRole(rt, "[1,9]30", ConcreteRole.ValueType.String);
-		IntervalSubsumption is = new IntervalSubsumption(null, null, null, List.of(rt));
+		// Pass empty map instead of null
+		IntervalSubsumption is = new IntervalSubsumption(null, Maps.mutable.empty(), Maps.mutable.empty(), List.of(rt));
 		assertFalse(is.isSubsumedBy(r2, r1));
 		assertFalse(is.isSubsumedBy(r1, r2));
 	}

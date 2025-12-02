@@ -123,20 +123,26 @@ public abstract class SnomedAssumptionsTestBase extends StatementSnomedOntologyT
 	@Test
 	public void disjoint() {
 		// check that the statement concepts are disjoint from other hierarchies
-		Set<Long> subs = snomedOntologyReasoner.getSubConcepts(StatementSnomedOntology.swec_id, false);
+		// Convert primitive MutableLongSet to Set<Long>
+		Set<Long> subs = new HashSet<>();
+		snomedOntologyReasoner.getSubConcepts(StatementSnomedOntology.swec_id, false).forEach(subs::add);
 		assertEquals(swec_concepts_cnt, subs.size());
 		subs.add(StatementSnomedOntology.swec_id);
 		for (long id : subs) {
 			if (id == StatementSnomedOntology.swec_id)
 				continue;
-			assertTrue(subs.containsAll(snomedOntologyReasoner.getSuperConcepts(id)));
+			// Convert primitive MutableLongSet to Set<Long> for containsAll
+			Set<Long> superConcepts = new HashSet<>();
+			snomedOntologyReasoner.getSuperConcepts(id).forEach(superConcepts::add);
+			assertTrue(subs.containsAll(superConcepts));
 		}
 	}
 
 	@Test
 	public void roles() {
 		// check that all role values are outside of the statement hierarchy
-		Set<Long> subs = snomedOntologyReasoner.getSubConcepts(StatementSnomedOntology.swec_id, false);
+		Set<Long> subs = new HashSet<>();
+		snomedOntologyReasoner.getSubConcepts(StatementSnomedOntology.swec_id, false).forEach(subs::add);
 		for (long id : subs) {
 			Concept concept = snomedOntology.getConcept(id);
 			HashSet<Long> deps = new HashSet<>();
@@ -158,7 +164,8 @@ public abstract class SnomedAssumptionsTestBase extends StatementSnomedOntologyT
 	@Test
 	public void singleDef() {
 		// check that statements concepts have only 1 definition
-		Set<Long> subs = snomedOntologyReasoner.getSubConcepts(StatementSnomedOntology.swec_id, false);
+		Set<Long> subs = new HashSet<>();
+		snomedOntologyReasoner.getSubConcepts(StatementSnomedOntology.swec_id, false).forEach(subs::add);
 		for (long id : subs) {
 			assertEquals(1, snomedOntology.getConcept(id).getDefinitions().size());
 		}
@@ -167,7 +174,8 @@ public abstract class SnomedAssumptionsTestBase extends StatementSnomedOntologyT
 	@Test
 	public void gci() {
 		// check that statements concepts have no gcis
-		Set<Long> subs = snomedOntologyReasoner.getSubConcepts(StatementSnomedOntology.swec_id, false);
+		Set<Long> subs = new HashSet<>();
+		snomedOntologyReasoner.getSubConcepts(StatementSnomedOntology.swec_id, false).forEach(subs::add);
 		for (long id : subs) {
 			assertEquals(0, snomedOntology.getConcept(id).getGciDefinitions().size());
 		}
@@ -178,18 +186,28 @@ public abstract class SnomedAssumptionsTestBase extends StatementSnomedOntologyT
 		Set<Long> roots = Set.of(FamilyHistoryIds.clinical_finding_absent_swec,
 				FamilyHistoryIds.no_family_history_swec);
 		int root_cnt = 0;
-		Set<Long> subs = snomedOntologyReasoner.getSubConcepts(StatementSnomedOntology.swec_id, false);
+		Set<Long> subs = new HashSet<>();
+		snomedOntologyReasoner.getSubConcepts(StatementSnomedOntology.swec_id, false).forEach(subs::add);
 		for (long id : subs) {
 			Concept con = snomedOntology.getConcept(id);
 			if (!AbsentSubsumption.hasGroupedAbsentSnomed(con))
 				continue;
-			if (!roots.contains(id)
-					&& !snomedOntologyReasoner.getSuperConcepts(id, false).stream().anyMatch(x -> roots.contains(x))) {
+			
+			// Convert primitive MutableLongSet to Set<Long> for stream operations
+			Set<Long> superConcepts = new HashSet<>();
+			snomedOntologyReasoner.getSuperConcepts(id, false).forEach(superConcepts::add);
+			
+			if (!roots.contains(id) && !superConcepts.stream().anyMatch(roots::contains)) {
 				root_cnt++;
 				log.info("Not under CFA or NFH: " + con);
-				if (!snomedOntologyReasoner.getSuperConcepts(id).contains(FamilyHistoryIds.finding_swec)) {
+				
+				// Convert primitive MutableLongSet to check contains
+				Set<Long> directSuperConcepts = new HashSet<>();
+				snomedOntologyReasoner.getSuperConcepts(id).forEach(directSuperConcepts::add);
+				
+				if (!directSuperConcepts.contains(FamilyHistoryIds.finding_swec)) {
 					log.info("Not under FWEC: " + con);
-					snomedOntologyReasoner.getSuperConcepts(con).forEach(x -> log.info("\tSup: " + x));
+					directSuperConcepts.forEach(x -> log.info("\tSup: " + x));
 				}
 			}
 		}
