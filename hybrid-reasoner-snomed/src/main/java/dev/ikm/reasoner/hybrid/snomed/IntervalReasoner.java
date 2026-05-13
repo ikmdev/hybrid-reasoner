@@ -1,6 +1,5 @@
 package dev.ikm.reasoner.hybrid.snomed;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.collections.api.factory.Maps;
