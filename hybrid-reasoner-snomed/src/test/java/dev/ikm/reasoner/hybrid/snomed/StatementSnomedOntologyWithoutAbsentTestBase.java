@@ -117,8 +117,8 @@ public abstract class StatementSnomedOntologyWithoutAbsentTestBase extends State
 			long id = con.getId();
 			if (isas.hasAncestor(id, SnomedIds.linkage_concept))
 				continue;
-			assertEquals(isas.getChildren(id), sso.getSubConcepts(id), "" + con);
-			assertEquals(isas.getParents(id), sso.getSuperConcepts(id), "" + con);
+			assertEquals(toSet(isas.getChildren(id)), sso.getSubConcepts(id), "" + con);
+			assertEquals(toSet(isas.getParents(id)), sso.getSuperConcepts(id), "" + con);
 		}
 	}
 

@@ -67,7 +67,7 @@ public class AbsentSubsumption extends DefiningSubsumption {
 	}
 
 	private AbsentSubsumption() {
-		super(null, null, null, null, null);
+		super(null, null, null, new HashMap<>(), null);
 		this.swecIds = StatementSnomedOntology.swec_sctids;
 	}
 

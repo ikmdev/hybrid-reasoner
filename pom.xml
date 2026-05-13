@@ -52,14 +52,13 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>24</java.version>
 		<java.compilerArgs></java.compilerArgs>
-
 		<!-- logging dependencies -->
 		<slf4j.version>2.0.17</slf4j.version>
 		<log4j.version>3.0.0-alpha1</log4j.version>
 		<!-- test dependencies -->
 		<junit.version>5.13.4</junit.version><!-- defined in parent -->
 		<!-- dev.ikm.elk dependencies -->
-		<ikm-reasoner.version>0.39.7</ikm-reasoner.version>
+		<ikm-reasoner.version>0.40.0</ikm-reasoner.version>
 		<!-- dev.ikm.owlapi dependencies -->
 		<owlapi.version>4.8.7</owlapi.version>
 		<!-- other dependencies -->

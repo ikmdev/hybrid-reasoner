@@ -1,14 +1,13 @@
 package dev.ikm.reasoner.hybrid.snomed;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+
+import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
+import org.eclipse.collections.api.set.primitive.MutableLongSet;
 
 import dev.ikm.elk.snomed.NecessaryNormalFormBuilder;
 import dev.ikm.elk.snomed.SnomedOntology;
 import dev.ikm.elk.snomed.model.ConcreteRoleType;
-import org.eclipse.collections.api.map.primitive.MutableLongObjectMap;
-import org.eclipse.collections.api.set.primitive.MutableLongSet;
 
 public class IntervalNecessaryNormalFormBuilder extends NecessaryNormalFormBuilder {
 

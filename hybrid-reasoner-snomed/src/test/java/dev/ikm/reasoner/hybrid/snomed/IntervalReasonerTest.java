@@ -102,9 +102,8 @@ public class IntervalReasonerTest {
 		assertEquals(Set.of(2L, 3L), toSet(sor.getSuperConcepts(4)));
 	}
 
-	@Test
-	public void classifyIR() throws Exception {
-		List<String> lines = Files.readAllLines(Paths.get("src/test/resources/DataHasIntervalValue.owl"));
+	public void classifyIR(String file) throws Exception {
+		List<String> lines = Files.readAllLines(Paths.get(file));
 		OwlElOntology ontology = new OwlElOntology();
 		ontology.load(lines);
 		SnomedOntology snomedOntology = new OwlElTransformer().transform(ontology);
@@ -119,6 +118,16 @@ public class IntervalReasonerTest {
 		assertEquals(Set.of(1L), toSet(ir.getSuperConcepts(2)));
 		assertEquals(Set.of(1L), toSet(ir.getSuperConcepts(3)));
 		assertEquals(Set.of(2L, 3L), toSet(ir.getSuperConcepts(4)));
+	}
+	
+	@Test
+	public void classifyIR() throws Exception {
+		classifyIR("src/test/resources/DataHasIntervalValue.owl");
+	}
+	
+	@Test
+	public void classifyDecimalIR() throws Exception {
+		classifyIR("src/test/resources/DataHasIntervalDecimalValue.owl");
 	}
 
 	// Helper method to convert MutableLongSet to Set<Long>

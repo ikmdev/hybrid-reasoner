@@ -143,8 +143,8 @@ public abstract class StatementSnomedOntologyAbsentNfhTestIBase extends Statemen
 				extra.removeAll(expectedChildren);
 				log.error("Extra: " + extra);
 			}
-			assertEquals(isas.getChildren(id), sso.getSubConcepts(id), "Children of " + con);
-			assertEquals(isas.getParents(id), sso.getSuperConcepts(id), "Parents of " + con);
+			assertEquals(toSet(isas.getChildren(id)), sso.getSubConcepts(id), "Children of " + con);
+			assertEquals(toSet(isas.getParents(id)), sso.getSuperConcepts(id), "Parents of " + con);
 		}
 	}
 
