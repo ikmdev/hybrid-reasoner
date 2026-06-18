@@ -2,10 +2,9 @@ package dev.ikm.reasoner.hybrid.snomed;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-
+import org.eclipse.collections.api.factory.primitive.LongSets;
+import org.eclipse.collections.api.set.primitive.ImmutableLongSet;
+import org.eclipse.collections.api.set.primitive.MutableLongSet;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -96,9 +95,9 @@ public abstract class StatementSnomedOntologyAbsentNfhTestIBase extends Statemen
 // 		408552005 No family history of chronic obstructive pulmonary disease (situation)
 // 			408553000 No family history of respiratory disease (situation)
 
-	private void checkParents(long con, Set<Long> expect_parents) {
-		Set<Long> actual_parents = sso.getSuperConcepts(con);
-		assertEquals(expect_parents, actual_parents, "Concept " + con + " " + snomedOntology.getFsn(con));
+	private void checkParents(long con, ImmutableLongSet immutableLongSet) {
+		MutableLongSet actual_parents = sso.getSuperConcepts(con);
+		assertEquals(immutableLongSet, actual_parents, "Concept " + con + " " + snomedOntology.getFsn(con));
 	}
 
 	@Test
@@ -109,13 +108,13 @@ public abstract class StatementSnomedOntologyAbsentNfhTestIBase extends Statemen
 		long end = System.currentTimeMillis();
 		log.info("Classify in: " + ((end - beg) / 1000 + " secs"));
 		list(sso, FamilyHistoryIds.family_history_swec, 0);
-		checkParents(408553000l, Set.of(704008007l, 408552005l));
-		checkParents(160270001, Set.of(160273004l, 266882009l, 297250002l, 313342001l));
-		checkParents(160250007l, Set.of(313376005l));
+		checkParents(408553000l, LongSets.immutable.with(704008007l, 408552005l));
+		checkParents(160270001, LongSets.immutable.with(160273004l, 266882009l, 297250002l, 313342001l));
+		checkParents(160250007l, LongSets.immutable.with(313376005l));
 		assertEquals(nfh_sub_concept_cnt, sso.getSubConcepts(FamilyHistoryIds.no_family_history_swec).size());
-		for (long parent : sso.getSuperConcepts(FamilyHistoryIds.no_family_history_swec)) {
+		sso.getSuperConcepts(FamilyHistoryIds.no_family_history_swec).forEach(parent -> {
 			log.info("Par: " + sso.getOntology().getConcept(parent));
-		}
+		});
 		for (Concept con : snomedOntology.getConcepts()) {
 			long id = con.getId();
 			if (isas.hasAncestor(id, SnomedIds.linkage_concept))
@@ -126,25 +125,28 @@ public abstract class StatementSnomedOntologyAbsentNfhTestIBase extends Statemen
 				continue;
 
 			// Convert both ImmutableLongSet to Set<Long> for comparison
-			Set<Long> expectedChildren = new HashSet<>();
-			isas.getChildren(id).forEach(expectedChildren::add);
-			Set<Long> actualChildren = sso.getSubConcepts(id);
+//			Set<Long> expectedChildren = new HashSet<>();
+//			isas.getChildren(id).forEach(expectedChildren::add);
+			ImmutableLongSet expectedChildren = isas.getChildren(id);
+			MutableLongSet actualChildren = sso.getSubConcepts(id);
 
 			if (!expectedChildren.equals(actualChildren)) {
 				log.error("" + con);
 
 				// Create missing list
-				ArrayList<Long> missing = new ArrayList<>(expectedChildren);
+//				ArrayList<Long> missing = new ArrayList<>(expectedChildren);
+				MutableLongSet missing = LongSets.mutable.withAll(expectedChildren);
 				missing.removeAll(actualChildren);
 				log.error("Missing: " + missing);
 
 				// Create extra list
-				ArrayList<Long> extra = new ArrayList<>(actualChildren);
+//				ArrayList<Long> extra = new ArrayList<>(actualChildren);
+				MutableLongSet extra = LongSets.mutable.withAll(actualChildren);
 				extra.removeAll(expectedChildren);
 				log.error("Extra: " + extra);
 			}
-			assertEquals(toSet(isas.getChildren(id)), sso.getSubConcepts(id), "Children of " + con);
-			assertEquals(toSet(isas.getParents(id)), sso.getSuperConcepts(id), "Parents of " + con);
+			assertEquals(isas.getChildren(id), sso.getSubConcepts(id), "Children of " + con);
+			assertEquals(isas.getParents(id), sso.getSuperConcepts(id), "Parents of " + con);
 		}
 	}
 
