@@ -7,10 +7,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
+import org.eclipse.collections.api.factory.primitive.LongSets;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -94,12 +93,11 @@ public class IntervalReasonerTest {
 		snomedOntology.getConcepts().stream().filter(con -> con.getId() != 0)
 				.sorted(Comparator.comparing(Concept::getId)).forEach(con -> log
 						.info("\n" + con + "\n" + con.getDefinitions().getFirst() + "\n" + sor.getSuperConcepts(con)));
-		
-		// Convert MutableLongSet to Set<Long> for assertions
-		assertEquals(Set.of(0L), toSet(sor.getSuperConcepts(1)));
-		assertEquals(Set.of(1L), toSet(sor.getSuperConcepts(2)));
-		assertEquals(Set.of(1L), toSet(sor.getSuperConcepts(3)));
-		assertEquals(Set.of(2L, 3L), toSet(sor.getSuperConcepts(4)));
+
+		assertEquals(LongSets.mutable.of(0L), sor.getSuperConcepts(1));
+		assertEquals(LongSets.mutable.of(1L), sor.getSuperConcepts(2));
+		assertEquals(LongSets.mutable.of(1L), sor.getSuperConcepts(3));
+		assertEquals(LongSets.mutable.of(2L, 3L), sor.getSuperConcepts(4));
 	}
 
 	public void classifyIR(String file) throws Exception {
@@ -112,28 +110,21 @@ public class IntervalReasonerTest {
 		snomedOntology.getConcepts().stream().filter(con -> con.getId() != 0)
 				.sorted(Comparator.comparing(Concept::getId)).forEach(con -> log
 						.info("\n" + con + "\n" + con.getDefinitions().getFirst() + "\n" + ir.getSuperConcepts(con)));
-		
-		// Convert MutableLongSet to Set<Long> for assertions
-		assertEquals(Set.of(0L), toSet(ir.getSuperConcepts(1)));
-		assertEquals(Set.of(1L), toSet(ir.getSuperConcepts(2)));
-		assertEquals(Set.of(1L), toSet(ir.getSuperConcepts(3)));
-		assertEquals(Set.of(2L, 3L), toSet(ir.getSuperConcepts(4)));
+
+		assertEquals(LongSets.mutable.of(0L), ir.getSuperConcepts(1));
+		assertEquals(LongSets.mutable.of(1L), ir.getSuperConcepts(2));
+		assertEquals(LongSets.mutable.of(1L), ir.getSuperConcepts(3));
+		assertEquals(LongSets.mutable.of(2L, 3L), ir.getSuperConcepts(4));
 	}
-	
+
 	@Test
 	public void classifyIR() throws Exception {
 		classifyIR("src/test/resources/DataHasIntervalValue.owl");
 	}
-	
+
 	@Test
 	public void classifyDecimalIR() throws Exception {
 		classifyIR("src/test/resources/DataHasIntervalDecimalValue.owl");
 	}
 
-	// Helper method to convert MutableLongSet to Set<Long>
-	private Set<Long> toSet(org.eclipse.collections.api.set.primitive.MutableLongSet primitiveSet) {
-		Set<Long> boxedSet = new HashSet<>();
-		primitiveSet.forEach(boxedSet::add);
-		return boxedSet;
-	}
 }

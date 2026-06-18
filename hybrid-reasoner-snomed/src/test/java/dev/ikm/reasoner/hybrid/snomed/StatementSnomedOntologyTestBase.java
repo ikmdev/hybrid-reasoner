@@ -37,9 +37,9 @@ public abstract class StatementSnomedOntologyTestBase extends SnomedTestBase {
 
 	protected void list(StatementSnomedOntology sso, long con, int depth) {
 		log.info("\t".repeat(depth) + con + " " + snomedOntology.getFsn(con));
-		for (long sub : sso.getSubConcepts(con)) {
+		sso.getSubConcepts(con).forEach(sub -> {
 			list(sso, sub, depth + 1);
-		}
+		});
 	}
 
 	// Helper method to convert ImmutableLongSet to Set<Long>

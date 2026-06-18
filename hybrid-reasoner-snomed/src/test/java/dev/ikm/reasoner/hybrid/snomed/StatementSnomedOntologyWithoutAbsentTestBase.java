@@ -5,8 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashSet;
-import java.util.Set;
 
+import org.eclipse.collections.api.factory.primitive.LongSets;
+import org.eclipse.collections.api.set.primitive.ImmutableLongSet;
+import org.eclipse.collections.api.set.primitive.MutableLongSet;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -95,30 +97,26 @@ public abstract class StatementSnomedOntologyWithoutAbsentTestBase extends State
 		for (long id : orderedConcepts) {
 			if (id == SnomedIds.root)
 				continue;
-			// Convert ImmutableLongSet to Set<Long> for comparison
-			Set<Long> exp = new HashSet<>();
-			isas.getChildren(id).forEach(exp::add);
-			Set<Long> act = new HashSet<>();
-			sso_isas.getChildren(id).forEach(act::add);
-
-			if (!exp.equals(act)) {
+			ImmutableLongSet expect = isas.getChildren(id);
+			ImmutableLongSet actual = sso_isas.getChildren(id);
+			if (!expect.equals(actual)) {
 				log.info("Con: " + sso_isas.getChildren(id).size() + " - " + snomedOntology.getFsn(id));
-				Set<Long> mis = new HashSet<>(exp);
-				mis.removeAll(act);
-				mis.forEach(child -> log.info("\tMis: " + snomedOntology.getFsn(child)));
-				Set<Long> ext = new HashSet<>(act);
-				ext.removeAll(exp);
-				ext.forEach(child -> log.info("\tExt: " + snomedOntology.getFsn(child)));
+				MutableLongSet misssing = LongSets.mutable.withAll(expect);
+				misssing.removeAll(actual);
+				misssing.forEach(child -> log.info("\tMis: " + snomedOntology.getFsn(child)));
+				MutableLongSet extra = LongSets.mutable.withAll(actual);
+				extra.removeAll(expect);
+				extra.forEach(child -> log.info("\tExt: " + snomedOntology.getFsn(child)));
 			}
-			assertEquals(exp, act);
-			assertEquals(exp, sso.getSubConcepts(id));
+			assertEquals(expect, actual);
+			assertEquals(expect, sso.getSubConcepts(id));
 		}
 		for (Concept con : snomedOntology.getConcepts()) {
 			long id = con.getId();
 			if (isas.hasAncestor(id, SnomedIds.linkage_concept))
 				continue;
-			assertEquals(toSet(isas.getChildren(id)), sso.getSubConcepts(id), "" + con);
-			assertEquals(toSet(isas.getParents(id)), sso.getSuperConcepts(id), "" + con);
+			assertEquals(isas.getChildren(id), sso.getSubConcepts(id), "" + con);
+			assertEquals(isas.getParents(id), sso.getSuperConcepts(id), "" + con);
 		}
 	}
 

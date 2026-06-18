@@ -1,9 +1,7 @@
 package dev.ikm.reasoner.hybrid.snomed;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.eclipse.collections.api.factory.primitive.LongObjectMaps;
@@ -23,7 +21,6 @@ import dev.ikm.elk.snomed.SnomedOntologyReasoner;
 import dev.ikm.elk.snomed.model.Concept;
 import dev.ikm.elk.snomed.model.Definition;
 
-//TODO: Refactor to use primitive collections...
 public class StatementSnomedOntology {
 
 	private static final Logger log = LoggerFactory.getLogger(StatementSnomedOntology.class);
@@ -120,15 +117,15 @@ public class StatementSnomedOntology {
 		// Use primitive maps instead of HashMap<Long, Set<Long>>
 		MutableLongObjectMap<MutableLongSet> definingSuperConcepts = LongObjectMaps.mutable.empty();
 		MutableLongObjectMap<MutableLongSet> dependentOnConcepts = LongObjectMaps.mutable.empty();
-		
+
 		for (Concept concept : ontology.getConcepts()) {
 			long id = concept.getId();
 			if (id == root)
 				continue;
-			
+
 			// Initialize with empty primitive set
 			definingSuperConcepts.put(id, LongSets.mutable.empty());
-			
+
 			for (Definition def : concept.getDefinitions()) {
 				for (Concept sup : def.getSuperConcepts()) {
 					if (id == sup.getId())
@@ -136,14 +133,15 @@ public class StatementSnomedOntology {
 					definingSuperConcepts.get(id).add(sup.getId());
 				}
 			}
-			
+
 			// getDependentOnConcepts now returns MutableLongSet
 			dependentOnConcepts.put(id, ontology.getDependentOnConcepts(concept.getId()));
 		}
 		definingIsa = SnomedIsa.init(definingSuperConcepts, root);
 		{
 			SnomedIsa deps = SnomedIsa.init(dependentOnConcepts, root);
-			deps.getOrderedConcepts().forEach(id -> conceptsDefiningDependentOrder.add(ontology.getConcept(id)));		}
+			deps.getOrderedConcepts().forEach(id -> conceptsDefiningDependentOrder.add(ontology.getConcept(id)));
+		}
 		log.info("Concepts: " + conceptsDefiningDependentOrder.size());
 		if (conceptsDefiningDependentOrder.size() != ontology.getConcepts().size()) {
 			String msg = "Size: " + conceptsDefiningDependentOrder.size() + " != " + ontology.getConcepts().size();
@@ -170,7 +168,8 @@ public class StatementSnomedOntology {
 		nsoReasoner = SnomedOntologyReasoner.create(nsoOntology);
 		nsoReasoner.flush();
 		nnfBuilder = NecessaryNormalFormBuilder.create(nsoOntology, nsoReasoner.getSuperConcepts(),
-				nsoReasoner.getSuperRoleTypes(false), root, (workDone, max) -> {});
+				nsoReasoner.getSuperRoleTypes(false), root, (workDone, max) -> {
+				});
 		// TODO can we get rid of this??? role chains issue
 		nnfBuilder.generate();
 		for (Concept con : getStatementConceptsDefiningDependentOrder()) {
@@ -194,27 +193,28 @@ public class StatementSnomedOntology {
 		MutableLongObjectMap<MutableLongSet> parents = LongObjectMaps.mutable.empty();
 		parents.put(swecIds.swec, LongSets.mutable.with(swecIds.swec_parent));
 		isas = SnomedIsa.init(parents);
-		
+
 		for (Concept con : statementConceptsDefiningDependentOrder) {
 //			log.info("Con: " + ontology.getFsn(con.getId()));
 			MutableLongSet mss = LongSets.mutable.empty();
 			findMss(con, swecIds.swec_parent, isas, LongSets.mutable.empty(), LongSets.mutable.empty(), mss);
 //			mss.forEach(id -> log.info("\tMSS: " + ontology.getFsn(id)));
-			
+
 			MutableLongSet mgs = LongSets.mutable.empty();
-			findMgs(con, bottom_id, isas, LongSets.mutable.empty(), LongSets.mutable.empty(), getLeaves(mss, isas), mgs);
+			findMgs(con, bottom_id, isas, LongSets.mutable.empty(), LongSets.mutable.empty(), getLeaves(mss, isas),
+					mgs);
 //			mgs.forEach(id -> log.info("\tMGS: " + ontology.getFsn(id)));
-			
+
 			parents.put(con.getId(), mss.toImmutable().toSet());
-			
+
 			MutableLongSet mss_ancs = LongSets.mutable.withAll(mss);
 			mss.forEach(mss1 -> mss_ancs.addAll(isas.getAncestors(mss1)));
-			
+
 			mgs.forEach(mgs1 -> {
 				parents.get(mgs1).removeAll(mss_ancs);
 				parents.get(mgs1).add(con.getId());
 			});
-			
+
 			isas = SnomedIsa.init(parents);
 		}
 		return isas;
@@ -222,7 +222,7 @@ public class StatementSnomedOntology {
 
 	private boolean findMss(Concept con_to_classify, long con_id, SnomedIsa isas, MutableLongSet visited,
 			MutableLongSet visited_found, MutableLongSet result) {
-		boolean[] found_mss = {false}; // Use array to allow modification in lambda
+		boolean[] found_mss = { false }; // Use array to allow modification in lambda
 
 		isas.getChildren(con_id).forEach(child_id -> {
 			if (visited.contains(child_id)) {
@@ -268,40 +268,27 @@ public class StatementSnomedOntology {
 	private ImmutableLongSet getLeaves(MutableLongSet mss, SnomedIsa isas) {
 		MutableLongSet leaves = LongSets.mutable.empty();
 		mss.forEach(mss1 -> {
-			isas.getDescendants(mss1).select(id -> isas.getChildren(id).isEmpty())
-					.forEach(leaves::add);
+			isas.getDescendants(mss1).select(id -> isas.getChildren(id).isEmpty()).forEach(leaves::add);
 		});
 		return leaves.toImmutable();
 	}
 
-	public Set<Long> getEquivalentConcepts(long id) {
+	public MutableLongSet getEquivalentConcepts(long id) {
 		if (nsoOntology.getConcept(id) != null) {
-			// Convert primitive MutableLongSet to Set<Long>
-			MutableLongSet equivalentPrimitive = nsoReasoner.getEquivalentConcepts(id);
-			Set<Long> equivalentBoxed = new HashSet<>();
-			equivalentPrimitive.forEach(equivalentBoxed::add);
-			return equivalentBoxed;
+			return LongSets.mutable.ofAll(nsoReasoner.getEquivalentConcepts(id));
 		}
-		return Set.of();
+		return LongSets.mutable.empty();
 	}
 
-	public Set<Long> getSuperConcepts(long id) {
+	public MutableLongSet getSuperConcepts(long id) {
 		if (nsoOntology.getConcept(id) != null) {
-			// Convert primitive MutableLongSet to Set<Long>
-			MutableLongSet superConceptsPrimitive = nsoReasoner.getSuperConcepts(id);
-			Set<Long> superConceptsBoxed = new HashSet<>();
-			superConceptsPrimitive.forEach(superConceptsBoxed::add);
-			return superConceptsBoxed;
+			return LongSets.mutable.ofAll(nsoReasoner.getSuperConcepts(id));
 		}
-		// Convert from SnomedIsa (returns MutableLongSet) to Set<Long>
-		ImmutableLongSet parents = isas.getParents(id);
-		Set<Long> parentsBoxed = new HashSet<>();
-		parents.forEach(parentsBoxed::add);
-		return parentsBoxed;
+		return LongSets.mutable.ofAll(isas.getParents(id));
 	}
 
-	public HashMap<Long, Set<Long>> getSuperConcepts() {
-		HashMap<Long, Set<Long>> superConcepts = new HashMap<>();
+	public MutableLongObjectMap<MutableLongSet> getSuperConcepts() {
+		MutableLongObjectMap<MutableLongSet> superConcepts = LongObjectMaps.mutable.empty();
 		for (Concept concept : ontology.getConcepts()) {
 			long id = concept.getId();
 			superConcepts.put(id, getSuperConcepts(id));
@@ -309,43 +296,23 @@ public class StatementSnomedOntology {
 		return superConcepts;
 	}
 
-	public Set<Long> getSubConcepts(long id) {
+	public MutableLongSet getSubConcepts(long id) {
 //		if (id == swecIds.swec_parent) {
 //			Set<Long> ret = new HashSet<>(nsoReasoner.getSubConcepts(id));
 //			ret.add(swecIds.swec);
 //			return ret;
 //		}
 		if (id == swecIds.swec) {
-			// Convert from SnomedIsa (returns MutableLongSet) to Set<Long>
-			ImmutableLongSet children = isas.getChildren(id);
-			Set<Long> childrenBoxed = new HashSet<>();
-			children.forEach(childrenBoxed::add);
-			return childrenBoxed;
+			return LongSets.mutable.ofAll(isas.getChildren(id));
 		}
 		if (nsoOntology.getConcept(id) != null) {
-			// Convert primitive MutableLongSet to Set<Long>
-			MutableLongSet subConceptsPrimitive = nsoReasoner.getSubConcepts(id);
-			Set<Long> subConceptsBoxed = new HashSet<>();
-			subConceptsPrimitive.forEach(subConceptsBoxed::add);
-			return subConceptsBoxed;
+			return LongSets.mutable.ofAll(nsoReasoner.getSubConcepts(id));
 		}
-		// Convert from SnomedIsa (returns MutableLongSet) to Set<Long>
-		ImmutableLongSet children = isas.getChildren(id);
-		Set<Long> childrenBoxed = new HashSet<>();
-		children.forEach(childrenBoxed::add);
-		return childrenBoxed;
+		return LongSets.mutable.ofAll(isas.getChildren(id));
 	}
 
-	public HashMap<Long, Set<Long>> getSuperRoleTypes(boolean direct) {
-		// Convert primitive map to boxed HashMap
-		MutableLongObjectMap<MutableLongSet> superRoleTypesPrimitive = nsoReasoner.getSuperRoleTypes(direct);
-		HashMap<Long, Set<Long>> superRoleTypesBoxed = new HashMap<>();
-		superRoleTypesPrimitive.forEachKeyValue((key, primitiveSet) -> {
-			Set<Long> boxedSet = new HashSet<>();
-			primitiveSet.forEach(boxedSet::add);
-			superRoleTypesBoxed.put(key, boxedSet);
-		});
-		return superRoleTypesBoxed;
+	public MutableLongObjectMap<MutableLongSet> getSuperRoleTypes(boolean direct) {
+		return nsoReasoner.getSuperRoleTypes(direct);
 	}
 
 }
