@@ -124,9 +124,6 @@ public abstract class StatementSnomedOntologyAbsentNfhTestIBase extends Statemen
 			if (isas.hasAncestor(id, FamilyHistoryIds.no_family_history_swec))
 				continue;
 
-			// Convert both ImmutableLongSet to Set<Long> for comparison
-//			Set<Long> expectedChildren = new HashSet<>();
-//			isas.getChildren(id).forEach(expectedChildren::add);
 			ImmutableLongSet expectedChildren = isas.getChildren(id);
 			MutableLongSet actualChildren = sso.getSubConcepts(id);
 
@@ -134,13 +131,11 @@ public abstract class StatementSnomedOntologyAbsentNfhTestIBase extends Statemen
 				log.error("" + con);
 
 				// Create missing list
-//				ArrayList<Long> missing = new ArrayList<>(expectedChildren);
 				MutableLongSet missing = LongSets.mutable.withAll(expectedChildren);
 				missing.removeAll(actualChildren);
 				log.error("Missing: " + missing);
 
 				// Create extra list
-//				ArrayList<Long> extra = new ArrayList<>(actualChildren);
 				MutableLongSet extra = LongSets.mutable.withAll(actualChildren);
 				extra.removeAll(expectedChildren);
 				log.error("Extra: " + extra);

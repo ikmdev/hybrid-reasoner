@@ -97,24 +97,19 @@ public abstract class StatementSnomedOntologyWithoutAbsentTestBase extends State
 		for (long id : orderedConcepts) {
 			if (id == SnomedIds.root)
 				continue;
-			// Convert ImmutableLongSet to Set<Long> for comparison
-//			Set<Long> exp = new HashSet<>();
-//			isas.getChildren(id).forEach(exp::add);
-			ImmutableLongSet exp = isas.getChildren(id);
-//			Set<Long> act = new HashSet<>();
-//			sso_isas.getChildren(id).forEach(act::add);
-			ImmutableLongSet act = sso_isas.getChildren(id);
-			if (!exp.equals(act)) {
+			ImmutableLongSet expect = isas.getChildren(id);
+			ImmutableLongSet actual = sso_isas.getChildren(id);
+			if (!expect.equals(actual)) {
 				log.info("Con: " + sso_isas.getChildren(id).size() + " - " + snomedOntology.getFsn(id));
-				MutableLongSet mis = LongSets.mutable.withAll(exp);
-				mis.removeAll(act);
-				mis.forEach(child -> log.info("\tMis: " + snomedOntology.getFsn(child)));
-				MutableLongSet ext = LongSets.mutable.withAll(act);
-				ext.removeAll(exp);
-				ext.forEach(child -> log.info("\tExt: " + snomedOntology.getFsn(child)));
+				MutableLongSet misssing = LongSets.mutable.withAll(expect);
+				misssing.removeAll(actual);
+				misssing.forEach(child -> log.info("\tMis: " + snomedOntology.getFsn(child)));
+				MutableLongSet extra = LongSets.mutable.withAll(actual);
+				extra.removeAll(expect);
+				extra.forEach(child -> log.info("\tExt: " + snomedOntology.getFsn(child)));
 			}
-			assertEquals(exp, act);
-			assertEquals(exp, sso.getSubConcepts(id));
+			assertEquals(expect, actual);
+			assertEquals(expect, sso.getSubConcepts(id));
 		}
 		for (Concept con : snomedOntology.getConcepts()) {
 			long id = con.getId();
